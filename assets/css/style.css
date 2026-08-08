@@ -1890,6 +1890,19 @@ body.home main::after {
   transform: translateY(0);
 }
 
+.cookie-banner__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.cookie-banner__icon {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--acid);
+}
+
 .cookie-banner__title {
   font-weight: 500;
   font-size: 1.0625rem;
