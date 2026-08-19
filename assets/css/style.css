@@ -831,7 +831,7 @@ body.nav-open .cookie-banner {
 
 @media (max-width: 480px) {
   .hero__visual {
-  bottom: -35px;
+  bottom: -20px;
   }
 
   .hero__chateau {
@@ -1085,7 +1085,7 @@ body.nav-open .cookie-banner {
 
 .services__visual {
   position: absolute;
-  bottom: -20px;
+  bottom: -35px;
   left: 50%;
   z-index: 0;
   pointer-events: none;
