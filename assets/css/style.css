@@ -813,7 +813,7 @@ body.nav-open .cookie-banner {
 
   .services__statue {
     width: 320px;
-    transform: translateX(calc(80% + 20px));
+    transform: translateX(calc(80% + 40px));
   }
 }
 
@@ -1096,7 +1096,7 @@ body.nav-open .cookie-banner {
   max-width: none;
   height: auto;
   opacity: 0.6;
-  transform: translateX(calc(80% + 20px));
+  transform: translateX(calc(80% + 40px));
 }
 
 .services__grid {
