@@ -831,7 +831,7 @@ body.nav-open .cookie-banner {
 
 @media (max-width: 480px) {
   .hero__visual {
-    bottom: -20px;
+  bottom: -25px;
   }
 
   .hero__chateau {
