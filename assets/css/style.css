@@ -784,6 +784,71 @@ body.nav-open .cookie-banner {
   overflow: hidden;
 }
 
+.hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__visual {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__chateau {
+  width: 1231px;
+  max-width: none;
+  height: auto;
+  opacity: 0.85;
+  transform: translateX(-30%);
+}
+
+@media (max-width: 1199px) {
+  .hero__chateau {
+    width: 960px;
+    transform: translateX(-30%);
+  }
+
+  .services__statue {
+    width: 320px;
+    transform: translateX(80%);
+  }
+}
+
+@media (max-width: 809px) {
+  .hero__chateau {
+    width: 640px;
+    transform: translateX(-25%);
+  }
+
+  .services__statue {
+    width: 260px;
+    transform: translateX(60%);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__visual {
+    bottom: -20px;
+  }
+
+  .hero__chateau {
+    width: 420px;
+    transform: translateX(-20%);
+  }
+
+  .services__visual {
+    bottom: -10px;
+  }
+
+  .services__statue {
+    width: 200px;
+    transform: translateX(50%);
+  }
+}
+
 .hero__label {
   display: inline-flex;
   align-items: center;
@@ -965,11 +1030,22 @@ body.nav-open .cookie-banner {
 }
 
 /* ---------- Proposition de valeur ---------- */
+.value {
+  position: relative;
+}
+
+.value__inner {
+  position: relative;
+  z-index: 1;
+}
+
 .value__grid {
   margin-top: 3.25rem;
   display: grid;
   gap: 1.25rem;
   grid-template-columns: 1fr;
+  position: relative;
+  z-index: 1;
 }
 
 .value__card {
@@ -1000,9 +1076,32 @@ body.nav-open .cookie-banner {
 
 /* ---------- Services ---------- */
 .services {
+  position: relative;
+  overflow: hidden;
   background: var(--surface-deep);
   border-top: 1px solid var(--border-on-dark);
   border-bottom: 1px solid var(--border-on-dark);
+}
+
+.services__visual {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.services__statue {
+  width: 380px;
+  max-width: none;
+  height: auto;
+  opacity: 0.6;
+  transform: translateX(80%);
+}
+
+.services__grid {
+  position: relative;
+  z-index: 1;
 }
 
 .services .label {
@@ -1033,6 +1132,8 @@ body.nav-open .cookie-banner {
   background: rgba(240, 242, 237, 0.04);
   border: 1px solid var(--border-on-dark);
   border-radius: var(--radius-xl);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
 }
 
