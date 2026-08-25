@@ -1471,9 +1471,9 @@ body.nav-open .cookie-banner {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.1rem 1.25rem;
   flex: 1;
 }
 
@@ -1483,7 +1483,6 @@ body.nav-open .cookie-banner {
   color: var(--on-dark-muted);
   padding-left: 1.15rem;
   position: relative;
-  white-space: nowrap;
 }
 
 .pricing__features li::before {
@@ -2526,7 +2525,7 @@ body.home main::after {
   }
 
   .pricing__features {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 0.15rem;
   }
 
