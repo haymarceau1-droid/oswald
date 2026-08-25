@@ -1416,14 +1416,13 @@ body.nav-open .cookie-banner {
 }
 
 .pricing__card-icon {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 4px;
   margin-bottom: 1rem;
   border-radius: var(--radius-md);
   background: rgba(240,242,237,0.06);
-  width: fit-content;
 }
 
 .pricing__card--featured .pricing__card-icon {
@@ -1437,15 +1436,16 @@ body.nav-open .cookie-banner {
   color: var(--acid);
 }
 
-.pricing__card-head h4 {
+.pricing__card-icon h4 {
   font-size: 20px;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 24px;
   letter-spacing: -0.02em;
   color: var(--on-dark);
+  margin: 0;
 }
 
-.pricing__card--featured .pricing__card-head h4 {
+.pricing__card--featured .pricing__card-icon h4 {
   color: var(--acid);
 }
 
