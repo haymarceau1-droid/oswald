@@ -1415,6 +1415,27 @@ body.nav-open .cookie-banner {
   flex-direction: column;
 }
 
+.pricing__card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(240,242,237,0.06);
+  margin-bottom: 1rem;
+}
+
+.pricing__card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--acid);
+}
+
+.pricing__card--featured .pricing__card-icon {
+  background: rgba(248,245,116,0.1);
+}
+
 .pricing__card-head h4 {
   font-size: 20px;
   font-weight: 500;
