@@ -1426,7 +1426,7 @@ body.nav-open .cookie-banner {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  padding: 6px;
+  padding: 8px;
   border-radius: var(--radius-md);
   background: rgba(240,242,237,0.06);
   color: var(--acid);
