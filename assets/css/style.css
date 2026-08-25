@@ -1419,7 +1419,15 @@ body.nav-open .cookie-banner {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
   margin-bottom: 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(240,242,237,0.06);
+  width: fit-content;
+}
+
+.pricing__card--featured .pricing__card-icon {
+  background: rgba(248,245,116,0.1);
 }
 
 .pricing__card-icon svg {
