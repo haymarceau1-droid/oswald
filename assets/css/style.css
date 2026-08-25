@@ -1339,6 +1339,7 @@ body.nav-open .cookie-banner {
 
 .pricing .section__title {
   color: var(--on-dark);
+  margin-bottom: 2.5rem;
 }
 
 .pricing__group-title {
