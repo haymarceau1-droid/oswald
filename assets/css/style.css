@@ -1356,24 +1356,22 @@ body.nav-open .cookie-banner {
 .pricing__cards {
   display: grid;
   gap: 1px;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   background: var(--border-on-dark);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
 .pricing__cards--3 {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 /* ---- Card ---- */
 .pricing__card {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(160px, 1fr) 1fr auto;
-  align-items: center;
-  gap: 2rem;
-  padding: 1.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem;
   background: var(--surface-deep);
   transition: background 0.25s var(--ease);
 }
@@ -1385,7 +1383,7 @@ body.nav-open .cookie-banner {
 /* ---- Featured ---- */
 .pricing__card--featured {
   background: rgba(248, 245, 116, 0.04);
-  border-left: 3px solid var(--acid);
+  border-top: 3px solid var(--acid);
 }
 
 .pricing__card--featured:hover {
@@ -1415,12 +1413,10 @@ body.nav-open .cookie-banner {
 }
 
 .pricing__card-head h4 {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--on-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .pricing__card--featured .pricing__card-head h4 {
@@ -1463,7 +1459,13 @@ body.nav-open .cookie-banner {
 
 /* ---- Divider ---- */
 .pricing__card-divider {
-  display: none;
+  height: 1px;
+  margin: 0.75rem 0;
+  background: var(--border-on-dark);
+}
+
+.pricing__card--featured .pricing__card-divider {
+  background: rgba(248, 245, 116, 0.15);
 }
 
 /* ---- Features ---- */
@@ -1508,7 +1510,9 @@ body.nav-open .cookie-banner {
 
 /* ---- CTA inside card ---- */
 .pricing__card .btn {
-  white-space: nowrap;
+  margin-top: auto;
+  width: 100%;
+  justify-content: center;
 }
 
 /* ---- Global CTA ---- */
@@ -2527,13 +2531,7 @@ body.home main::after {
   }
 
   .pricing__card {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
     padding: 1.25rem;
-  }
-
-  .pricing__features {
-    gap: 0.15rem;
   }
 
   .pricing__card .btn {
@@ -2573,17 +2571,11 @@ body.home main::after {
   }
 
   .pricing__cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .pricing__card {
-    grid-template-columns: minmax(140px, 1fr) 1fr auto;
-    padding: 1rem 1.25rem;
-    gap: 1.25rem;
-  }
-
-  .pricing__features {
-    gap: 0.2rem 0.75rem;
+  .pricing__cards--3 {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .pricing__features li {
