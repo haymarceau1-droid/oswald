@@ -1419,7 +1419,7 @@ body.nav-open .cookie-banner {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0.4rem;
+  padding: 4px;
   margin-bottom: 1rem;
   border-radius: var(--radius-md);
   background: rgba(240,242,237,0.06);
