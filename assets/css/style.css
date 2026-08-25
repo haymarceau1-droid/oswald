@@ -1471,9 +1471,9 @@ body.nav-open .cookie-banner {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
   flex: 1;
 }
 
@@ -2533,7 +2533,6 @@ body.home main::after {
   }
 
   .pricing__features {
-    grid-template-columns: 1fr;
     gap: 0.15rem;
   }
 
