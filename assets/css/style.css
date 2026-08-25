@@ -1370,7 +1370,7 @@ body.nav-open .cookie-banner {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   padding: 1.75rem;
   background: rgba(240, 242, 237, 0.04);
   border: 1px solid var(--border-on-dark);
