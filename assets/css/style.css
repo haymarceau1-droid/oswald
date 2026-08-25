@@ -1418,22 +1418,15 @@ body.nav-open .cookie-banner {
 .pricing__card-icon {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: rgba(240,242,237,0.06);
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
 
 .pricing__card-icon svg {
   width: 24px;
   height: 24px;
+  flex-shrink: 0;
   color: var(--acid);
-}
-
-.pricing__card--featured .pricing__card-icon {
-  background: rgba(248,245,116,0.1);
 }
 
 .pricing__card-head h4 {
