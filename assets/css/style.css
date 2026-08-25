@@ -1516,6 +1516,14 @@ body.nav-open .cookie-banner {
   margin-top: 2rem;
 }
 
+/* ---- Separator ---- */
+.pricing__separator {
+  border: none;
+  height: 1px;
+  margin: 2rem 0;
+  background: #a8d5ba;
+}
+
 /* ---------- À propos ---------- */
 .about {
   border-top: 1px solid var(--border);
