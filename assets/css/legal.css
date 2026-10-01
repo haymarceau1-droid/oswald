@@ -1,0 +1,226 @@
+/* ============================================================
+   Pages légales — bandeau sombre, sommaire collant, sections numérotées
+   ============================================================ */
+
+/* ---------- Bandeau d'en-tête ---------- */
+.legal-hero {
+  padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2.5rem, 6vw, 4rem);
+  background: var(--surface-deep);
+  color: var(--on-dark);
+  border-bottom: 1px solid var(--border-on-dark);
+}
+
+.legal-hero .label {
+  color: var(--on-dark-muted);
+}
+
+.legal-hero__title {
+  max-width: 20ch;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  color: var(--on-dark);
+}
+
+.legal-hero__intro {
+  margin-top: 1.5rem;
+  max-width: 62ch;
+  color: var(--on-dark-muted);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  line-height: 1.6;
+}
+
+.legal-hero__updated {
+  display: inline-block;
+  margin-top: 1.75rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--on-dark-muted);
+}
+
+/* ---------- Corps : fond uni, sans décor ---------- */
+.legal {
+  min-height: 0;
+  padding-block: clamp(3rem, 7vw, 5rem) clamp(4rem, 9vw, 7rem);
+}
+
+.legal::before,
+.legal::after {
+  display: none;
+}
+
+.legal__layout {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.legal__content {
+  counter-reset: lg;
+  min-width: 0;
+}
+
+.legal__section {
+  counter-increment: lg;
+  max-width: 70ch;
+  scroll-margin-top: 96px;
+}
+
+.legal__section + .legal__section {
+  margin-top: 0;
+  padding-top: 2.5rem;
+  border-top: 0;
+}
+
+.legal__section {
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.legal__section:last-child {
+  border-bottom: 0;
+}
+
+.legal h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+  letter-spacing: -0.035em;
+}
+
+.legal h2::before {
+  content: counter(lg, decimal-leading-zero);
+  flex-shrink: 0;
+  min-width: 1.75rem;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted-2);
+}
+
+.legal__section > p,
+.legal__section > ul {
+  margin-left: 2.75rem;
+}
+
+.legal__section h2 + p,
+.legal__section h2 + ul {
+  margin-top: 1.1rem;
+}
+
+.legal p,
+.legal ul {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.legal ul {
+  gap: 0.4rem;
+}
+
+.legal ul li::marker {
+  color: var(--accent-ink);
+}
+
+.legal a {
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.legal a:hover {
+  color: var(--accent-ink);
+  text-decoration-color: var(--accent-ink);
+}
+
+/* ---------- Sommaire ---------- */
+.legal__toc:empty {
+  display: none;
+}
+
+.legal__toc ol {
+  display: grid;
+  counter-reset: toc;
+  gap: 0.15rem;
+}
+
+.legal__toc li {
+  counter-increment: toc;
+}
+
+.legal .legal__toc a {
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 2px solid var(--border);
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--muted);
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.legal__toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted-2);
+}
+
+.legal__toc a:hover {
+  color: var(--ink-deep);
+  background: rgba(0, 38, 36, 0.04);
+}
+
+.legal__toc a.is-active {
+  border-left-color: var(--surface-deep);
+  color: var(--ink-deep);
+  font-weight: 500;
+}
+
+/* mobile : sommaire replié en bloc simple */
+@media (max-width: 959px) {
+  .legal__toc {
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-mid);
+  }
+
+  .legal__toc ol {
+    grid-template-columns: 1fr;
+  }
+
+  .legal__section > p,
+  .legal__section > ul {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 960px) {
+  .legal__layout {
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  .legal__toc {
+    position: sticky;
+    top: 96px;
+  }
+}
+
+@media print {
+  .legal__toc,
+  .legal-hero__updated {
+    display: none;
+  }
+}

@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/legal.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Aller au contenu principal</a>
@@ -32,13 +33,19 @@
   </header>
 
   <main id="main">
-    <section class="section legal" aria-labelledby="legal-title">
+    <section class="legal-hero" aria-labelledby="legal-title">
       <div class="container">
         <p class="label">Confidentialité</p>
-        <h1 class="section__title" id="legal-title">Vos données restent sous votre contrôle.</h1>
-        <p class="legal__intro">Cette politique décrit les données personnelles collectées sur ce site, leur finalité, leur durée de conservation et les droits dont vous disposez, conformément au Règlement général sur la protection des données (RGPD).</p>
-        <p class="legal__updated">Dernière mise à jour : août 2026.</p>
+        <h1 class="legal-hero__title" id="legal-title">Vos données restent sous votre contrôle.</h1>
+        <p class="legal-hero__intro">Cette politique décrit les données personnelles collectées sur ce site, leur finalité, leur durée de conservation et les droits dont vous disposez, conformément au Règlement général sur la protection des données (RGPD).</p>
+        <p class="legal-hero__updated">Dernière mise à jour : août 2026.</p>
+      </div>
+    </section>
 
+    <section class="section legal">
+      <div class="container legal__layout">
+        <nav class="legal__toc" aria-label="Sommaire"></nav>
+        <div class="legal__content">
         <div class="legal__section">
           <h2>Responsable du traitement</h2>
           <p>Le responsable du traitement est <strong>Oswald Solutions</strong>, studio web situé à Angers, France.</p>
@@ -106,6 +113,7 @@
           <h2>Modifications</h2>
           <p>Cette politique peut être mise à jour à tout moment. La version en ligne fait foi. La date de mise à jour figure en haut de la page.</p>
         </div>
+        </div>
       </div>
     </section>
   </main>
@@ -155,5 +163,6 @@
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/animations.js"></script>
+  <script src="assets/js/legal.js"></script>
 </body>
 </html>
