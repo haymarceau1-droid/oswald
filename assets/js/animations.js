@@ -36,7 +36,7 @@
   window.addEventListener("resize", updateScroll);
   updateScroll();
 
-  /* ---------- Hero : aurora + halo qui suit le curseur ---------- */
+  /* ---------- Hero : aurora ---------- */
   if (hero) {
     var aurora = document.createElement("div");
     aurora.className = "hero__aurora";
@@ -44,44 +44,8 @@
     aurora.innerHTML =
       '<span class="hero__orb hero__orb--1"></span>' +
       '<span class="hero__orb hero__orb--2"></span>' +
-      '<span class="hero__orb hero__orb--3"></span>' +
-      '<span class="hero__spot"></span>';
+      '<span class="hero__orb hero__orb--3"></span>';
     hero.insertBefore(aurora, hero.firstChild);
-
-    if (finePointer) {
-      var spot = aurora.querySelector(".hero__spot");
-      var sx = 0, sy = 0, tx = 0, ty = 0, spotRunning = false;
-
-      var spotLoop = function () {
-        sx += (tx - sx) * 0.12;
-        sy += (ty - sy) * 0.12;
-        spot.style.transform = "translate3d(" + sx.toFixed(1) + "px," + sy.toFixed(1) + "px,0)";
-        if (hero.classList.contains("is-hovered") ||
-            Math.abs(tx - sx) > 0.5 || Math.abs(ty - sy) > 0.5) {
-          raf(spotLoop);
-        } else {
-          spotRunning = false;
-        }
-      };
-
-      hero.addEventListener("pointermove", function (e) {
-        var r = hero.getBoundingClientRect();
-        tx = e.clientX - r.left;
-        ty = e.clientY - r.top;
-        if (!hero.classList.contains("is-hovered")) {
-          sx = tx;
-          sy = ty;
-          hero.classList.add("is-hovered");
-        }
-        if (!spotRunning) {
-          spotRunning = true;
-          raf(spotLoop);
-        }
-      });
-      hero.addEventListener("pointerleave", function () {
-        hero.classList.remove("is-hovered");
-      });
-    }
   }
 
   /* ---------- Titres de section : mot par mot ---------- */
