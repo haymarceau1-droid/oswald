@@ -1,7 +1,7 @@
 /* ============================================================
    Oswald Solutions — Animations premium
    Barre de progression · spotlight & tilt des cartes
-   Boutons magnétiques · titres mot à mot · compteurs
+   titres mot à mot · compteurs
    ============================================================ */
 
 /* ---------- Barre de progression du scroll ---------- */
@@ -103,16 +103,14 @@
   to { background-position: -250% 0; }
 }
 
-/* ---------- Boutons : reflet + effet magnétique ---------- */
+/* ---------- Boutons : reflet ---------- */
 .btn--primary {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  translate: var(--tx, 0) var(--ty, 0);
   transition: background 0.2s var(--ease), color 0.2s var(--ease),
     border-color 0.2s var(--ease), transform 0.2s var(--ease),
-    filter 0.2s var(--ease), box-shadow 0.35s var(--ease),
-    translate 0.35s var(--ease);
+    filter 0.2s var(--ease), box-shadow 0.35s var(--ease);
 }
 
 .btn--primary::after {
@@ -141,12 +139,6 @@
 
 .btn--primary:hover {
   box-shadow: 0 10px 30px -8px rgba(248, 245, 116, 0.55);
-}
-
-.btn--primary.is-magnetic {
-  transition: background 0.2s var(--ease), color 0.2s var(--ease),
-    filter 0.2s var(--ease), box-shadow 0.35s var(--ease),
-    translate 0.12s linear;
 }
 
 /* Effet « ripple » au clic */

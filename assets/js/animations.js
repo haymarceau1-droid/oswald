@@ -162,26 +162,6 @@
     });
   });
 
-  /* ---------- Boutons magnétiques ---------- */
-  document.querySelectorAll(".btn--primary").forEach(function (btn) {
-    var STRENGTH = 0.28;
-
-    btn.addEventListener("pointermove", function (e) {
-      var r = btn.getBoundingClientRect();
-      var dx = e.clientX - (r.left + r.width / 2);
-      var dy = e.clientY - (r.top + r.height / 2);
-      btn.classList.add("is-magnetic");
-      btn.style.setProperty("--tx", (dx * STRENGTH).toFixed(1) + "px");
-      btn.style.setProperty("--ty", (dy * STRENGTH).toFixed(1) + "px");
-    });
-
-    btn.addEventListener("pointerleave", function () {
-      btn.classList.remove("is-magnetic");
-      btn.style.removeProperty("--tx");
-      btn.style.removeProperty("--ty");
-    });
-  });
-
   /* ---------- Ripple au clic ---------- */
   document.addEventListener("pointerdown", function (e) {
     var btn = e.target.closest(".btn");
