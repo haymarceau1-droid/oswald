@@ -1,0 +1,370 @@
+/* ============================================================
+   Pages prestations — mise en page dédiée (body.service-page)
+   Hero scindé · constat sticky numéroté · bénéfices en lignes
+   Méthode en frise · tarifs en 2 colonnes
+   ============================================================ */
+
+/* ---------- Hero : texte + carte « En bref » ---------- */
+.service-page .hero__proof {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 960px) {
+  .service-page .hero .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.7fr);
+    grid-template-areas:
+      "label label"
+      "title card"
+      "lede  card"
+      "actions card";
+    column-gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .service-page .hero__label { grid-area: label; justify-self: start; }
+  .service-page .hero__title { grid-area: title; max-width: 18ch; }
+  .service-page .hero__lede { grid-area: lede; }
+  .service-page .hero__actions { grid-area: actions; }
+
+  .service-page .hero__proof {
+    grid-area: card;
+    align-self: center;
+    justify-self: end;
+    width: 100%;
+    display: grid;
+    gap: 0;
+  }
+}
+
+.service-page .hero__proof {
+  margin-top: 2.5rem;
+  padding: 1.25rem 1.5rem 0.75rem;
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-xl);
+  background: rgba(240, 242, 237, 0.05);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--on-dark);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+@media (min-width: 960px) {
+  .service-page .hero__proof { margin-top: 0; }
+}
+
+.service-page .hero__proof::before {
+  content: "En bref";
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--acid);
+}
+
+.service-page .hero__proof li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--border-on-dark);
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.service-page .hero__proof li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--acid)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.2l2.6 2.6L13 6.4' fill='none' stroke='%23002624' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 100% no-repeat;
+}
+
+/* ---------- Constat : titre sticky + liste numérotée ---------- */
+.service-page .problem .container {
+  max-width: var(--container);
+}
+
+@media (min-width: 960px) {
+  .service-page .problem .container {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-areas:
+      "label list"
+      "title list"
+      "lede  list"
+      "outro outro";
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: clamp(3rem, 7vw, 7rem);
+  }
+
+  .service-page .problem .label { grid-area: label; }
+  .service-page .problem .section__title { grid-area: title; }
+  .service-page .problem .section__lede { grid-area: lede; }
+  .service-page .problem__list { grid-area: list; margin-top: 0; }
+  .service-page .problem__outro { grid-area: outro; }
+}
+
+.service-page .problem__list {
+  counter-reset: pb;
+  gap: 0;
+}
+
+.service-page .problem__list li {
+  counter-increment: pb;
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  align-items: baseline;
+  padding: 1.35rem 0;
+  border-top: 1px solid var(--border);
+  color: var(--ink-deep);
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+}
+
+.service-page .problem__list li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.service-page .problem__list li::before {
+  content: counter(pb, decimal-leading-zero);
+  position: static;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--muted-2);
+  transition: color 0.3s var(--ease);
+}
+
+.service-page .problem__list li:hover::before {
+  color: var(--accent-ink);
+}
+
+.service-page .problem__outro {
+  max-width: none;
+  margin-top: 4rem;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border: 0;
+  border-radius: var(--radius-xl);
+  background: var(--acid);
+  color: var(--ink);
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+}
+
+/* ---------- Bénéfices : lignes éditoriales ---------- */
+.service-page .value__grid {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 3rem;
+  counter-reset: vc;
+}
+
+.service-page .value__card {
+  counter-increment: vc;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  grid-template-areas:
+    "icon title"
+    ".    text";
+  column-gap: 1.25rem;
+  align-items: center;
+  padding: 1.75rem 0.5rem;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--border-strong);
+  border-radius: 0;
+  box-shadow: none;
+  transition: padding 0.4s var(--ease), background 0.4s var(--ease);
+}
+
+.service-page .value__card:last-child {
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.service-page .value__card .icon { grid-area: icon; width: 28px; height: 28px; }
+.service-page .value__card h3 { grid-area: title; font-size: clamp(1.25rem, 2.4vw, 1.75rem); letter-spacing: -0.03em; }
+.service-page .value__card p { grid-area: text; margin-top: 0.5rem; max-width: 52ch; }
+
+.service-page .value__card:hover,
+.service-page .value__card.is-tilting {
+  transform: none;
+  padding-inline: 1.25rem;
+  background: var(--surface-mid);
+  border-color: var(--border-strong);
+  box-shadow: none;
+}
+
+@media (min-width: 960px) {
+  .service-page .value__card {
+    grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-areas: "icon title text";
+    column-gap: clamp(1.5rem, 4vw, 4rem);
+    padding-block: 2.25rem;
+  }
+
+  .service-page .value__card p { margin-top: 0; }
+}
+
+/* ---------- Méthode : frise horizontale numérotée ---------- */
+.service-page .method__list {
+  counter-reset: ms;
+  position: relative;
+  margin-top: 4rem;
+}
+
+.service-page .method__step,
+.service-page .method__step:first-child {
+  counter-increment: ms;
+  padding: 0 0 2.5rem 3.75rem;
+  border: 0;
+}
+
+.service-page .method__step::after {
+  content: counter(ms);
+  position: absolute;
+  top: -0.25rem;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--surface-deep);
+  color: var(--acid);
+  font-size: 15px;
+  font-weight: 500;
+  transition: transform 0.4s var(--ease), background 0.3s var(--ease);
+}
+
+.service-page .method__step:hover::after {
+  transform: scale(1.12);
+  background: var(--acid);
+  color: var(--surface-deep);
+}
+
+/* rail vertical (mobile) — remplace le trait d'accent de l'accueil */
+.service-page .method__step::before {
+  left: 1.25rem;
+  top: 2.5rem;
+  width: 1px;
+  height: calc(100% - 2.5rem);
+  background: var(--border-strong);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+}
+
+.service-page .method__step.is-visible::before { transform: scaleY(1); }
+.service-page .method__step:last-child::before { display: none; }
+
+@media (min-width: 960px) {
+  .service-page .method__list {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .service-page .method__step,
+  .service-page .method__step:first-child {
+    padding: 4rem 0 0;
+  }
+
+  .service-page .method__step::after { top: 0; }
+
+  .service-page .method__step::before {
+    left: 2.5rem;
+    top: 1.25rem;
+    width: calc(100% - 1.25rem);
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    background: var(--border-strong);
+  }
+
+  .service-page .method__step.is-visible::before { transform: scaleX(1); }
+}
+
+/* ---------- Tarifs : titre à gauche, lignes de prix à droite ---------- */
+.service-page .pricing .container {
+  max-width: var(--container);
+}
+
+.service-page .pricing__list {
+  display: grid;
+}
+
+.service-page .price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-on-dark);
+  transition: padding 0.4s var(--ease), background 0.4s var(--ease);
+}
+
+.service-page .price-row:last-child {
+  border-bottom: 1px solid var(--border-on-dark);
+}
+
+.service-page .price-row h3 {
+  font-size: clamp(1.0625rem, 1.8vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--on-dark);
+}
+
+.service-page .price-row__price {
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--acid);
+  white-space: nowrap;
+}
+
+.service-page .price-row:hover {
+  padding-inline: 1rem;
+  background: rgba(240, 242, 237, 0.05);
+}
+
+.service-page .pricing__note {
+  margin: 1.75rem 0 2rem;
+  max-width: 44ch;
+  color: var(--on-dark-muted);
+  font-size: 15px;
+}
+
+@media (min-width: 960px) {
+  .service-page .pricing .container {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-areas:
+      "label list"
+      "title list"
+      "note  list"
+      "cta   list";
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
+  }
+
+  .service-page .pricing .label { grid-area: label; }
+  .service-page .pricing .section__title { grid-area: title; margin-bottom: 0; }
+  .service-page .pricing__list { grid-area: list; }
+  .service-page .pricing__note { grid-area: note; }
+  .service-page .pricing .btn { grid-area: cta; justify-self: start; }
+}
