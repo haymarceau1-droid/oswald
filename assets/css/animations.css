@@ -110,7 +110,7 @@
   isolation: isolate;
   transition: background 0.2s var(--ease), color 0.2s var(--ease),
     border-color 0.2s var(--ease), transform 0.2s var(--ease),
-    filter 0.2s var(--ease), box-shadow 0.35s var(--ease);
+    filter 0.2s var(--ease);
 }
 
 .btn--primary::after {
@@ -135,10 +135,6 @@
 .btn--primary:focus-visible::after {
   left: 140%;
   transition: left 0.75s var(--ease);
-}
-
-.btn--primary:hover {
-  box-shadow: 0 10px 30px -8px rgba(248, 245, 116, 0.55);
 }
 
 /* Effet « ripple » au clic */
