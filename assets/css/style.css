@@ -2238,7 +2238,7 @@ body.home main::after {
 .cookie-banner {
   position: fixed;
   right: max(clamp(1.25rem, 5vw, 2.5rem), calc((100vw - var(--container)) / 2));
-  bottom: clamp(1rem, 3vw, 1.5rem);
+  bottom: calc(clamp(1rem, 3vw, 2rem) + 60px + 48px + 0.75rem);
   z-index: 200;
   width: min(calc(100% - 2rem), 480px);
   padding: 1.5rem;
