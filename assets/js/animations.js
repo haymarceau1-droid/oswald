@@ -13,7 +13,6 @@
   bar.setAttribute("aria-hidden", "true");
   document.body.appendChild(bar);
 
-  var hero = document.querySelector(".hero");
   var heroVisual = document.querySelector(".hero__visual");
   var ticking = false;
 
@@ -35,18 +34,6 @@
   }, { passive: true });
   window.addEventListener("resize", updateScroll);
   updateScroll();
-
-  /* ---------- Hero : aurora ---------- */
-  if (hero) {
-    var aurora = document.createElement("div");
-    aurora.className = "hero__aurora";
-    aurora.setAttribute("aria-hidden", "true");
-    aurora.innerHTML =
-      '<span class="hero__orb hero__orb--1"></span>' +
-      '<span class="hero__orb hero__orb--2"></span>' +
-      '<span class="hero__orb hero__orb--3"></span>';
-    hero.insertBefore(aurora, hero.firstChild);
-  }
 
   /* ---------- Titres de section : mot par mot ---------- */
   document.querySelectorAll("h2.section__title").forEach(function (title) {
