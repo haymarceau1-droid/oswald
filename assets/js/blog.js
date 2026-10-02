@@ -80,14 +80,18 @@
     }
     return (
       '<div class="post-card__cover post-card__cover--placeholder" aria-hidden="true">' +
-      "<span>" + escapeHtml(post.category || "Oswald Solutions") + "</span>" +
+      '<div class="post-card__cover-top">' +
+      '<span class="post-card__cover-brand">Oswald Solutions</span>' +
+      '<span class="post-card__cover-cat">' + escapeHtml(post.category || "Blog") + "</span>" +
+      "</div>" +
+      '<p class="post-card__cover-title">' + escapeHtml(post.title) + "</p>" +
       "</div>"
     );
   };
 
   var renderCard = function (post) {
     return (
-      '<article class="post-card">' +
+      '<article class="post-card' + (post.cover ? "" : " post-card--typo") + '">' +
       '<a class="post-card__link" href="article.html?slug=' + encodeURIComponent(post.slug) + '">' +
       coverHtml(post) +
       '<div class="post-card__body">' +
