@@ -2920,76 +2920,95 @@ body.home main::after {
 }
 
 .post-card__cover--placeholder {
+  --cv-bg: var(--surface-deep);
+  --cv-ink: var(--on-dark);
+  --cv-accent: var(--acid);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
   padding: 1.25rem 1.5rem 1.5rem;
-  background: var(--surface-deep);
-  color: var(--on-dark);
+  overflow: hidden;
+  background: var(--cv-bg);
+  color: var(--cv-ink);
   border-bottom: 0;
 }
 
+.post-card__cover--acid {
+  --cv-bg: var(--acid);
+  --cv-ink: var(--surface-deep);
+  --cv-accent: var(--surface-deep);
+}
+
+/* Silhouette du château d'Angers, en filigrane */
 .post-card__cover--placeholder::before {
   content: "";
   position: absolute;
-  inset: 10px;
-  border: 1px solid var(--border-on-dark);
-  border-radius: calc(var(--radius-xl) - 8px);
+  right: -12%;
+  bottom: -14%;
+  width: 78%;
+  aspect-ratio: 1672 / 941;
+  background: var(--cv-accent);
+  opacity: 0.2;
+  -webkit-mask: url("../svg/chateau-angers.svg") center / contain no-repeat;
+  mask: url("../svg/chateau-angers.svg") center / contain no-repeat;
+  transition: transform 0.6s var(--ease), opacity 0.4s var(--ease);
   pointer-events: none;
 }
 
+.post-card__link:hover .post-card__cover--placeholder::before {
+  transform: translate(-4%, -4%);
+  opacity: 0.32;
+}
+
 .post-card__cover-top {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.35rem 0.5rem 0;
-}
-
-.post-card__cover-brand {
-  font-family: var(--font-logo);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--on-dark-muted);
 }
 
 .post-card__cover-cat {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--acid);
+  color: var(--cv-accent);
+}
+
+.post-card__cover-go {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--cv-ink);
+  color: var(--cv-bg);
+  font-size: 15px;
+  transition: transform 0.4s var(--ease);
+}
+
+.post-card__link:hover .post-card__cover-go {
+  transform: rotate(45deg);
 }
 
 .post-card__cover-title {
   position: relative;
-  padding: 0 0.5rem 0.35rem;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  max-width: 16ch;
+  font-size: clamp(1.5rem, 2.4vw, 1.875rem);
   font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.04em;
-  color: var(--on-dark);
-}
-
-.post-card__cover-title::before {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 2px;
-  margin-bottom: 0.85rem;
-  background: var(--acid);
-  transition: width 0.4s var(--ease);
-}
-
-.post-card__link:hover .post-card__cover-title::before {
-  width: 56px;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+  color: var(--cv-ink);
 }
 
 /* Le titre est déjà dans la vignette : on le garde pour les lecteurs d'écran */

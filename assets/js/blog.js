@@ -78,11 +78,14 @@
         "</div>"
       );
     }
+    var h = 0;
+    String(post.slug || post.title).split("").forEach(function (ch) { h += ch.charCodeAt(0); });
+    var tone = h % 2 === 0 ? "acid" : "forest";
     return (
-      '<div class="post-card__cover post-card__cover--placeholder" aria-hidden="true">' +
+      '<div class="post-card__cover post-card__cover--placeholder post-card__cover--' + tone + '" aria-hidden="true">' +
       '<div class="post-card__cover-top">' +
-      '<span class="post-card__cover-brand">Oswald Solutions</span>' +
       '<span class="post-card__cover-cat">' + escapeHtml(post.category || "Blog") + "</span>" +
+      '<span class="post-card__cover-go">\u2197</span>' +
       "</div>" +
       '<p class="post-card__cover-title">' + escapeHtml(post.title) + "</p>" +
       "</div>"
