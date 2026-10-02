@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/animations.css">
   <link rel="stylesheet" href="assets/css/megamenu.css">
+  <link rel="stylesheet" href="assets/css/pricing.css">
 </head>
 <body class="home">
   <a class="skip-link" href="#main">Aller au contenu principal</a>
@@ -341,10 +342,19 @@
 
     <section class="section pricing" id="tarifs" aria-labelledby="tarifs-title">
       <div class="container">
-        <p class="label">Tarifs</p>
-        <h2 class="section__title" id="tarifs-title">Des offres lisibles, adaptées à votre projet.</h2>
-
-        <div class="pricing__cards">
+        <div class="pricing__head">
+          <div class="pricing__intro">
+            <p class="label">Tarifs</p>
+            <h2 class="section__title" id="tarifs-title">Des offres lisibles, adaptées à votre projet.</h2>
+          </div>
+          <div class="pricing__tabs" role="tablist" aria-label="Type d'offre">
+          <span class="pricing__tab-indicator" aria-hidden="true"></span>
+          <button class="pricing__tab is-active" type="button" role="tab" id="tab-sites" aria-controls="panel-sites" aria-selected="true">Création de site</button>
+          <button class="pricing__tab" type="button" role="tab" id="tab-care" aria-controls="panel-care" aria-selected="false" tabindex="-1">Suivi mensuel</button>
+        </div>
+        </div>
+        <div class="pricing__panel is-active" id="panel-sites" role="tabpanel" aria-labelledby="tab-sites">
+          <div class="pricing__cards">
           <div class="pricing__card">
             <div class="pricing__card-head">
               <span class="pricing__card-icon"><svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -353,7 +363,7 @@
 <path d="M16 12C15.44 12 15 11.55 15 11C15 10.45 15.45 10 16 10C16.55 10 17 10.45 17 11C17 11.55 16.56 12 16 12Z" fill="currentColor"/>
 <path d="M8 12C7.44 12 7 11.55 7 11C7 10.45 7.45 10 8 10C8.55 10 9 10.45 9 11C9 11.55 8.56 12 8 12Z" fill="currentColor"/>
 </svg><h4>Landing Page</h4></span>
-              <p class="pricing__card-price"><span class="pricing__amount">À partir de 1 490 €</span></p>
+              <p class="pricing__card-price"><span class="pricing__from">À partir de</span><span class="pricing__amount">1 490 €</span></p>
               <p class="pricing__card-period">Paiement unique</p>
             </div>
             <div class="pricing__card-divider"></div>
@@ -378,7 +388,7 @@
 <path d="M22 13.75H2C1.59 13.75 1.25 13.41 1.25 13C1.25 12.59 1.59 12.25 2 12.25H22C22.41 12.25 22.75 12.59 22.75 13C22.75 13.41 22.41 13.75 22 13.75Z" fill="currentColor"/>
 <path d="M16.5 22.75H7.5C7.09 22.75 6.75 22.41 6.75 22C6.75 21.59 7.09 21.25 7.5 21.25H16.5C16.91 21.25 17.25 21.59 17.25 22C17.25 22.41 16.91 22.75 16.5 22.75Z" fill="currentColor"/>
 </svg><h4>Site Vitrine <span class="pricing__card-badge">Populaire</span></h4></span>
-              <p class="pricing__card-price"><span class="pricing__amount">À partir de 2 490 €</span></p>
+              <p class="pricing__card-price"><span class="pricing__from">À partir de</span><span class="pricing__amount">2 490 €</span></p>
               <p class="pricing__card-period">Paiement unique</p>
             </div>
             <div class="pricing__card-divider"></div>
@@ -405,7 +415,7 @@
 <path d="M16 8.75C15.59 8.75 15.25 8.41 15.25 8V4.5C15.25 3.42 14.58 2.75 13.5 2.75H10.5C9.42 2.75 8.75 3.42 8.75 4.5V8C8.75 8.41 8.41 8.75 8 8.75C7.59 8.75 7.25 8.41 7.25 8V4.5C7.25 2.59 8.59 1.25 10.5 1.25H13.5C15.41 1.25 16.75 2.59 16.75 4.5V8C16.75 8.41 16.41 8.75 16 8.75Z" fill="currentColor"/>
 <path d="M20.41 17.78H8C7.59 17.78 7.25 17.44 7.25 17.03C7.25 16.62 7.59 16.28 8 16.28H20.41C20.82 16.28 21.16 16.62 21.16 17.03C21.16 17.44 20.82 17.78 20.41 17.78Z" fill="currentColor"/>
 </svg><h4>E-commerce · Refonte · Gros projet</h4></span>
-              <p class="pricing__card-price"><span class="pricing__amount">Sur devis</span></p>
+              <p class="pricing__card-price"><span class="pricing__from" aria-hidden="true">&nbsp;</span><span class="pricing__amount">Sur devis</span></p>
               <p class="pricing__card-period">Devis personnalisé</p>
             </div>
             <div class="pricing__card-divider"></div>
@@ -422,15 +432,16 @@
             <a class="btn btn--outline" href="#contact"><span class="btn__label"><span class="btn__text">Nous contacter</span><span class="btn__text btn__text--dupe" aria-hidden="true">Nous contacter</span></span></a>
           </div>
         </div>
-        <hr class="pricing__separator">
-        <div class="pricing__cards pricing__cards--3">
+        </div>
+        <div class="pricing__panel" id="panel-care" role="tabpanel" aria-labelledby="tab-care">
+          <div class="pricing__cards pricing__cards--3">
           <div class="pricing__card">
             <div class="pricing__card-head">
               <span class="pricing__card-icon"><svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.0002 22.6298C11.3302 22.6298 10.6502 22.4798 10.1202 22.1698L4.62023 18.9998C2.38023 17.4898 2.24023 17.2598 2.24023 14.8898V9.1098C2.24023 6.7398 2.37023 6.5098 4.57023 5.0198L10.1102 1.8198C11.1602 1.2098 12.8102 1.2098 13.8602 1.8198L19.3802 4.9998C21.6202 6.5098 21.7602 6.7398 21.7602 9.1098V14.8798C21.7602 17.2498 21.6302 17.4798 19.4302 18.9698L13.8902 22.1698C13.3502 22.4798 12.6702 22.6298 12.0002 22.6298ZM12.0002 2.8698C11.5802 2.8698 11.1702 2.9498 10.8802 3.1198L5.38023 6.2998C3.75023 7.3998 3.75023 7.3998 3.75023 9.1098V14.8798C3.75023 16.5898 3.75023 16.5898 5.42023 17.7198L10.8802 20.8698C11.4702 21.2098 12.5402 21.2098 13.1302 20.8698L18.6302 17.6898C20.2502 16.5898 20.2502 16.5898 20.2502 14.8798V9.1098C20.2502 7.3998 20.2502 7.3998 18.5802 6.2698L13.1202 3.1198C12.8302 2.9498 12.4202 2.8698 12.0002 2.8698Z" fill="currentColor"/>
 <path d="M12 15.75C9.93 15.75 8.25 14.07 8.25 12C8.25 9.93 9.93 8.25 12 8.25C14.07 8.25 15.75 9.93 15.75 12C15.75 14.07 14.07 15.75 12 15.75ZM12 9.75C10.76 9.75 9.75 10.76 9.75 12C9.75 13.24 10.76 14.25 12 14.25C13.24 14.25 14.25 13.24 14.25 12C14.25 10.76 13.24 9.75 12 9.75Z" fill="currentColor"/>
 </svg><h4>Care Essential</h4></span>
-              <p class="pricing__card-price"><span class="pricing__amount">79 €</span><span class="pricing__card-unit">/mois</span></p>
+              <p class="pricing__card-price"><span class="pricing__from" aria-hidden="true">&nbsp;</span><span class="pricing__amount">79 €</span><span class="pricing__card-unit">/mois</span></p>
               <p class="pricing__card-period">Facturé mensuellement</p>
             </div>
             <div class="pricing__card-divider"></div>
@@ -453,7 +464,7 @@
 <path d="M16 12C15.44 12 15 11.55 15 11C15 10.45 15.45 10 16 10C16.55 10 17 10.45 17 11C17 11.55 16.56 12 16 12Z" fill="currentColor"/>
 <path d="M8 12C7.44 12 7 11.55 7 11C7 10.45 7.45 10 8 10C8.55 10 9 10.45 9 11C9 11.55 8.56 12 8 12Z" fill="currentColor"/>
 </svg><h4>Care &amp; Growth <span class="pricing__card-badge">Populaire</span></h4></span>
-              <p class="pricing__card-price"><span class="pricing__amount">149 €</span><span class="pricing__card-unit">/mois</span></p>
+              <p class="pricing__card-price"><span class="pricing__from" aria-hidden="true">&nbsp;</span><span class="pricing__amount">149 €</span><span class="pricing__card-unit">/mois</span></p>
               <p class="pricing__card-period">Ou <strong>1 490 €/an</strong></p>
             </div>
             <div class="pricing__card-divider"></div>
@@ -477,7 +488,7 @@
 <path d="M16 12C15.44 12 15 11.55 15 11C15 10.45 15.45 10 16 10C16.55 10 17 10.45 17 11C17 11.55 16.56 12 16 12Z" fill="currentColor"/>
 <path d="M8 12C7.44 12 7 11.55 7 11C7 10.45 7.45 10 8 10C8.55 10 9 10.45 9 11C9 11.55 8.56 12 8 12Z" fill="currentColor"/>
 </svg><h4>Care Premium</h4></span>
-              <p class="pricing__card-price"><span class="pricing__amount">299 €</span><span class="pricing__card-unit">/mois</span></p>
+              <p class="pricing__card-price"><span class="pricing__from" aria-hidden="true">&nbsp;</span><span class="pricing__amount">299 €</span><span class="pricing__card-unit">/mois</span></p>
               <p class="pricing__card-period">Facturé mensuellement</p>
             </div>
             <div class="pricing__card-divider"></div>
@@ -493,7 +504,7 @@
             <a class="btn btn--outline" href="#contact"><span class="btn__label"><span class="btn__text">Choisir</span><span class="btn__text btn__text--dupe" aria-hidden="true">Choisir</span></span></a>
           </div>
         </div>
-
+        </div>
       </div>
     </section>
 
@@ -748,6 +759,7 @@
   <script src="assets/data/posts.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/animations.js"></script>
+  <script src="assets/js/pricing.js"></script>
   <script src="assets/js/blog.js"></script>
 </body>
 </html>

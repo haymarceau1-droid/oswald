@@ -1,0 +1,309 @@
+/* ============================================================
+   Section Tarifs — style SaaS épuré
+   Onglets à indicateur glissant · cartes plates · apparition en cascade
+   ============================================================ */
+
+/* ---------- En-tête : titre + onglets ---------- */
+.pricing__head {
+  display: grid;
+  gap: 1.75rem;
+  margin-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+
+.pricing .section__title {
+  margin-bottom: 0;
+}
+
+@media (min-width: 960px) {
+  .pricing__head {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 2rem;
+  }
+}
+
+/* ---------- Onglets ---------- */
+.pricing__tabs {
+  position: relative;
+  display: none;
+  width: fit-content;
+  padding: 4px;
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-pill);
+  background: rgba(240, 242, 237, 0.04);
+}
+
+.js-tabs .pricing__tabs {
+  display: inline-flex;
+}
+
+.pricing__tab-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: var(--w, 0);
+  border-radius: var(--radius-pill);
+  background: var(--on-dark);
+  transform: translateX(var(--x, 4px));
+  transition: transform 0.45s var(--ease), width 0.45s var(--ease);
+}
+
+.pricing__tab {
+  position: relative;
+  z-index: 1;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--on-dark-muted);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.3s var(--ease);
+}
+
+.pricing__tab:hover {
+  color: var(--on-dark);
+}
+
+.pricing__tab.is-active,
+.pricing__tab.is-active:hover {
+  color: var(--ink-deep);
+}
+
+.pricing__tab:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 2px;
+}
+
+/* ---------- Panneaux ---------- */
+.js-tabs .pricing__panel {
+  display: none;
+}
+
+.js-tabs .pricing__panel.is-active {
+  display: block;
+}
+
+/* ---------- Grille ---------- */
+.pricing__cards,
+.pricing__cards--3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+@media (min-width: 960px) {
+  .pricing__cards,
+  .pricing__cards--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Carte ---------- */
+.pricing__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(240, 242, 237, 0.03);
+  border: 1px solid var(--border-on-dark);
+  border-radius: var(--radius-xl);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transition: border-color 0.3s var(--ease), transform 0.4s var(--ease),
+    background 0.3s var(--ease);
+}
+
+.pricing__card:hover {
+  border-color: var(--border-on-dark-strong);
+  background: rgba(240, 242, 237, 0.05);
+  transform: translateY(-4px);
+}
+
+.pricing__card--featured {
+  background: rgba(248, 245, 116, 0.05);
+  border-color: rgba(248, 245, 116, 0.55);
+}
+
+.pricing__card--featured:hover {
+  border-color: var(--acid);
+  background: rgba(248, 245, 116, 0.07);
+}
+
+/* ---------- Tête de carte ---------- */
+.pricing__card-head {
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+
+.pricing__card-icon {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  margin-bottom: 1.5rem;
+}
+
+.pricing__card-icon svg {
+  display: none;
+}
+
+.pricing__card-icon h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--on-dark-muted);
+}
+
+.pricing__card--featured .pricing__card-icon h4 {
+  color: var(--on-dark);
+}
+
+.pricing__card-badge {
+  margin-left: 0;
+  padding: 0.25rem 0.65rem;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.pricing__card-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.35rem;
+  margin-top: 0;
+}
+
+.pricing__from {
+  flex-basis: 100%;
+  margin-bottom: 0.4rem;
+  font-size: 13px;
+  color: var(--on-dark-muted-2);
+}
+
+.pricing__amount {
+  font-size: clamp(2.25rem, 4vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-dark);
+}
+
+.pricing__card--featured .pricing__amount {
+  color: var(--acid);
+}
+
+.pricing__card-unit {
+  font-size: 15px;
+  color: var(--on-dark-muted-2);
+}
+
+.pricing__card-period {
+  margin-top: 0.6rem;
+  font-size: 13px;
+  color: var(--on-dark-muted-2);
+}
+
+/* ---------- CTA puis liste ---------- */
+.pricing__card .btn {
+  order: 2;
+  margin-top: 0;
+  width: 100%;
+}
+
+.pricing__card .btn.reveal {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+.pricing__card-divider {
+  order: 3;
+  background: var(--border-on-dark);
+}
+
+.pricing__card--featured .pricing__card-divider {
+  background: rgba(248, 245, 116, 0.2);
+}
+
+.pricing__features {
+  order: 4;
+  gap: 0.7rem;
+}
+
+.pricing__features li {
+  padding-left: 1.6rem;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--on-dark-muted);
+}
+
+.pricing__features li::before {
+  top: 0.15em;
+  width: 16px;
+  height: 16px;
+  opacity: 1;
+}
+
+.pricing__card--featured .pricing__features li {
+  color: var(--on-dark);
+}
+
+/* ---------- Apparition en cascade (déclenchée par pricing.js) ---------- */
+.js-tabs .pricing__panel:not(.is-in) .pricing__card {
+  opacity: 0;
+}
+
+.js-tabs .pricing__panel.is-in .pricing__card {
+  animation: pricing-card-in 0.8s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+.js-tabs .pricing__panel.is-in .pricing__features li {
+  animation: pricing-li-in 0.5s var(--ease) both;
+  animation-delay: calc(0.3s + var(--i, 0) * 90ms + var(--j, 0) * 40ms);
+}
+
+@keyframes pricing-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pricing-li-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing__tab-indicator {
+    transition: none;
+  }
+
+  .js-tabs .pricing__panel:not(.is-in) .pricing__card {
+    opacity: 1;
+  }
+}

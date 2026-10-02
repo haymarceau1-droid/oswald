@@ -35,16 +35,14 @@
 
 /* Les cartes gardent leurs transitions de survol */
 .value__card.reveal,
-.service-card.reveal,
-.pricing__card.reveal {
+.service-card.reveal {
   transition: opacity 0.9s var(--ease), transform 0.9s var(--ease),
     filter 0.9s var(--ease), border-color 0.25s var(--ease),
     box-shadow 0.35s var(--ease);
 }
 
 .value__card.reveal.is-visible:hover,
-.service-card.reveal.is-visible:hover,
-.pricing__card.reveal.is-visible:hover {
+.service-card.reveal.is-visible:hover {
   transition-delay: 0s;
 }
 
@@ -163,15 +161,13 @@
 
 /* ---------- Cartes : spotlight + tilt 3D ---------- */
 .value__card,
-.service-card,
-.pricing__card {
+.service-card {
   position: relative;
   transform-style: preserve-3d;
 }
 
 .value__card::after,
-.service-card::after,
-.pricing__card::after {
+.service-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -186,8 +182,7 @@
   pointer-events: none;
 }
 
-.service-card::after,
-.pricing__card::after {
+.service-card::after {
   background: radial-gradient(
     380px circle at var(--mx, 50%) var(--my, 50%),
     rgba(248, 245, 116, 0.13),
@@ -196,8 +191,7 @@
 }
 
 .value__card:hover::after,
-.service-card:hover::after,
-.pricing__card:hover::after {
+.service-card:hover::after {
   opacity: 1;
 }
 
@@ -206,15 +200,13 @@
   box-shadow: 0 18px 40px -22px rgba(0, 38, 36, 0.35);
 }
 
-.service-card:hover,
-.pricing__card:hover {
+.service-card:hover {
   box-shadow: 0 0 0 1px rgba(248, 245, 116, 0.18),
     0 22px 50px -28px rgba(248, 245, 116, 0.35);
 }
 
 .value__card.is-tilting,
-.service-card.is-tilting,
-.pricing__card.is-tilting {
+.service-card.is-tilting {
   transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
     translateY(-4px) scale(1.01);
   transition: transform 0.12s linear, border-color 0.25s var(--ease),

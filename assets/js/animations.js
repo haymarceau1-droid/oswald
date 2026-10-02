@@ -56,13 +56,7 @@
     title.classList.add("reveal", "reveal--split");
   });
 
-  /* ---------- Observateur dédié (titres, cartes tarifs) ---------- */
-  var pricingCards = document.querySelectorAll(".pricing__card");
-  pricingCards.forEach(function (card, i) {
-    card.classList.add("reveal");
-    card.style.transitionDelay = Math.min(i * 90, 270) + "ms";
-  });
-
+  /* ---------- Observateur dédié (titres) ---------- */
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
@@ -71,7 +65,7 @@
     });
   }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
 
-  document.querySelectorAll(".reveal--split, .pricing__card").forEach(function (el) {
+  document.querySelectorAll(".reveal--split").forEach(function (el) {
     io.observe(el);
   });
 
@@ -128,7 +122,7 @@
 
   /* ---------- Cartes : spotlight + tilt 3D ---------- */
   var MAX_TILT = 5;
-  document.querySelectorAll(".value__card, .service-card, .pricing__card").forEach(function (card) {
+  document.querySelectorAll(".value__card, .service-card").forEach(function (card) {
     var frame = null;
 
     card.addEventListener("pointerenter", function () {
