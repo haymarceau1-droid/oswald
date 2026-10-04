@@ -20,7 +20,7 @@
 <body class="service-page">
   <a class="skip-link" href="#main">Aller au contenu principal</a>
 
-  <header class="site-header" id="site-header">
+  <header class="site-header site-header--solid" id="site-header">
     <div class="container header__inner">
       <a href="index.html" class="logo" aria-label="Oswald Solutions — retour à l'accueil">
         <span class="logo__word">Oswald Solutions</span>
@@ -142,41 +142,82 @@
 
 
   <main id="main">
-    <section class="hero" id="top">
-      <div class="container">
-        <p class="label hero__label"><span class="status"><span class="status__dot" aria-hidden="true"></span><span class="status__label">Disponible</span></span><span class="hero__label-text">Studio web — Angers &amp; France</span></p>
-        <h1 class="hero__title" id="hero-title">Un site qui reste <span class="accent">bien suivi</span> après la mise en ligne.</h1>
-        <p class="hero__lede">La mise en ligne n'est pas la fin du projet. Le Care Plan Oswald vous décharge de la partie technique pour que vous puissiez vous concentrer sur votre activité.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
-          <a class="btn btn--outline" href="#tarifs"><span class="btn__label"><span class="btn__text">Voir les tarifs</span><span class="btn__text btn__text--dupe" aria-hidden="true">Voir les tarifs</span></span></a>
+    <section class="sv-hero" id="top">
+      <div class="container sv-hero__grid">
+        <div class="sv-hero__main">
+          <nav class="sv-crumb" aria-label="Fil d'Ariane"><a href="index.html#services">Services</a><span aria-hidden="true">/</span><span aria-current="page">Care Plan Oswald</span></nav>
+          <h1 class="sv-hero__title" id="hero-title">Un site qui reste <span class="accent">bien suivi</span> après la mise en ligne.</h1>
+          <p class="sv-hero__lede">La mise en ligne n'est pas la fin du projet. Le Care Plan Oswald vous décharge de la partie technique pour que vous puissiez vous concentrer sur votre activité.</p>
+          <div class="sv-hero__actions">
+            <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
+          <a class="btn btn--ghost" href="#tarifs"><span class="btn__label"><span class="btn__text">Voir les tarifs</span><span class="btn__text btn__text--dupe" aria-hidden="true">Voir les tarifs</span></span></a>
+          </div>
         </div>
-        <ul class="hero__proof" aria-label="En bref"><li>Hébergement</li><li>Maintenance</li><li>Support</li></ul>
+        <aside class="sv-sheet" aria-label="Fiche prestation">
+          <p class="sv-sheet__eyebrow"><span>Prestation</span><span>06 / 06</span></p>
+          <p class="sv-sheet__name">Care Plan Oswald</p>
+          <p class="sv-sheet__label">Mise en place du Care Plan</p>
+          <p class="sv-sheet__price">300&nbsp;€</p>
+          <ul class="sv-sheet__list">
+        <li>Hébergement</li>
+        <li>Maintenance</li>
+        <li>Support</li>
+          </ul>
+          <a class="sv-sheet__link" href="#tarifs">Voir le détail des tarifs <span aria-hidden="true">→</span></a>
+        </aside>
       </div>
     </section>
 
-    <section class="section problem" id="probleme" aria-labelledby="probleme-title">
-      <div class="container container--narrow">
-        <p class="label">Le constat</p>
-        <h2 class="section__title" id="probleme-title">Un site sans suivi devient vite un poids.</h2>
-        <p class="section__lede">Une fois votre site en ligne, il faut bien le tenir : hébergement, mises à jour, sécurité, petites modifications. Sans suivi, tout retombe sur vous.</p>
-        <ul class="problem__list">
-          <li>La technique de votre site vous prend du temps.</li>
-          <li>Les mises à jour et la sécurité sont vite déléguées au second plan.</li>
-          <li>Les petites demandes s'accumulent sans réponse.</li>
-          <li>Personne ne surveille votre site d'un mois sur l'autre.</li>
-          <li>Votre site se dégrade insensiblement.</li>
-        </ul>
-        <p class="problem__outro">Le Care Plan Oswald remet votre site entre des mains régulières, pour de bon.</p>
-      </div>
-    </section>
-
-    <section class="section value" id="benefices" aria-labelledby="benefices-title">
+    <nav class="sv-subnav" aria-label="Dans cette page">
       <div class="container">
-        <p class="label">Ce que le plan inclut</p>
-        <h2 class="section__title" id="benefices-title">Tout l'essentiel, en un abonnement simple.</h2>
-        <p class="section__lede">Un interlocuteur unique, un tarif mensuel clair et l'essentiel de la gestion technique d'un site.</p>
-        <div class="value__grid">
+        <ul>
+          <li><a href="#probleme">Le constat</a></li>
+          <li><a href="#benefices">Bénéfices</a></li>
+          <li><a href="#methode">Méthode</a></li>
+          <li><a href="#tarifs">Tarifs</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="section sv-problem" id="probleme" aria-labelledby="probleme-title">
+      <div class="container">
+        <div class="sv-head">
+          <div>
+            <p class="label">Le constat</p>
+            <h2 class="section__title" id="probleme-title">Un site sans suivi devient vite un poids.</h2>
+          </div>
+          <p class="section__lede">Une fois votre site en ligne, il faut bien le tenir : hébergement, mises à jour, sécurité, petites modifications. Sans suivi, tout retombe sur vous.</p>
+        </div>
+        <div class="sv-versus">
+          <div class="sv-versus__col sv-versus__col--before">
+            <p class="sv-versus__tag">Aujourd'hui</p>
+            <ul class="problem__list">
+              <li>La technique de votre site vous prend du temps.</li>
+              <li>Les mises à jour et la sécurité sont vite déléguées au second plan.</li>
+              <li>Les petites demandes s'accumulent sans réponse.</li>
+              <li>Personne ne surveille votre site d'un mois sur l'autre.</li>
+              <li>Votre site se dégrade insensiblement.</li>
+            </ul>
+          </div>
+          <div class="sv-versus__col sv-versus__col--after">
+            <p class="sv-versus__tag">Avec Oswald Solutions</p>
+            <p class="problem__outro">Le Care Plan Oswald remet votre site entre des mains régulières, pour de bon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sv-value" id="benefices" aria-labelledby="benefices-title">
+      <div class="container">
+        <div class="sv-head">
+          <div>
+            <p class="label">Ce que le plan inclut</p>
+            <h2 class="section__title" id="benefices-title">Tout l'essentiel, en un abonnement simple.</h2>
+          </div>
+          <p class="section__lede">Un interlocuteur unique, un tarif mensuel clair et l'essentiel de la gestion technique d'un site.</p>
+        </div>
+        <div class="value__grid sv-bento">
           <article class="value__card">
             <svg class="icon current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -188,7 +229,7 @@
             <h3>Hébergement</h3>
             <p>Hébergement géré et suivi de votre site.</p>
           </article>
-          <article class="value__card">
+<article class="value__card">
             <svg class="icon current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M14.55 22.42C14.22 22.42 13.91 22.2 13.82 21.86C13.71 21.46 13.95 21.05 14.36 20.94C18.42 19.87 21.25 16.19 21.25 11.99C21.25 6.89 17.1 2.74 12 2.74C7.67 2.74 4.83 5.27 3.5 6.8H6.44C6.85 6.8 7.19 7.14 7.19 7.55C7.19 7.96 6.86 8.31 6.44 8.31H2.01C1.96 8.31 1.87 8.3 1.8 8.28C1.71 8.25 1.63 8.21 1.56 8.16C1.47 8.1 1.4 8.02 1.35 7.93C1.3 7.84 1.26 7.73 1.25 7.62C1.25 7.59 1.25 7.57 1.25 7.54V3C1.25 2.59 1.59 2.25 2 2.25C2.41 2.25 2.75 2.59 2.75 3V5.39C4.38 3.64 7.45 1.25 12 1.25C17.93 1.25 22.75 6.07 22.75 12C22.75 16.88 19.46 21.16 14.74 22.4C14.68 22.41 14.61 22.42 14.55 22.42Z" fill="currentColor"/>
@@ -198,7 +239,7 @@
             <h3>Maintenance</h3>
             <p>Entretien technique régulier.</p>
           </article>
-          <article class="value__card">
+<article class="value__card">
             <svg class="icon current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M20.5 10.19H17.61C15.24 10.19 13.31 8.26 13.31 5.89V3C13.31 2.45 12.86 2 12.31 2H8.07C4.99 2 2.5 4 2.5 7.57V16.43C2.5 20 4.99 22 8.07 22H15.93C19.01 22 21.5 20 21.5 16.43V11.19C21.5 10.64 21.05 10.19 20.5 10.19Z" fill="currentColor"/>
@@ -208,7 +249,7 @@
             <h3>Sauvegardes</h3>
             <p>Copies de sécurité régulières.</p>
           </article>
-          <article class="value__card">
+<article class="value__card">
             <svg class="icon current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.0002 22.6298C11.3302 22.6298 10.6502 22.4798 10.1202 22.1698L4.62023 18.9998C2.38023 17.4898 2.24023 17.2598 2.24023 14.8898V9.1098C2.24023 6.7398 2.37023 6.5098 4.57023 5.0198L10.1102 1.8198C11.1602 1.2098 12.8102 1.2098 13.8602 1.8198L19.3802 4.9998C21.6202 6.5098 21.7602 6.7398 21.7602 9.1098V14.8798C21.7602 17.2498 21.6302 17.4798 19.4302 18.9698L13.8902 22.1698C13.3502 22.4798 12.6702 22.6298 12.0002 22.6298ZM12.0002 2.8698C11.5802 2.8698 11.1702 2.9498 10.8802 3.1198L5.38023 6.2998C3.75023 7.3998 3.75023 7.3998 3.75023 9.1098V14.8798C3.75023 16.5898 3.75023 16.5898 5.42023 17.7198L10.8802 20.8698C11.4702 21.2098 12.5402 21.2098 13.1302 20.8698L18.6302 17.6898C20.2502 16.5898 20.2502 16.5898 20.2502 14.8798V9.1098C20.2502 7.3998 20.2502 7.3998 18.5802 6.2698L13.1202 3.1198C12.8302 2.9498 12.4202 2.8698 12.0002 2.8698Z" fill="currentColor"/>
@@ -218,7 +259,7 @@
             <h3>Sécurité</h3>
             <p>Protection et mises à jour de sécurité.</p>
           </article>
-          <article class="value__card">
+<article class="value__card">
             <svg class="icon current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M21.6602 10.44L20.6802 14.62C19.8402 18.23 18.1802 19.69 15.0602 19.39C14.5602 19.35 14.0202 19.26 13.4702 19.12L11.4002 18.53C7.40021 17.41 5.32021 15.33 6.44021 11.33L7.42021 7.15C7.64021 6.26 7.89021 5.48 8.18021 4.83C9.18021 2.28 11.2002 1.86 14.9402 2.95L17.0102 3.54C21.0102 4.66 23.0902 6.74 21.6602 10.44Z" fill="currentColor"/>
@@ -230,7 +271,7 @@
             <h3>Petites modifications</h3>
             <p>Ajustements de textes, d'images et de liens.</p>
           </article>
-          <article class="value__card">
+<article class="value__card">
             <svg class="icon current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <svg class="current-color" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M12 22.75C11.3 22.75 10.59 22.48 10.06 21.95L8.35001 20.26C7.92001 19.84 7.35999 19.61 6.75999 19.61H6C3.93 19.61 2.25 17.94 2.25 15.89V4.97998C2.25 2.92998 3.93 1.26001 6 1.26001H18C20.07 1.26001 21.75 2.92998 21.75 4.97998V15.89C21.75 17.94 20.07 19.61 18 19.61H17.24C16.64 19.61 16.07 19.84 15.65 20.26L13.94 21.95C13.41 22.48 12.7 22.75 12 22.75ZM6 2.75C4.76 2.75 3.75 3.74997 3.75 4.96997V15.88C3.75 17.11 4.76 18.1 6 18.1H6.75999C7.75999 18.1 8.7 18.4899 9.41 19.1899L11.12 20.88C11.61 21.36 12.4 21.36 12.89 20.88L14.6 19.1899C15.31 18.4899 16.25 18.1 17.25 18.1H18C19.24 18.1 20.25 17.1 20.25 15.88V4.96997C20.25 3.73997 19.24 2.75 18 2.75H6Z" fill="currentColor"/>
@@ -246,24 +287,24 @@
       </div>
     </section>
 
-    <section class="section method" id="methode" aria-labelledby="methode-title">
+    <section class="section sv-method" id="methode" aria-labelledby="methode-title">
       <div class="container">
         <p class="label">Méthode</p>
         <h2 class="section__title" id="methode-title">Comment le projet se déroule.</h2>
-        <ol class="method__list">
+        <ol class="method__list sv-steps">
           <li class="method__step">
             <h3>Mise en place</h3>
             <p>Configuration de l'hébergement et de l'accès au plan.</p>
           </li>
-          <li class="method__step">
+<li class="method__step">
             <h3>Suivi régulier</h3>
             <p>Vérifications, mises à jour et sauvegardes.</p>
           </li>
-          <li class="method__step">
+<li class="method__step">
             <h3>Interventions</h3>
             <p>Traitement des petits problèmes et modifications.</p>
           </li>
-          <li class="method__step">
+<li class="method__step">
             <h3>Accompagnement</h3>
             <p>Conseils et réponses à vos questions.</p>
           </li>
@@ -271,11 +312,15 @@
       </div>
     </section>
 
-    <section class="section pricing" id="tarifs" aria-labelledby="tarifs-title">
-      <div class="container container--narrow">
-        <p class="label">Tarifs</p>
-        <h2 class="section__title" id="tarifs-title">Un tarif clair, adapté à votre projet.</h2>
-        <div class="pricing__list">
+    <section class="section pricing sv-pricing" id="tarifs" aria-labelledby="tarifs-title">
+      <div class="container sv-pricing__grid">
+        <div class="sv-pricing__intro">
+          <p class="label">Tarifs</p>
+          <h2 class="section__title" id="tarifs-title">Un tarif clair, adapté à votre projet.</h2>
+          <p class="pricing__note">Les nouvelles pages importantes, les refontes complètes, les fonctionnalités avancées et les évolutions majeures font l'objet d'un devis séparé.</p>
+          <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
+        </div>
+        <div class="pricing__list sv-menu">
           <div class="price-row">
             <h3>Mise en place du Care Plan</h3>
             <p class="price-row__price">300&nbsp;€</p>
@@ -293,8 +338,6 @@
             <p class="price-row__price">devis séparé</p>
           </div>
         </div>
-        <p class="pricing__note">Les nouvelles pages importantes, les refontes complètes, les fonctionnalités avancées et les évolutions majeures font l'objet d'un devis séparé.</p>
-        <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
       </div>
     </section>
 
@@ -355,6 +398,19 @@
       </div>
     </section>
 
+    <section class="section sv-more" aria-labelledby="more-title">
+      <div class="container">
+        <p class="label">Autres prestations</p>
+        <h2 class="section__title" id="more-title">Une offre complète, un seul interlocuteur.</h2>
+        <div class="sv-more__list">
+          <a class="sv-more__row" href="site-vitrine.html"><span class="sv-more__num">01</span><span class="sv-more__name">Site vitrine</span><span class="sv-more__desc">Une présence professionnelle pour votre entreprise.</span><span class="sv-more__arrow" aria-hidden="true">→</span></a>
+          <a class="sv-more__row" href="landing-page.html"><span class="sv-more__num">02</span><span class="sv-more__name">Landing page</span><span class="sv-more__desc">Une page pensée pour convertir vos visiteurs.</span><span class="sv-more__arrow" aria-hidden="true">→</span></a>
+          <a class="sv-more__row" href="refonte-site.html"><span class="sv-more__num">03</span><span class="sv-more__name">Refonte de site</span><span class="sv-more__desc">Modernisez votre site existant.</span><span class="sv-more__arrow" aria-hidden="true">→</span></a>
+          <a class="sv-more__row" href="site-e-commerce.html"><span class="sv-more__num">04</span><span class="sv-more__name">Site e-commerce</span><span class="sv-more__desc">Une boutique en ligne claire et évolutive.</span><span class="sv-more__arrow" aria-hidden="true">→</span></a>
+          <a class="sv-more__row" href="maintenance.html"><span class="sv-more__num">05</span><span class="sv-more__name">Maintenance</span><span class="sv-more__desc">Hébergement, mises à jour et petites évolutions.</span><span class="sv-more__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <section class="section contact" id="contact" aria-labelledby="contact-title">
@@ -511,5 +567,6 @@
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/animations.js"></script>
+  <script src="assets/js/service.js"></script>
 </body>
 </html>
