@@ -1,0 +1,147 @@
+/* ============================================================
+   Menu mobile & tablette (< 1200px) — simple et épuré
+   Fond uni · liens en lignes à filets · sous-menu en liste
+   ============================================================ */
+
+@media (max-width: 1199px) {
+  .site-nav {
+    gap: 2rem;
+    padding: 6rem clamp(1.25rem, 6vw, 2.5rem) 1.75rem;
+    background: var(--surface-deep);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* plus de décor : ni grille de points ni lueurs */
+  .site-nav::before,
+  .site-nav::after {
+    display: none;
+  }
+
+  /* l'infobulle WhatsApp ne doit pas flotter sur le menu */
+  body.nav-open .whatsapp-tip {
+    display: none;
+  }
+
+  /* ---------- Liens principaux ---------- */
+  .site-nav.is-open .site-nav__list {
+    gap: 0;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .site-nav.is-open .site-nav__list > li {
+    border-bottom: 1px solid var(--border-on-dark);
+  }
+
+  .site-nav.is-open .site-nav__list > li:first-child {
+    border-top: 1px solid var(--border-on-dark);
+  }
+
+  .site-nav.is-open .site-nav__list > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.1rem 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--on-dark);
+  }
+
+  .site-nav__list > li > a::after {
+    display: none;
+  }
+
+  .site-nav.is-open .has-dropdown {
+    max-width: none;
+  }
+
+  .nav-link__chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--on-dark-muted);
+  }
+
+  .has-dropdown.is-open .nav-link__chevron {
+    color: var(--acid);
+  }
+
+  /* ---------- Sous-menu Services : simple liste ---------- */
+  .dropdown__grid {
+    display: grid;
+    gap: 0;
+    margin-top: 0;
+    padding: 0 0 0.75rem 0.25rem;
+    background: none;
+  }
+
+  .dropdown__item,
+  .dropdown__item:hover {
+    padding: 0.7rem 0 0.7rem 1rem;
+    border: 0;
+    border-left: 1px solid var(--border-on-dark);
+    border-radius: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .dropdown__item.is-current {
+    border-left-color: var(--acid);
+    background: none;
+  }
+
+  .dropdown__item:hover {
+    border-left-color: var(--on-dark-muted);
+  }
+
+  .dropdown__icon,
+  .dropdown__copy span {
+    display: none;
+  }
+
+  .dropdown__copy strong {
+    font-size: 1.0625rem;
+    font-weight: 400;
+    color: var(--on-dark-muted);
+  }
+
+  .dropdown__item:hover .dropdown__copy strong {
+    color: var(--on-dark);
+  }
+
+  .dropdown__item.is-current .dropdown__copy strong {
+    color: var(--acid);
+  }
+
+  .dropdown__footer-link,
+  .dropdown__footer-link:hover {
+    justify-content: flex-start;
+    gap: 0.5rem;
+    margin-top: 0;
+    padding: 0.4rem 0 1.1rem 1.25rem;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    font-size: 14px;
+    color: var(--acid);
+  }
+
+  .dropdown__footer-link:hover {
+    color: var(--on-dark);
+  }
+
+  /* ---------- CTA en bas du panneau ---------- */
+  .site-nav.is-open .site-nav__cta {
+    align-self: stretch;
+    justify-content: center;
+    margin-top: auto;
+    width: 100%;
+  }
+}
