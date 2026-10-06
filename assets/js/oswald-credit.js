@@ -37,10 +37,10 @@
       ".band{box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.35rem .55rem;" +
       "width:100%;padding:.95rem 1.25rem;background:" + palette.bg + ";color:" + palette.text + ";" +
       "border-top:1px solid " + palette.line + ";text-align:center;" +
-      "font:500 13px/1.4 'Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;letter-spacing:-.005em}" +
+      "font:400 13px/1.4 'Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;letter-spacing:-.005em}" +
       ".dot{width:6px;height:6px;border-radius:50%;background:" + palette.dot + ";flex-shrink:0}" +
       "a{display:inline-flex;align-items:center;gap:.3rem;color:" + palette.strong + ";text-decoration:none;" +
-      "font-family:'Clash Grotesk','Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-weight:600;letter-spacing:-.01em;" +
+      "font-family:'Clash Grotesk','Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-weight:500;letter-spacing:-.01em;" +
       "padding-bottom:1px;border-bottom:1px solid " + palette.line + ";transition:color .2s ease,border-color .2s ease}" +
       "a:hover,a:focus-visible{color:" + palette.hover + ";border-color:" + palette.hover + "}" +
       "a:focus-visible{outline:2px solid " + palette.hover + ";outline-offset:3px;border-radius:2px}" +
