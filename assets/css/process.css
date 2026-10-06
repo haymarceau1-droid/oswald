@@ -1,0 +1,140 @@
+/* ============================================================
+   Accueil — section « Un processus simple, sans jargon »
+   Étapes en cartes numérotées, reliées entre elles
+   ============================================================ */
+
+.method--home .method__list {
+  counter-reset: st;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 3.25rem;
+}
+
+@media (min-width: 640px) {
+  .method--home .method__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .method--home .method__list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.method--home .method__step,
+.method--home .method__step:first-child {
+  counter-increment: st;
+  position: relative;
+  overflow: hidden;
+  padding: 1.75rem 1.5rem 2rem;
+  background: var(--surface-mid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  transition: border-color 0.3s var(--ease), transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.method--home .method__step:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -24px rgba(0, 38, 36, 0.35);
+}
+
+/* le filet d'accent de l'accueil, en vert sur fond blanc */
+.method--home .method__step::before {
+  background: linear-gradient(90deg, var(--surface-deep), transparent);
+}
+
+/* numéro dans une pastille */
+.method--home .method__step h3::before {
+  content: counter(st, decimal-leading-zero);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  background: var(--surface-deep);
+  color: var(--acid);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease),
+    transform 0.4s var(--ease);
+}
+
+.method--home .method__step:hover h3::before {
+  background: var(--acid);
+  color: var(--surface-deep);
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.method--home .method__step h3 {
+  font-size: 1.25rem;
+}
+
+.method--home .method__step p {
+  margin-top: 0.6rem;
+  max-width: none;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* trait de liaison entre les cartes */
+@media (min-width: 1200px) {
+  .method--home .method__step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: calc(1.75rem + 21px);
+    right: 0;
+    width: 1.25rem;
+    height: 1px;
+    background: var(--border-strong);
+    transform: translateX(100%);
+  }
+
+  .method--home .method__step {
+    overflow: visible;
+  }
+
+  .method--home .method__step::before {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+}
+
+/* phrase de conclusion */
+.method--home .method__outro {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: none;
+  width: fit-content;
+  margin-top: 2.5rem;
+  padding: 1rem 1.5rem 1rem 1.15rem;
+  border-radius: var(--radius-pill);
+  background: rgba(248, 245, 116, 0.45);
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  color: var(--ink-deep);
+}
+
+.method--home .method__outro::before {
+  content: "";
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--surface-deep)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.2l2.6 2.6L13 6.4' fill='none' stroke='%23f8f574' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 70% no-repeat;
+}
+
+@media (max-width: 639px) {
+  .method--home .method__outro {
+    border-radius: var(--radius-xl);
+  }
+}
