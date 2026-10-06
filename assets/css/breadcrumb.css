@@ -1,119 +1,75 @@
 /* ============================================================
    Fil d'Ariane — pages hors accueil
-   Pastille arrondie : icône maison · liens · page courante en pilule
+   Discret : texte seul, séparateur « / », page courante plus claire
    ============================================================ */
 
 .breadcrumb {
   display: block;
   max-width: 100%;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .breadcrumb__list {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  max-width: 100%;
-  padding: 4px;
-  border: 1px solid var(--bc-border);
-  border-radius: var(--radius-pill);
-  background: var(--bc-bg);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.breadcrumb__list::-webkit-scrollbar {
-  display: none;
+  flex-wrap: wrap;
+  gap: 0.25rem 0;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .breadcrumb--light {
-  --bc-border: var(--border-strong);
-  --bc-bg: var(--surface-mid);
   --bc-link: var(--muted);
-  --bc-link-hover: var(--ink-deep);
-  --bc-sep: var(--muted-2);
-  --bc-cur-bg: var(--surface-deep);
-  --bc-cur-fg: var(--on-dark);
+  --bc-hover: var(--ink-deep);
+  --bc-sep: var(--border-strong);
+  --bc-cur: var(--ink-deep);
 }
 
 .breadcrumb--dark {
-  --bc-border: var(--border-on-dark);
-  --bc-bg: rgba(240, 242, 237, 0.05);
-  --bc-link: var(--on-dark-muted);
-  --bc-link-hover: var(--on-dark);
-  --bc-sep: var(--on-dark-muted-2);
-  --bc-cur-bg: var(--acid);
-  --bc-cur-fg: var(--ink);
+  --bc-link: var(--on-dark-muted-2);
+  --bc-hover: var(--on-dark);
+  --bc-sep: rgba(240, 242, 237, 0.25);
+  --bc-cur: var(--on-dark-muted);
 }
 
 .breadcrumb li {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
+  min-width: 0;
 }
 
-/* séparateur : chevron */
 .breadcrumb li + li::before {
-  content: "";
-  width: 14px;
-  height: 14px;
-  margin-inline: 2px;
-  background: var(--bc-sep);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m9 6 6 6-6 6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m9 6 6 6-6 6' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-
-.breadcrumb__link,
-.breadcrumb__current {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.2;
-  white-space: nowrap;
+  content: "/";
+  margin-inline: 0.6rem;
+  color: var(--bc-sep);
 }
 
 .breadcrumb__link {
   color: var(--bc-link);
-  transition: color 0.2s var(--ease), background 0.2s var(--ease);
+  transition: color 0.2s var(--ease);
 }
 
 .breadcrumb__link:hover,
 .breadcrumb__link:focus-visible {
-  color: var(--bc-link-hover);
-  background: rgba(127, 127, 127, 0.12);
-}
-
-.breadcrumb__link--home {
-  padding-left: 0.7rem;
+  color: var(--bc-hover);
 }
 
 .breadcrumb__home {
-  width: 14px;
-  height: 14px;
+  display: none;
 }
 
 .breadcrumb__current {
-  max-width: 30ch;
+  display: block;
+  max-width: 34ch;
   overflow: hidden;
   text-overflow: ellipsis;
-  background: var(--bc-cur-bg);
-  color: var(--bc-cur-fg);
+  white-space: nowrap;
+  color: var(--bc-cur);
 }
 
 @media (max-width: 479px) {
   .breadcrumb__current {
-    max-width: 18ch;
-  }
-
-  .breadcrumb__link--home span {
-    display: none;
-  }
-
-  .breadcrumb__link--home {
-    padding-inline: 0.6rem;
+    max-width: 22ch;
   }
 }
 
@@ -127,5 +83,5 @@
 }
 
 .sv-hero__crumb {
-  margin-bottom: clamp(1.5rem, 4vw, 2.75rem);
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
 }
