@@ -165,6 +165,8 @@
     if (heroTitle) heroTitle.textContent = post.title;
     var heroCat = document.getElementById("article-category");
     if (heroCat) heroCat.textContent = post.category || "Blog";
+    var crumb = document.getElementById("crumb-current");
+    if (crumb) crumb.textContent = post.title;
     var heroDate = document.getElementById("article-date");
     if (heroDate) heroDate.textContent = formatDate(post.date);
   };
