@@ -20,7 +20,7 @@
 <body class="service-page">
   <a class="skip-link" href="#main">Aller au contenu principal</a>
 
-  <header class="site-header" id="site-header">
+  <header class="site-header site-header--solid" id="site-header">
     <div class="container header__inner">
       <a href="index.html" class="logo" aria-label="Oswald Solutions — retour à l'accueil">
         <span class="logo__word">Oswald Solutions</span>
@@ -142,20 +142,32 @@
 
 
   <main id="main">
-    <section class="hero hero--photo" id="top" style="--hero-img: url('https://images.pexels.com/photos/17188273/pexels-photo-17188273.jpeg?auto=compress&cs=tinysrgb&w=1800')">
-      <div class="container">
-        <p class="label hero__label"><span class="status"><span class="status__dot" aria-hidden="true"></span><span class="status__label">Disponible</span></span><span class="hero__label-text">Studio web — Angers &amp; France</span></p>
-        <h1 class="hero__title" id="hero-title">Un site qui reste <span class="accent">en bon état</span> dans la durée.</h1>
-        <p class="hero__lede">Un site s'use s'il n'est pas entretenu. La maintenance et l'hébergement vous déchargent de la partie technique.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
-          <a class="btn btn--outline" href="care-plan.html"><span class="btn__label"><span class="btn__text">Découvrir le Care Plan</span><span class="btn__text btn__text--dupe" aria-hidden="true">Découvrir le Care Plan</span></span></a>
+    <section class="sv-hero" id="top">
+      <div class="container sv-hero__grid">
+        <div class="sv-hero__main">
+          <p class="sv-eyebrow"><span>Prestation 05 / 06</span><span>Maintenance</span></p>
+          <h1 class="sv-hero__title" id="hero-title">Un site qui reste <span class="accent">en bon état</span> dans la durée.</h1>
+          <p class="sv-hero__lede">Un site s'use s'il n'est pas entretenu. La maintenance et l'hébergement vous déchargent de la partie technique.</p>
+          <div class="sv-hero__actions">
+            <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
+          <a class="btn btn--ghost" href="care-plan.html"><span class="btn__label"><span class="btn__text">Découvrir le Care Plan</span><span class="btn__text btn__text--dupe" aria-hidden="true">Découvrir le Care Plan</span></span></a>
+          </div>
+          <ul class="sv-hero__proof">
+            <li>Hébergement</li>
+            <li>Sauvegardes</li>
+            <li>Mises à jour</li>
+          </ul>
         </div>
-        <ul class="hero__proof" aria-label="En bref"><li>Hébergement</li><li>Sauvegardes</li><li>Mises à jour</li></ul>
+        <div class="sv-hero__photo" style="--hero-img: url('https://images.pexels.com/photos/17188273/pexels-photo-17188273.jpeg?auto=compress&cs=tinysrgb&w=1800')" role="img" aria-label="Illustration : Maintenance">
+          <a class="sv-hero__price" href="#tarifs">
+            <span class="sv-hero__price-label">Intervention ponctuelle</span>
+            <span class="sv-hero__price-value">sur devis</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="section problem" id="probleme" aria-labelledby="probleme-title">
+    <section class="section problem sv-problem" id="probleme" aria-labelledby="probleme-title">
       <div class="container container--narrow">
         <p class="label">Le constat</p>
         <h2 class="section__title" id="probleme-title">Sans entretien, un site se dégrade.</h2>
@@ -171,7 +183,7 @@
       </div>
     </section>
 
-    <section class="section value" id="benefices" aria-labelledby="benefices-title">
+    <section class="section value sv-value" id="benefices" aria-labelledby="benefices-title">
       <div class="container">
         <p class="label">Ce que vous gagnez</p>
         <h2 class="section__title" id="benefices-title">Tranquillité, sans gérer la technique.</h2>
@@ -245,7 +257,7 @@
       </div>
     </section>
 
-    <section class="section method" id="methode" aria-labelledby="methode-title">
+    <section class="section method sv-method" id="methode" aria-labelledby="methode-title">
       <div class="container">
         <p class="label">Méthode</p>
         <h2 class="section__title" id="methode-title">Comment le projet se déroule.</h2>
@@ -270,11 +282,16 @@
       </div>
     </section>
 
-    <section class="section pricing" id="tarifs" aria-labelledby="tarifs-title">
-      <div class="container container--narrow">
-        <p class="label">Tarifs</p>
-        <h2 class="section__title" id="tarifs-title">Un tarif clair, adapté à votre projet.</h2>
-        <div class="pricing__list">
+    <section class="section pricing sv-pricing" id="tarifs" aria-labelledby="tarifs-title">
+      <div class="container">
+        <div class="sv-pricecard">
+          <div class="sv-pricecard__intro">
+            <p class="label">Tarifs</p>
+            <h2 class="section__title" id="tarifs-title">Un tarif clair, adapté à votre projet.</h2>
+            <p class="pricing__note">Le Care Plan couvre l'hébergement, la maintenance, les sauvegardes, les mises à jour, la sécurité de base, les petites modifications et le support par email.</p>
+            <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
+          </div>
+          <div class="pricing__list">
           <div class="price-row">
             <h3>Intervention ponctuelle</h3>
             <p class="price-row__price">sur devis</p>
@@ -292,8 +309,7 @@
             <p class="price-row__price">devis séparé</p>
           </div>
         </div>
-        <p class="pricing__note">Le Care Plan couvre l'hébergement, la maintenance, les sauvegardes, les mises à jour, la sécurité de base, les petites modifications et le support par email.</p>
-        <a class="btn btn--primary" href="#contact"><span class="btn__label"><span class="btn__text">Demander un devis</span><span class="btn__text btn__text--dupe" aria-hidden="true">Demander un devis</span></span></a>
+        </div>
       </div>
     </section>
 

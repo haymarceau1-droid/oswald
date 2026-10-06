@@ -1,217 +1,473 @@
 /* ============================================================
-   Pages prestations — une colonne, du texte et des filets fins
-   Même composants que l'accueil (hero, label, FAQ, boutons),
-   sans cartes ni panneaux : sections séparées par un simple trait.
+   Pages prestations — gabarit clair avec photo
+   Hero clair + photo arrondie · constat en 2 colonnes · bénéfices en 3 colonnes
+   Méthode en frise · tarifs dans un encadré vert · FAQ de l'accueil
+   Composants du design system (labels, boutons, FAQ, tokens) conservés.
    ============================================================ */
 
+.service-page main > .section > .container,
+.service-page main > .section > .container.container--narrow {
+  max-width: var(--container);
+}
+
 .service-page main > .section {
-  padding-block: clamp(3.5rem, 8vw, 6rem);
-  background: transparent;
-  border-top: 1px solid var(--border);
+  padding-block: clamp(4rem, 9vw, 7rem);
 }
 
-.service-page main > .section + .section {
-  margin-top: 0;
+/* ---------- Hero clair ---------- */
+.sv-hero {
+  background: var(--surface);
+  padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5.5rem);
 }
 
-/* une seule largeur de lecture pour toute la page */
-.service-page main > .section > .container {
-  max-width: var(--container-narrow);
+.sv-hero__grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
 }
 
-.service-page .section__title {
-  max-width: 20ch;
+@media (min-width: 960px) {
+  .sv-hero__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(3rem, 6vw, 6rem);
+  }
 }
 
-/* ---------- Hero ---------- */
-.service-page .hero {
-  padding-bottom: clamp(3.5rem, 8vw, 6rem);
+.sv-eyebrow {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.service-page .hero .container {
-  max-width: var(--container-narrow);
+.sv-eyebrow span + span {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--ink-deep);
 }
 
-/* ---------- Constat ---------- */
-.service-page .problem__list {
+.sv-eyebrow span + span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 0 1px var(--ink-deep);
+}
+
+.sv-hero__title {
+  max-width: 14ch;
+  font-size: clamp(2.6rem, 5.6vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+  color: var(--ink-deep);
+}
+
+.sv-hero__title > .hero__char {
+  display: inline;
+  white-space: normal;
+}
+
+/* mot mis en avant : surligné au marqueur jaune */
+.sv-hero__title .hero__char--accent {
+  color: var(--ink-deep);
+  background: linear-gradient(
+    transparent 62%,
+    var(--acid) 62%,
+    var(--acid) 94%,
+    transparent 94%
+  );
+}
+
+.sv-hero__lede {
+  max-width: 48ch;
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: clamp(1.0625rem, 1.7vw, 1.1875rem);
+  line-height: 1.55;
+}
+
+.sv-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.25rem;
+}
+
+.sv-hero__proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.sv-hero__proof li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  color: var(--ink-deep);
+}
+
+.sv-hero__proof li::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--acid)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.2l2.6 2.6L13 6.4' fill='none' stroke='%23002624' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 100% no-repeat;
+}
+
+/* photo arrondie + carte tarif flottante */
+.sv-hero__photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 28px;
+  background-color: var(--surface-deep);
+  background-image: var(--hero-img);
+  background-position: center;
+  background-size: cover;
+  animation: sv-photo-in 1s var(--ease) 0.2s both;
+}
+
+@media (min-width: 960px) {
+  .sv-hero__photo {
+    aspect-ratio: 4 / 4.6;
+  }
+}
+
+@keyframes sv-photo-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sv-hero__price {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  display: grid;
+  gap: 0.2rem;
+  max-width: calc(100% - 2.5rem);
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-xl);
+  background: var(--surface-mid);
+  box-shadow: 0 16px 40px -16px rgba(0, 38, 36, 0.45);
+  transition: transform 0.35s var(--ease);
+}
+
+.sv-hero__price:hover {
+  transform: translateY(-3px);
+}
+
+.sv-hero__price-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sv-hero__price-value {
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--ink-deep);
+}
+
+/* ---------- Constat : 2 colonnes + encart jaune ---------- */
+.sv-problem {
+  border-top: 0;
+}
+
+@media (min-width: 960px) {
+  .sv-problem > .container {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    grid-template-areas:
+      "label list"
+      "title list"
+      "lede  list"
+      "outro outro";
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  .sv-problem .label { grid-area: label; }
+  .sv-problem .section__title { grid-area: title; }
+  .sv-problem .section__lede { grid-area: lede; }
+  .sv-problem .problem__list { grid-area: list; margin-top: 0; }
+  .sv-problem .problem__outro { grid-area: outro; }
+}
+
+.sv-problem .problem__list {
   gap: 0;
   margin-top: 2.5rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-strong);
 }
 
-.service-page .problem__list li {
-  padding: 1.1rem 0 1.1rem 1.5rem;
+.sv-problem .problem__list li {
+  padding: 1.15rem 0 1.15rem 1.5rem;
   border-bottom: 1px solid var(--border);
   color: var(--ink-deep);
   font-size: 17px;
   line-height: 1.5;
 }
 
-.service-page .problem__list li::before {
-  top: 1.75em;
+.sv-problem .problem__list li::before {
+  top: 1.8em;
 }
 
-.service-page .problem__outro {
-  max-width: 30ch;
+.sv-problem .problem__outro {
+  max-width: none;
   margin-top: 3rem;
-  padding-top: 0;
-  border-top: 0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border: 0;
+  border-radius: 28px;
+  background: var(--acid);
+  color: var(--surface-deep);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.15;
 }
 
-/* ---------- Bénéfices : liste à deux colonnes, sans cartes ---------- */
-.service-page .value__grid {
+/* ---------- Bénéfices : bande blanche, 3 colonnes ---------- */
+.sv-value {
+  background: var(--surface-mid);
+  border-block: 1px solid var(--border);
+}
+
+.sv-value .value__grid {
   grid-template-columns: 1fr;
-  gap: 0 3rem;
+  gap: 2.5rem 2rem;
   margin-top: 3rem;
-  border-bottom: 1px solid var(--border);
 }
 
-@media (min-width: 720px) {
-  .service-page .value__grid {
+@media (min-width: 640px) {
+  .sv-value .value__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.service-page .value__card,
-.service-page .value__card:hover,
-.service-page .value__card.is-tilting {
+@media (min-width: 960px) {
+  .sv-value .value__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3.5rem 3rem;
+  }
+}
+
+.sv-value .value__card,
+.sv-value .value__card:hover,
+.sv-value .value__card.is-tilting {
   transform: none;
-  padding: 1.75rem 0;
+  padding: 0;
   border: 0;
-  border-top: 1px solid var(--border);
   border-radius: 0;
   background: transparent;
   box-shadow: none;
 }
 
-.service-page .value__card::after {
+.sv-value .value__card::after {
   display: none;
 }
 
-.service-page .value__card .icon {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 1rem;
+.sv-value .value__card .icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.25rem;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-sizing: border-box;
 }
 
-/* ---------- Méthode : liste numérotée ---------- */
-.service-page .method__list {
+/* ---------- Méthode : frise ---------- */
+.sv-method {
+  border-top: 0;
+}
+
+.sv-method .method__list {
   counter-reset: ms;
-  display: block;
-  margin-top: 3rem;
-  border-top: 1px solid var(--border);
+  position: relative;
 }
 
-.service-page .method__step,
-.service-page .method__step:first-child {
+.sv-method .method__step,
+.sv-method .method__step:first-child {
   counter-increment: ms;
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
-  grid-template-areas:
-    "n title"
-    ".  text";
-  align-items: baseline;
-  padding: 1.5rem 0;
+  position: relative;
+  padding: 0 0 2.25rem 4rem;
   border: 0;
-  border-bottom: 1px solid var(--border);
 }
 
-/* le trait d'accent de l'accueil devient le numéro */
-.service-page .method__step::before {
-  content: counter(ms, decimal-leading-zero);
-  grid-area: n;
-  position: static;
-  width: auto;
-  height: auto;
-  background: none;
-  transform: none;
-  transition: none;
-  font-size: 12px;
+.sv-method .method__step:last-child {
+  padding-bottom: 0;
+}
+
+.sv-method .method__step::after {
+  content: counter(ms);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-deep);
+  color: var(--acid);
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--muted-2);
+  transition: transform 0.35s var(--ease), background 0.25s var(--ease),
+    color 0.25s var(--ease);
 }
 
-.service-page .method__step h3 {
-  grid-area: title;
+.sv-method .method__step:hover::after {
+  transform: scale(1.1);
+  background: var(--acid);
+  color: var(--surface-deep);
 }
 
-.service-page .method__step p {
-  grid-area: text;
-  max-width: 44ch;
+/* trait de liaison */
+.sv-method .method__step::before {
+  left: 20px;
+  top: 44px;
+  width: 1px;
+  height: calc(100% - 48px);
+  background: var(--border-strong);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 1s var(--ease) 0.2s;
 }
 
-/* ---------- Tarifs : lignes simples sur fond clair ---------- */
-.service-page .pricing {
+.sv-method .method__step.is-visible::before {
+  transform: scaleY(1);
+}
+
+.sv-method .method__step:last-child::before {
+  display: none;
+}
+
+.sv-method .method__step h3 {
+  padding-top: 0.5rem;
+}
+
+.sv-method .method__step p {
+  max-width: 36ch;
+}
+
+@media (min-width: 960px) {
+  .sv-method .method__list {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none;
+    gap: 1.5rem;
+  }
+
+  .sv-method .method__step,
+  .sv-method .method__step:first-child {
+    padding: 4rem 0 0;
+  }
+
+  .sv-method .method__step::before {
+    left: 52px;
+    top: 20px;
+    width: calc(100% - 28px);
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+  }
+
+  .sv-method .method__step.is-visible::before {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Tarifs : encadré vert contenu ---------- */
+.sv-pricing {
   background: transparent;
-  border-bottom: 0;
+  border: 0;
+  padding-top: 0;
 }
 
-.service-page .pricing .label {
-  color: var(--muted);
+.sv-pricecard {
+  display: grid;
+  gap: 2.5rem;
+  align-items: start;
+  padding: clamp(1.75rem, 5vw, 4rem);
+  border-radius: 28px;
+  background: var(--surface-deep);
+  color: var(--on-dark);
 }
 
-.service-page .pricing .section__title {
+@media (min-width: 960px) {
+  .sv-pricecard {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+}
+
+.sv-pricing .section__title {
   margin-bottom: 0;
-  color: var(--ink-deep);
+  color: var(--on-dark);
 }
 
-.service-page .pricing__list {
-  margin-top: 3rem;
-  border-top: 1px solid var(--border);
+.sv-pricing .label {
+  color: var(--on-dark-muted);
 }
 
-.service-page .price-row {
+.sv-pricing .pricing__note {
+  max-width: 40ch;
+  margin: 1.5rem 0 2rem;
+  color: var(--on-dark-muted);
+  font-size: 15px;
+}
+
+.sv-pricing .pricing__list {
+  border-top: 1px solid var(--border-on-dark);
+}
+
+.sv-pricing .price-row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
   gap: 0.25rem 1.5rem;
-  padding: 1.25rem 0;
-  border: 0;
-  border-bottom: 1px solid var(--border);
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--border-on-dark);
 }
 
-.service-page .price-row h3 {
+.sv-pricing .price-row h3 {
   font-size: 17px;
   font-weight: 400;
   letter-spacing: -0.01em;
-  color: var(--ink-deep);
+  color: var(--on-dark);
 }
 
-.service-page .price-row__price {
-  font-size: 17px;
+.sv-pricing .price-row__price {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
   font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--ink-deep);
-}
-
-.service-page .pricing__note {
-  max-width: 52ch;
-  margin: 1.5rem 0 2rem;
-  color: var(--muted);
-  font-size: 15px;
-}
-
-/* ---------- FAQ : composant de l'accueil, en une colonne ---------- */
-.service-page .faq {
-  border-top: 1px solid var(--border);
-}
-
-.service-page .faq__layout {
-  display: block;
-}
-
-.service-page .faq__support {
-  display: none;
-}
-
-.service-page .faq__list {
-  margin-top: 2.5rem;
+  letter-spacing: -0.02em;
+  color: var(--acid);
 }
 
 /* ---------- Autres prestations ---------- */
+.sv-more {
+  border-top: 1px solid var(--border);
+}
+
 .sv-links {
   display: flex;
   flex-wrap: wrap;
@@ -237,32 +493,8 @@
   color: var(--on-dark);
 }
 
-/* ---------- Mots clés du hero : sur une ligne ---------- */
-.service-page .hero__proof {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
-  padding: 0;
-  list-style: none;
-}
-
-.service-page .hero__proof li + li::before {
-  content: "·";
-  margin-right: 1.5rem;
-  color: var(--on-dark-muted-2);
-}
-
-/* ---------- Hero avec photo (banque d'images) ---------- */
-.service-page .hero--photo {
-  background-color: var(--surface-deep);
-  background-image: linear-gradient(
-      180deg,
-      rgba(0, 38, 36, 0.74) 0%,
-      rgba(0, 38, 36, 0.68) 45%,
-      rgba(0, 38, 36, 0.94) 100%
-    ),
-    var(--hero-img);
-  background-position: center, center;
-  background-size: cover, cover;
-  background-repeat: no-repeat;
+@media (prefers-reduced-motion: reduce) {
+  .sv-hero__photo {
+    animation: none;
+  }
 }
