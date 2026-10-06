@@ -42,9 +42,9 @@
   box-shadow: 0 18px 36px -24px rgba(0, 38, 36, 0.35);
 }
 
-/* le filet d'accent de l'accueil, en vert sur fond blanc */
+/* pas de filet d'accent en haut des cartes */
 .method--home .method__step::before {
-  background: linear-gradient(90deg, var(--surface-deep), transparent);
+  display: none;
 }
 
 /* numéro dans une pastille */
@@ -97,10 +97,6 @@
 
   .method--home .method__step {
     overflow: visible;
-  }
-
-  .method--home .method__step::before {
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   }
 }
 
