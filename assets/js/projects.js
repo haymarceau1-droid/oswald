@@ -17,6 +17,15 @@
   /* maquette de navigateur dessinée en CSS */
   var mock = function (p) {
     var tone = p.visual === "acid" ? "acid" : "forest";
+    /* capture d'écran réelle du site : "image": "assets/projects/xxx.jpg" */
+    if (p.image) {
+      return (
+        '<div class="mock mock--shot mock--' + tone + '">' +
+        '<div class="mock__bar"><i></i><i></i><i></i><span class="mock__url">' + escapeHtml(p.domain || "") + "</span></div>" +
+        '<img class="mock__shot" src="' + escapeHtml(p.image) + '" alt="Aperçu du site ' + escapeHtml(p.domain || p.title) + '" loading="lazy">' +
+        "</div>"
+      );
+    }
     return (
       '<div class="mock mock--' + tone + '" aria-hidden="true">' +
       '<div class="mock__bar"><i></i><i></i><i></i><span class="mock__url">' + escapeHtml(p.domain || "exemple.fr") + "</span></div>" +

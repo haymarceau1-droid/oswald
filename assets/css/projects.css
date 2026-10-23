@@ -307,6 +307,16 @@ a.project-card__link {
   border: 1px solid rgba(0, 38, 36, 0.08);
 }
 
+/* capture d'écran réelle à la place de la maquette dessinée */
+.mock__shot {
+  display: block;
+  width: 100%;
+  height: calc(100% - 30px);
+  object-fit: cover;
+  object-position: top center;
+  background: var(--surface);
+}
+
 /* variante jaune pour les prochains projets */
 .mock--acid {
   background: #ffffff;
