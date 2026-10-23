@@ -329,19 +329,7 @@
 }
 
 
-/* ---------- Magnétisme très léger entre les sections ----------
-   « proximity » : la page ne se cale sur une section que si l'on s'arrête
-   près de son début. Jamais de blocage, désactivé sur mobile et en
-   mouvement réduit. */
-@media (min-width: 810px) and (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-snap-type: y proximity;
-    scroll-padding-top: var(--header-h, 69px);
-  }
-
-  main > section,
-  body > section,
-  .site-footer {
-    scroll-snap-align: start;
-  }
+/* ---------- Ancres : la section se pose sous l'en-tête ---------- */
+html {
+  scroll-padding-top: var(--header-h, 69px);
 }

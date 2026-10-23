@@ -7,6 +7,106 @@
 
   var raf = window.requestAnimationFrame.bind(window);
 
+  /* ---------- Magnétisme léger entre les sections ----------
+     Quand on arrête de défiler près du début d'une section, la page glisse
+     doucement pour la poser pile sous l'en-tête. Réglages : distances en px. */
+  (function () {
+    if (!finePointer) return;
+
+    var MIN_WIDTH = 810;
+    var SETTLE_DELAY = 130;
+    var sections = Array.prototype.slice.call(
+      document.querySelectorAll("main > section, body > section")
+    );
+    if (!sections.length) return;
+
+    var timer = null;
+    var animating = false;
+    var frame = null;
+    var lastY = window.scrollY;
+    var direction = 1;
+
+    var headerH = function () {
+      var v = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue("--header-h"), 10
+      );
+      return isNaN(v) ? 69 : v;
+    };
+
+    var maxScroll = function () {
+      return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    };
+
+    var cancel = function () {
+      if (frame) cancelAnimationFrame(frame);
+      frame = null;
+      animating = false;
+    };
+
+    var glideTo = function (target) {
+      var from = window.scrollY;
+      var dist = target - from;
+      var duration = Math.min(650, 320 + Math.abs(dist) * 1.4);
+      var start = null;
+      animating = true;
+      var step = function (now) {
+        if (start === null) start = now;
+        var t = Math.min((now - start) / duration, 1);
+        var e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        window.scrollTo(0, from + dist * e);
+        if (t < 1) {
+          frame = raf(step);
+        } else {
+          frame = null;
+          setTimeout(function () { animating = false; lastY = window.scrollY; }, 60);
+        }
+      };
+      frame = raf(step);
+    };
+
+    var settle = function () {
+      if (animating || window.innerWidth < MIN_WIDTH) return;
+      var y = window.scrollY;
+      var vh = window.innerHeight;
+      var forward = Math.min(280, vh * 0.32);   // section devant soi (on descend)
+      var backward = Math.min(150, vh * 0.16);  // section qu'on vient de dépasser
+      var best = null;
+
+      sections.forEach(function (s) {
+        var t = Math.min(
+          maxScroll(),
+          Math.max(0, s.getBoundingClientRect().top + y - headerH())
+        );
+        var d = t - y;
+        if (Math.abs(d) < 2) { best = null; return; }
+        var ahead = direction > 0 ? d > 0 : d < 0;
+        var limit = ahead ? forward : backward;
+        if (Math.abs(d) <= limit && (best === null || Math.abs(d) < Math.abs(best.d))) {
+          best = { t: t, d: d };
+        }
+      });
+
+      if (best) glideTo(best.t);
+    };
+
+    window.addEventListener("scroll", function () {
+      if (animating) return;
+      var y = window.scrollY;
+      if (y !== lastY) direction = y > lastY ? 1 : -1;
+      lastY = y;
+      clearTimeout(timer);
+      timer = setTimeout(settle, SETTLE_DELAY);
+    }, { passive: true });
+
+    /* la main reprend toujours la priorité */
+    ["wheel", "touchstart", "mousedown", "keydown"].forEach(function (evt) {
+      window.addEventListener(evt, function () {
+        if (animating) cancel();
+        clearTimeout(timer);
+      }, { passive: true });
+    });
+  })();
+
   /* ---------- Barre de progression du scroll ---------- */
   var bar = document.createElement("div");
   bar.className = "scroll-progress";
