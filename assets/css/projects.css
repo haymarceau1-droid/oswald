@@ -528,14 +528,6 @@ a.project-card__link {
   z-index: 2;
 }
 
-.project-feature__meta {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--acid);
-}
-
 .project-feature__text h3 {
   font-size: clamp(2.5rem, 5.2vw, 4.25rem);
   font-weight: 500;
@@ -613,49 +605,6 @@ a.project-card__link {
   to { translate: 0 -10px; }
 }
 
-/* pastilles flottantes */
-.project-feature__chip {
-  position: absolute;
-  z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-pill);
-  background: var(--surface-mid);
-  box-shadow: 0 18px 36px -14px rgba(0, 0, 0, 0.55);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--ink-deep);
-  animation: feature-float 5.5s ease-in-out infinite alternate;
-}
-
-.project-feature__chip i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--surface-deep);
-  box-shadow: 0 0 0 3px var(--acid);
-}
-
-.project-feature__chip--1 {
-  left: -1.25rem;
-  bottom: 14%;
-  animation-delay: -1.5s;
-}
-
-.project-feature__chip--2 {
-  top: -0.9rem;
-  right: 18%;
-  background: var(--acid);
-  animation-delay: -3s;
-}
-
-.project-feature__chip--2 i {
-  box-shadow: none;
-}
-
 /* mobile / tablette : empilé, moins incliné */
 @media (max-width: 959px) {
   .project-feature {
@@ -672,14 +621,6 @@ a.project-card__link {
     transform-origin: 20% 50%;
   }
 
-  .project-feature__chip--1 {
-    left: -0.5rem;
-    bottom: 10%;
-  }
-
-  .project-feature__chip--2 {
-    right: 6%;
-  }
 }
 
 @media (max-width: 719px) {
@@ -691,10 +632,6 @@ a.project-card__link {
     width: 100%;
   }
 
-  .project-feature__chip {
-    padding: 0.45rem 0.8rem;
-    font-size: 12px;
-  }
 
   /* la fenêtre garde son cadre (pas le plein cadre des cartes) */
   .project-feature .mock--shot {
@@ -713,8 +650,7 @@ a.project-card__link {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .project-feature .mock,
-  .project-feature__chip {
+  .project-feature .mock {
     animation: none;
     transition: none;
   }

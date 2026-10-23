@@ -65,19 +65,14 @@
   /* projet à la une : grand encadré avec la capture en perspective */
   var feature = function (p) {
     var tags = (p.tags || []);
-    var meta = [p.category, p.year].filter(Boolean).map(escapeHtml).join(" · ");
-    var chips = tags.slice(0, 2).map(function (t, i) {
-      return '<span class="project-feature__chip project-feature__chip--' + (i + 1) + '"><i></i>' + escapeHtml(t) + "</span>";
-    }).join("");
     var pills = tags.map(function (t) { return "<li>" + escapeHtml(t) + "</li>"; }).join("");
     var cta = p.url
       ? '<a class="btn btn--primary" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener"><span class="btn__label"><span class="btn__text">Voir le projet \u2197</span><span class="btn__text btn__text--dupe" aria-hidden="true">Voir le projet \u2197</span></span></a>'
       : "";
-    var stage = '<div class="project-feature__stage">' + mock(p) + chips + "</div>";
+    var stage = '<div class="project-feature__stage">' + mock(p) + "</div>";
     return (
       '<article class="project-feature">' +
       '<div class="project-feature__text">' +
-      (meta ? '<p class="project-feature__meta">' + meta + "</p>" : "") +
       "<h3>" + escapeHtml(p.title) + "</h3>" +
       '<p class="project-feature__excerpt">' + escapeHtml(p.excerpt) + "</p>" +
       (pills ? '<ul class="project-feature__tags">' + pills + "</ul>" : "") +
