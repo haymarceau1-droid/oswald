@@ -7,6 +7,42 @@
 
   var raf = window.requestAnimationFrame.bind(window);
 
+  /* ---------- Étoiles filantes du hero (accueil) ---------- */
+  (function () {
+    var hero = document.querySelector("body.home .hero");
+    if (!hero) return;
+
+    var box = document.createElement("div");
+    box.className = "hero__stars";
+    box.setAttribute("aria-hidden", "true");
+    hero.insertBefore(box, hero.firstChild);
+
+    var rand = function (min, max) { return min + Math.random() * (max - min); };
+
+    var place = function (star) {
+      var angle = rand(142, 156);
+      var rad = (angle * Math.PI) / 180;
+      var dist = rand(380, 520);
+      star.style.setProperty("--x", rand(38, 96).toFixed(1) + "%");
+      star.style.setProperty("--y", rand(2, 46).toFixed(1) + "%");
+      star.style.setProperty("--a", angle.toFixed(1) + "deg");
+      star.style.setProperty("--dx", (Math.cos(rad) * dist).toFixed(0) + "px");
+      star.style.setProperty("--dy", (Math.sin(rad) * dist).toFixed(0) + "px");
+      star.style.setProperty("--o", rand(0.22, 0.38).toFixed(2));
+    };
+
+    [2.2, 6.8, 11.5].forEach(function (delay, i) {
+      var star = document.createElement("span");
+      star.className = "hero__star";
+      star.style.setProperty("--dur", (12 + i * 2.3).toFixed(1) + "s");
+      star.style.animationDelay = delay + "s";
+      place(star);
+      /* à chaque nouveau passage : autre endroit, autre angle */
+      star.addEventListener("animationiteration", function () { place(star); });
+      box.appendChild(star);
+    });
+  })();
+
   /* ---------- Barre de progression du scroll ---------- */
   var bar = document.createElement("div");
   bar.className = "scroll-progress";
