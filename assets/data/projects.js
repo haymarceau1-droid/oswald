@@ -14,9 +14,10 @@ window.PROJECTS = [
     "title": "Talaria",
     "category": "Design",
     "year": "",
-    "excerpt": "Conception de l'ensemble du design du site : direction visuelle, mise en page et interface.",
+    "excerpt": "Design complet du site de Talaria, l'app qui regroupe vols, logements, activités et budget pour voyager entre amis.",
     "tags": ["Design", "UX/UI"],
     "url": "https://talaria.world",
+    "image": "assets/projects/talaria.jpg",
     "domain": "talaria.world",
     "visual": "forest",
     "status": "published"

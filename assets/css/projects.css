@@ -317,6 +317,20 @@ a.project-card__link {
   background: var(--surface);
 }
 
+/* la capture flotte au centre du visuel, site entier visible */
+.mock--shot {
+  top: 50%;
+  bottom: auto;
+  left: 7%;
+  right: 7%;
+  translate: 0 -50%;
+  border-radius: 12px;
+}
+
+.mock--shot .mock__shot {
+  height: auto;
+}
+
 /* variante jaune pour les prochains projets */
 .mock--acid {
   background: #ffffff;
