@@ -19,12 +19,17 @@
 
     var rand = function (min, max) { return min + Math.random() * (max - min); };
 
+    /* Sens de chute alterné (une fois vers la gauche, une fois vers la droite) et
+       point de départ pris dans la moitié opposée : l'écran est couvert de façon
+       équilibrée, à gauche comme à droite. */
     var place = function (star) {
-      var angle = rand(142, 156);
+      var toLeft = star._toLeft = !star._toLeft;
+      var angle = toLeft ? rand(142, 156) : rand(24, 38);
       var rad = (angle * Math.PI) / 180;
       var dist = rand(380, 520);
-      star.style.setProperty("--x", rand(38, 96).toFixed(1) + "%");
-      star.style.setProperty("--y", rand(2, 46).toFixed(1) + "%");
+      var x = toLeft ? rand(36, 108) : rand(-8, 64);
+      star.style.setProperty("--x", x.toFixed(1) + "%");
+      star.style.setProperty("--y", rand(2, 48).toFixed(1) + "%");
       star.style.setProperty("--a", angle.toFixed(1) + "deg");
       star.style.setProperty("--dx", (Math.cos(rad) * dist).toFixed(0) + "px");
       star.style.setProperty("--dy", (Math.sin(rad) * dist).toFixed(0) + "px");
@@ -39,6 +44,7 @@
       star.className = "hero__star";
       star.style.setProperty("--dur", dur.toFixed(1) + "s");
       star.style.animationDelay = delays[i] + "s";
+      star._toLeft = i % 2 === 0; /* place() inverse : la 1re ira donc vers la droite */
       place(star);
       /* à chaque nouveau passage : autre endroit, autre angle */
       star.addEventListener("animationiteration", function () { place(star); });
