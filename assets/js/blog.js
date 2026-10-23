@@ -141,24 +141,89 @@
     fillGrid(list, published());
   };
 
+  /* SEO dynamique de la page article (le contenu vient de assets/data/posts.js) */
+  var SITE = "https://oswaldsolutions.fr";
+
+  var setHead = function (selector, attr, value) {
+    var el = document.head.querySelector(selector);
+    if (el && value) el.setAttribute(attr, value);
+  };
+
+  var applyArticleSeo = function (post) {
+    var url = SITE + "/article.html?slug=" + encodeURIComponent(post.slug);
+    var title = /oswald solutions/i.test(post.title) ? post.title : post.title + " — Oswald Solutions";
+    var desc = post.excerpt || "Article du blog Oswald Solutions.";
+    var abs = function (u) { return /^https?:/.test(u) ? u : SITE + "/" + String(u).replace(/^\//, ""); };
+    var image = post.cover ? abs(post.cover) : SITE + "/assets/og/og-image.png";
+
+    setHead('meta[name="description"]', "content", desc);
+    setHead('link[rel="canonical"]', "href", url);
+    setHead('meta[property="og:title"]', "content", title);
+    setHead('meta[property="og:description"]', "content", desc);
+    setHead('meta[property="og:url"]', "content", url);
+    setHead('meta[property="og:image"]', "content", image);
+    setHead('meta[name="twitter:title"]', "content", title);
+    setHead('meta[name="twitter:description"]', "content", desc);
+    setHead('meta[name="twitter:image"]', "content", image);
+
+    var ld = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BlogPosting",
+          "@id": url + "#article",
+          "headline": post.title,
+          "description": desc,
+          "image": image,
+          "datePublished": post.date,
+          "dateModified": post.updated || post.date,
+          "inLanguage": "fr-FR",
+          "articleSection": post.category || "Blog",
+          "mainEntityOfPage": { "@type": "WebPage", "@id": url },
+          "author": { "@id": SITE + "/#organization" },
+          "publisher": { "@id": SITE + "/#organization" }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE + "/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": SITE + "/blog.html" },
+            { "@type": "ListItem", "position": 3, "name": post.title, "item": url }
+          ]
+        }
+      ]
+    };
+    /* remplace les données structurées génériques de la page par celles de l'article */
+    Array.prototype.forEach.call(
+      document.head.querySelectorAll('script[type="application/ld+json"]'),
+      function (s) { s.parentNode.removeChild(s); }
+    );
+    var script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(ld);
+    document.head.appendChild(script);
+  };
+
   var initArticlePage = function () {
     var main = document.getElementById("article-main");
     if (!main) return;
     var slug = new URLSearchParams(window.location.search).get("slug");
     var post = bySlug(slug);
     if (!post) {
+      setHead('meta[name="robots"]', "content", "noindex,follow");
       main.innerHTML =
         '<section class="section article">' +
         '<div class="container container--narrow">' +
         '<p class="label">Blog</p>' +
-        '<h1 class="section__title">Article introuvable.</h1>' +
+        '<h2 class="section__title">Article introuvable.</h2>' +
         '<p class="section__lede">Cet article n\u2019existe pas ou a \u00e9t\u00e9 retir\u00e9.</p>' +
         '<p style="margin-top:2rem"><a class="btn btn--primary" href="blog.html"><span class="btn__label"><span class="btn__text">Retour au blog</span><span class="btn__text btn__text--dupe" aria-hidden="true">Retour au blog</span></span></a></p>' +
         "</div>" +
         "</section>";
       return;
     }
-    document.title = post.title + " — Oswald Solutions";
+    document.title = /oswald solutions/i.test(post.title) ? post.title : post.title + " — Oswald Solutions";
+    applyArticleSeo(post);
     var body = document.getElementById("article-body");
     if (body) body.innerHTML = renderContent(post.content);
     var heroTitle = document.getElementById("article-title");
