@@ -6,16 +6,15 @@
    ("forest" ou "acid" : couleur du visuel), status ("published" ou "draft"). */
 window.PROJECTS = [
   {
-    "slug": "exemple",
-    "title": "Exemple de réalisation",
-    "category": "Site vitrine",
-    "year": "2026",
-    "excerpt": "Emplacement réservé : les sites réalisés pour mes clients apparaîtront ici, avec leur contexte, les choix de design et le résultat.",
-    "tags": ["Design", "Développement", "SEO"],
-    "url": "",
-    "domain": "exemple.fr",
+    "slug": "talaria",
+    "title": "Talaria",
+    "category": "Design",
+    "year": "",
+    "excerpt": "Conception de l'ensemble du design du site : direction visuelle, mise en page et interface.",
+    "tags": ["Design", "UX/UI"],
+    "url": "https://talaria.world",
+    "domain": "talaria.world",
     "visual": "forest",
-    "status": "published",
-    "sample": true
+    "status": "published"
   }
 ];
