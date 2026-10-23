@@ -1952,9 +1952,38 @@ body.nav-open .cookie-banner {
 
 /* ---------- Footer ---------- */
 .site-footer {
+  --wm: clamp(3rem, 11.4vw, 11.5rem);
+  position: relative;
+  overflow: hidden;
   border-top: 1px solid var(--border-on-dark);
   background: var(--surface-deep);
-  padding-block: 3.5rem 2rem;
+  padding-block: 3.5rem calc(2rem + var(--wm) * 0.62);
+}
+
+.site-footer > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Nom de la marque en filigrane, légèrement rogné en bas */
+.site-footer::after {
+  content: "Oswald Solutions";
+  content: "Oswald Solutions" / "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--wm) * -0.2);
+  transform: translateX(-50%);
+  z-index: 0;
+  font-family: var(--font-logo);
+  font-size: var(--wm);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+  color: var(--on-dark);
+  opacity: 0.055;
+  pointer-events: none;
+  user-select: none;
 }
 
 .footer__grid {
