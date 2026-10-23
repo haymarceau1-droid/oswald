@@ -62,22 +62,53 @@
       : '<article class="' + cls + '"><div class="project-card__link">' + inner + "</div></article>";
   };
 
+  /* projet à la une : grand encadré avec la capture en perspective */
+  var feature = function (p) {
+    var tags = (p.tags || []);
+    var meta = [p.category, p.year].filter(Boolean).map(escapeHtml).join(" · ");
+    var chips = tags.slice(0, 2).map(function (t, i) {
+      return '<span class="project-feature__chip project-feature__chip--' + (i + 1) + '"><i></i>' + escapeHtml(t) + "</span>";
+    }).join("");
+    var pills = tags.map(function (t) { return "<li>" + escapeHtml(t) + "</li>"; }).join("");
+    var cta = p.url
+      ? '<a class="btn btn--primary" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener"><span class="btn__label"><span class="btn__text">Voir le projet \u2197</span><span class="btn__text btn__text--dupe" aria-hidden="true">Voir le projet \u2197</span></span></a>'
+      : "";
+    var stage = '<div class="project-feature__stage">' + mock(p) + chips + "</div>";
+    return (
+      '<article class="project-feature">' +
+      '<div class="project-feature__text">' +
+      (meta ? '<p class="project-feature__meta">' + meta + "</p>" : "") +
+      "<h3>" + escapeHtml(p.title) + "</h3>" +
+      '<p class="project-feature__excerpt">' + escapeHtml(p.excerpt) + "</p>" +
+      (pills ? '<ul class="project-feature__tags">' + pills + "</ul>" : "") +
+      cta +
+      "</div>" +
+      (p.url
+        ? '<a class="project-feature__shot" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener" aria-label="Ouvrir ' + escapeHtml(p.domain || p.title) + '" tabindex="-1">' + stage + "</a>"
+        : stage) +
+      "</article>"
+    );
+  };
+
   var fill = function (container, list) {
-    if (!container) return;
-    container.innerHTML = list.map(card).join("");
-    container.classList.toggle("projects__grid--single", list.length === 1);
-    var cards = container.querySelectorAll(".project-card");
-    cards.forEach(function (c, i) {
+    if (!container || !list.length) return;
+    var rest = list.slice(1);
+    container.classList.remove("projects__grid");
+    container.classList.add("projects__stack");
+    container.innerHTML =
+      feature(list[0]) +
+      (rest.length ? '<div class="projects__grid projects__grid--rest">' + rest.map(card).join("") + "</div>" : "");
+
+    var items = container.querySelectorAll(".project-feature, .project-card");
+    items.forEach(function (c, i) {
       c.classList.add("reveal");
-      c.style.transitionDelay = Math.min(i * 80, 240) + "ms";
+      c.style.transitionDelay = Math.min(i * 90, 270) + "ms";
     });
-    if (cards.length) {
+    requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          cards.forEach(function (c) { c.classList.add("is-visible"); });
-        });
+        items.forEach(function (c) { c.classList.add("is-visible"); });
       });
-    }
+    });
   };
 
   document.addEventListener("DOMContentLoaded", function () {
