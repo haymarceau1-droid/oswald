@@ -321,8 +321,8 @@ a.project-card__link {
 .mock--shot {
   top: 50%;
   bottom: auto;
-  left: 7%;
-  right: 7%;
+  left: 9%;
+  right: 9%;
   translate: 0 -50%;
   border-radius: 12px;
 }
