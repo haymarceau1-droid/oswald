@@ -375,3 +375,108 @@ a.project-card__link {
     transition: none;
   }
 }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* un seul projet : toujours pleine largeur (pas de colonne vide) */
+.projects__grid--single {
+  grid-template-columns: 1fr;
+}
+
+/* tablette (720 – 899 px) : carte pleine largeur, visuel large au-dessus */
+@media (min-width: 720px) and (max-width: 899px) {
+  .projects__grid--single .project-card__visual {
+    aspect-ratio: 16 / 9;
+  }
+
+  .projects__grid--single .mock--shot {
+    left: 16%;
+    right: 16%;
+  }
+
+  .projects__grid--single .project-card__body {
+    padding: 2rem;
+  }
+
+  .projects__grid--single .project-card__body h3 {
+    font-size: 1.75rem;
+  }
+}
+
+/* mobile (< 720 px) : la capture occupe toute la largeur de la carte */
+@media (max-width: 719px) {
+  .projects__grid {
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .project-card:hover {
+    transform: none;
+  }
+
+  .project-card__visual {
+    aspect-ratio: 4 / 3.1;
+  }
+
+  /* fenêtre de navigateur plein cadre : on gagne ~25 % de largeur d'image */
+  .mock--shot {
+    inset: 0;
+    translate: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .mock--shot .mock__bar {
+    height: 28px;
+  }
+
+  .mock--shot .mock__shot {
+    height: calc(100% - 28px);
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .project-card:hover .mock {
+    transform: none;
+  }
+
+  .project-card__badge {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .project-card__body {
+    gap: 0.6rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .project-card__body h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-card__excerpt {
+    font-size: 15px;
+  }
+
+  /* lien : vrai bouton, facile à toucher */
+  .project-card__more {
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    font-size: 14px;
+  }
+
+  .projects__more .btn {
+    width: 100%;
+  }
+
+  .projects-cta .btn {
+    width: 100%;
+  }
+}
