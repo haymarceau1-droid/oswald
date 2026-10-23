@@ -31,11 +31,14 @@
       star.style.setProperty("--o", rand(0.22, 0.38).toFixed(2));
     };
 
-    [2.2, 6.8, 11.5].forEach(function (delay, i) {
+    /* 4 étoiles : durée du cycle (s) et délai de départ (s) */
+    var cycles = [12, 14.3, 16.6, 23.4];
+    var delays = [2.2, 6.8, 11.5, 9];
+    cycles.forEach(function (dur, i) {
       var star = document.createElement("span");
       star.className = "hero__star";
-      star.style.setProperty("--dur", (12 + i * 2.3).toFixed(1) + "s");
-      star.style.animationDelay = delay + "s";
+      star.style.setProperty("--dur", dur.toFixed(1) + "s");
+      star.style.animationDelay = delays[i] + "s";
       place(star);
       /* à chaque nouveau passage : autre endroit, autre angle */
       star.addEventListener("animationiteration", function () { place(star); });
