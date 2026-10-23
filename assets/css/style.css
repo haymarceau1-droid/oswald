@@ -1976,12 +1976,12 @@ body.nav-open .cookie-banner {
   z-index: 0;
   font-family: var(--font-logo);
   font-size: var(--wm);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.045em;
   white-space: nowrap;
   color: var(--on-dark);
-  opacity: 0.055;
+  opacity: 0.028;
   pointer-events: none;
   user-select: none;
 }
