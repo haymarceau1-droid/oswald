@@ -605,6 +605,40 @@ a.project-card__link {
   to { translate: 0 -10px; }
 }
 
+/* une carte sur deux : texte à droite, capture à gauche */
+@media (min-width: 960px) {
+  .project-feature:nth-child(even) {
+    grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+    background:
+      radial-gradient(60% 80% at 8% 8%, rgba(248, 245, 116, 0.17), transparent 65%),
+      radial-gradient(50% 60% at 100% 100%, rgba(40, 190, 160, 0.12), transparent 70%),
+      var(--surface-deep);
+  }
+
+  .project-feature:nth-child(even) .project-feature__text {
+    order: 2;
+  }
+
+  .project-feature:nth-child(even) .project-feature__shot,
+  .project-feature:nth-child(even) .project-feature__stage {
+    order: 1;
+  }
+
+  .project-feature:nth-child(even) .project-feature__stage {
+    margin-right: 0;
+    margin-left: calc(-1 * clamp(1.75rem, 4vw, 3.5rem) - 3rem);
+  }
+
+  .project-feature:nth-child(even) .mock {
+    transform: rotateY(10deg) rotateX(4deg) rotateZ(-0.8deg);
+    transform-origin: 85% 50%;
+  }
+
+  .project-feature:nth-child(even):hover .mock {
+    transform: rotateY(3deg) rotateX(1deg) rotateZ(0deg);
+  }
+}
+
 /* mobile / tablette : empilé, moins incliné */
 @media (max-width: 959px) {
   .project-feature {
