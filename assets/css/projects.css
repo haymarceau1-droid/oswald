@@ -689,3 +689,10 @@ a.project-card__link {
     transition: none;
   }
 }
+
+.ext-icon {
+  display: inline-block;
+  flex: none;
+  margin-left: 0.4em;
+  vertical-align: -0.12em;
+}

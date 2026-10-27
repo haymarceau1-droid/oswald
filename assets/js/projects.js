@@ -52,7 +52,7 @@
       '<p class="project-card__excerpt">' + escapeHtml(p.excerpt) + "</p>" +
       (tags ? '<ul class="project-card__tags">' + tags + "</ul>" : "") +
       (p.url
-        ? '<span class="project-card__more">Voir le projet <span class="arrow" aria-hidden="true">↗</span></span>'
+        ? '<span class="project-card__more">Voir le projet '+ext+'</span>'
         : "") +
       "</div>";
 
@@ -62,12 +62,15 @@
       : '<article class="' + cls + '"><div class="project-card__link">' + inner + "</div></article>";
   };
 
+  /* icône « nouvel onglet » */
+  var ext = '<svg class="ext-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>';
+
   /* projet à la une : grand encadré avec la capture en perspective */
   var feature = function (p) {
     var tags = (p.tags || []);
     var pills = tags.map(function (t) { return "<li>" + escapeHtml(t) + "</li>"; }).join("");
     var cta = p.url
-      ? '<a class="btn btn--primary" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener"><span class="btn__label"><span class="btn__text">Voir le projet \u2197</span><span class="btn__text btn__text--dupe" aria-hidden="true">Voir le projet \u2197</span></span></a>'
+      ? '<a class="btn btn--primary" href="' + escapeHtml(p.url) + '" target="_blank" rel="noopener"><span class="btn__label"><span class="btn__text">Voir le projet '+ext+'</span><span class="btn__text btn__text--dupe" aria-hidden="true">Voir le projet '+ext+'</span></span></a>'
       : "";
     var stage = '<div class="project-feature__stage">' + mock(p) + "</div>";
     return (
