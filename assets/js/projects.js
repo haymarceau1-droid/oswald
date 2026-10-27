@@ -87,12 +87,9 @@
 
   var fill = function (container, list) {
     if (!container || !list.length) return;
-    var rest = list.slice(1);
     container.classList.remove("projects__grid");
     container.classList.add("projects__stack");
-    container.innerHTML =
-      feature(list[0]) +
-      (rest.length ? '<div class="projects__grid projects__grid--rest' + (rest.length === 1 ? " projects__grid--single" : "") + '">' + rest.map(card).join("") + "</div>" : "");
+    container.innerHTML = list.map(feature).join("");
 
     var items = container.querySelectorAll(".project-feature, .project-card");
     items.forEach(function (c, i) {

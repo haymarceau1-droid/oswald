@@ -493,7 +493,7 @@ a.project-card__link {
   margin-top: 0;
 }
 
-.projects__grid--rest {
+.projects__stack > .project-feature + .project-feature {
   margin-top: 1.5rem;
 }
 
