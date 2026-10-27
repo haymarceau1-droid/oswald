@@ -21,5 +21,18 @@ window.PROJECTS = [
     "domain": "talaria.world",
     "visual": "forest",
     "status": "published"
+  },
+  {
+    "slug": "rodara",
+    "title": "Rodara",
+    "category": "Plateforme web",
+    "year": "",
+    "excerpt": "Plateforme de mise en relation entre particuliers pour acheter et vendre des véhicules au Mexique. Design, intégration, backend et branding réalisés de A à Z.",
+    "tags": ["Design", "Développement", "Backend", "Branding"],
+    "url": "https://trato-seven.vercel.app/",
+    "domain": "rodara.mx",
+    "image": "assets/projects/rodara.jpg",
+    "visual": "acid",
+    "status": "published"
   }
 ];

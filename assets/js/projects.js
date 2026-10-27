@@ -92,7 +92,7 @@
     container.classList.add("projects__stack");
     container.innerHTML =
       feature(list[0]) +
-      (rest.length ? '<div class="projects__grid projects__grid--rest">' + rest.map(card).join("") + "</div>" : "");
+      (rest.length ? '<div class="projects__grid projects__grid--rest' + (rest.length === 1 ? " projects__grid--single" : "") + '">' + rest.map(card).join("") + "</div>" : "");
 
     var items = container.querySelectorAll(".project-feature, .project-card");
     items.forEach(function (c, i) {
