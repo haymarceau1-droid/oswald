@@ -3263,3 +3263,13 @@ body.home main::after {
   font-weight: 500;
 }
 
+
+/* champ piège anti-spam du formulaire */
+.form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}

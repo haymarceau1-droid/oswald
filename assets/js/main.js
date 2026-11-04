@@ -358,7 +358,7 @@
     return valid;
   };
 
-  form.querySelectorAll("input, select, textarea").forEach(function (field) {
+  form.querySelectorAll(".form__field input, .form__field select, .form__field textarea").forEach(function (field) {
     field.addEventListener("blur", function () {
       if (field.value) validateField(field);
     });
@@ -367,7 +367,7 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    var fields = form.querySelectorAll("input, select, textarea");
+    var fields = form.querySelectorAll(".form__field input, .form__field select, .form__field textarea");
     var allValid = true;
     fields.forEach(function (field) {
       if (!validateField(field)) allValid = false;
@@ -379,9 +379,32 @@
       return;
     }
 
+    var submit = form.querySelector(".form__submit");
+    var data = {};
+    new FormData(form).forEach(function (v, k) { data[k] = v; });
+    data.page = location.pathname;
+
     status.classList.remove("is-error");
-    status.textContent = "Merci. Votre demande a bien été prise en compte, je reviens vers vous rapidement.";
-    form.reset();
+    status.textContent = "Envoi en cours…";
+    submit.disabled = true;
+
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+      .then(function (r) { return r.json().then(function (j) { return r.ok && j.ok; }, function () { return false; }); })
+      .catch(function () { return false; })
+      .then(function (ok) {
+        submit.disabled = false;
+        if (ok) {
+          status.textContent = "Merci. Votre demande a bien été envoyée, je reviens vers vous rapidement.";
+          form.reset();
+        } else {
+          status.classList.add("is-error");
+          status.innerHTML = "L’envoi a échoué. Écrivez-moi directement à <a href=\"mailto:contact@oswaldsolutions.fr\">contact@oswaldsolutions.fr</a>.";
+        }
+      });
   });
   }
 
