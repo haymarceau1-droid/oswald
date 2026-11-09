@@ -1,0 +1,27 @@
+# Oswald Solutions
+
+> Studio web basé à Angers (France) qui conçoit des sites professionnels pour les TPE, PME, artisans et indépendants, puis les accompagne dans la durée : hébergement, maintenance, modifications. Intervient partout en France, à distance.
+
+Contact : contact@oswaldsolutions.fr · +33 6 51 47 64 35 · https://oswaldsolutions.fr/#contact
+
+## Offres de création de site
+
+- [Landing page](https://oswaldsolutions.fr/landing-page.html) : à partir de 1 490 €, paiement unique. Une page de conversion pour une offre, un événement ou une campagne.
+- [Site vitrine](https://oswaldsolutions.fr/site-vitrine.html) : à partir de 2 490 €, paiement unique, nombre de pages illimité. Présenter son activité, rassurer ses clients, être trouvé sur Google.
+- [Site e-commerce](https://oswaldsolutions.fr/site-e-commerce.html) : sur devis. Boutique en ligne complète.
+- [Refonte de site](https://oswaldsolutions.fr/refonte-site.html) : sur devis. Audit, migration des contenus, nouveau design.
+
+## Suivi mensuel
+
+- [Maintenance](https://oswaldsolutions.fr/maintenance.html) : hébergement, sauvegardes, mises à jour, sécurité, petites modifications.
+- [Care Plan](https://oswaldsolutions.fr/care-plan.html) : Care Essential 79 €/mois, Care & Growth 149 €/mois (ou 1 490 €/an), Care Premium 299 €/mois.
+
+## Réalisations
+
+- [Réalisations](https://oswaldsolutions.fr/realisations.html) : Talaria (UX/UI de la landing page, de l'app mobile et de la webapp) et Rodara (plateforme de vente de véhicules entre particuliers au Mexique : design, intégration, backend, branding).
+
+## Informations utiles
+
+- [Accueil, tarifs et FAQ](https://oswaldsolutions.fr/) : présentation complète, méthode de travail et questions fréquentes.
+- [Blog](https://oswaldsolutions.fr/blog.html) : conseils sur la présence en ligne.
+- [Mentions légales](https://oswaldsolutions.fr/mentions-legales.html) · [Confidentialité](https://oswaldsolutions.fr/confidentialite.html)
