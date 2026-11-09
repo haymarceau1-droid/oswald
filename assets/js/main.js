@@ -408,6 +408,14 @@
   });
   }
 
+  /* ---------- Offre choisie : pré-sélectionne le type de projet ---------- */
+  document.querySelectorAll("[data-projet]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var select = document.getElementById("field-projet");
+      if (select) select.value = btn.getAttribute("data-projet");
+    });
+  });
+
   /* ---------- Année du footer ---------- */
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
