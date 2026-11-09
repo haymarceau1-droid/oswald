@@ -3245,3 +3245,39 @@ body.nav-open .header__inner::before {
 .faq__support:hover::before {
   border-color: var(--border-strong);
 }
+
+/* ---------- Correctifs responsive ---------- */
+/* bouton « outline » posé sur fond clair : texte et contour foncés */
+.projects__more .btn--outline {
+  border-color: var(--ink-deep);
+  color: var(--ink-deep);
+  background: transparent;
+}
+
+.projects__more .btn--outline:hover {
+  background: var(--ink-deep);
+  color: var(--on-dark);
+}
+
+/* mobile : les boutons flottants ne masquent plus les liens du bas de page */
+@media (max-width: 640px) {
+  .site-footer {
+    padding-bottom: 4.75rem;
+  }
+}
+
+/* mobile : zones de toucher confortables dans le pied de page et la FAQ */
+@media (max-width: 899px) {
+  .footer__col ul {
+    gap: 0;
+  }
+
+  .footer__col li > a {
+    display: inline-block;
+    padding-block: 0.6rem;
+  }
+
+  .faq__support-link {
+    padding-block: 0.6rem;
+  }
+}
