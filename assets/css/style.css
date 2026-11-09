@@ -797,11 +797,11 @@ body.loader-active {
 @keyframes nav-cta-in {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    translate: 0 28px;
   }
   to {
     opacity: 1;
-    transform: none;
+    translate: 0 0;
   }
 }
 

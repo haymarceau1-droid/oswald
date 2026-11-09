@@ -142,6 +142,8 @@
     align-self: stretch;
     justify-content: center;
     margin-top: auto;
-    width: 100%;
+    /* le bouton est penché : on laisse la place du débord de chaque côté */
+    width: calc(100% - 14px);
+    margin-inline: 7px;
   }
 }
