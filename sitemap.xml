@@ -2,22 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://oswaldsolutions.fr/</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://oswaldsolutions.fr/article.html?slug=bienvenue-sur-le-blog</loc>
-    <lastmod>2026-08-05</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://oswaldsolutions.fr/blog.html</loc>
-    <lastmod>2026-10-23</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://oswaldsolutions.fr/care-plan.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -27,12 +17,12 @@
   </url>
   <url>
     <loc>https://oswaldsolutions.fr/landing-page.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://oswaldsolutions.fr/maintenance.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -42,17 +32,17 @@
   </url>
   <url>
     <loc>https://oswaldsolutions.fr/refonte-site.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://oswaldsolutions.fr/site-e-commerce.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://oswaldsolutions.fr/site-vitrine.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

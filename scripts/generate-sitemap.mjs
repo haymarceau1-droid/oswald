@@ -1,10 +1,8 @@
 #!/usr/bin/env node
-/* Régénère sitemap.xml à partir des pages du site et des articles publiés
-   (assets/data/posts.js).  Usage :  node scripts/generate-sitemap.mjs
-   À relancer après avoir publié ou modifié un article, puis commit + push. */
+/* Régénère sitemap.xml à partir des pages du site.
+   Usage :  node scripts/generate-sitemap.mjs   (puis commit + push) */
 import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
 import { execSync } from "node:child_process";
-import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -14,7 +12,7 @@ const BASE = "https://oswaldsolutions.fr";
 // pages à exclure du sitemap
 // realisations.html est « noindex » tant qu'il n'y a pas de vraie réalisation :
 // retirer "realisations.html" d'ici (et le noindex de la page) pour l'indexer.
-const EXCLUDE = new Set(["404.html", "article.html", "realisations.html"]);
+const EXCLUDE = new Set(["404.html", "realisations.html"]);
 const pages = readdirSync(root).filter((f) => f.endsWith(".html") && !EXCLUDE.has(f));
 
 const lastmod = (file) => {
@@ -28,22 +26,8 @@ const lastmod = (file) => {
 const urls = pages.map((f) => ({
   loc: f === "index.html" ? `${BASE}/` : `${BASE}/${f}`,
   lastmod: lastmod(f),
-  priority: f === "index.html" ? "1.0" : /legales|confidentialite/.test(f) ? "0.3" : f === "blog.html" ? "0.7" : "0.8",
+  priority: f === "index.html" ? "1.0" : /legales|confidentialite/.test(f) ? "0.3" : "0.8",
 }));
-
-// articles de blog publiés
-const ctx = { window: {} };
-vm.createContext(ctx);
-vm.runInContext(readFileSync(join(root, "assets/data/posts.js"), "utf8"), ctx);
-(ctx.window.BLOG_POSTS || [])
-  .filter((p) => p && p.status === "published" && p.slug)
-  .forEach((p) =>
-    urls.push({
-      loc: `${BASE}/article.html?slug=${encodeURIComponent(p.slug)}`,
-      lastmod: p.date || lastmod("assets/data/posts.js"),
-      priority: "0.6",
-    })
-  );
 
 urls.sort((a, b) => (a.loc === `${BASE}/` ? -1 : b.loc === `${BASE}/` ? 1 : a.loc.localeCompare(b.loc)));
 
