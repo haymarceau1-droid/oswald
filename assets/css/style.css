@@ -3135,3 +3135,61 @@ body.nav-open .header__inner::before {
     padding-block: 0.6rem;
   }
 }
+
+/* ---------- Mobile : barre compacte fixée en haut à droite ---------- */
+@media (max-width: 767px) {
+  :root {
+    --header-h: 64px;
+  }
+
+  /* l'en-tête défile avec la page ; seule la capsule d'actions reste fixe */
+  .site-header {
+    position: relative;
+    padding-top: 12px;
+  }
+
+  .header__inner {
+    min-height: 52px;
+    padding-right: clamp(1.25rem, 5vw, 2.5rem);
+  }
+
+  .header__inner::before {
+    display: none;
+  }
+
+  /* logo dans une petite capsule sombre : lisible sur fond clair comme sombre */
+  .logo {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(240, 242, 237, 0.14);
+    border-radius: var(--radius-pill);
+    background: rgba(0, 38, 36, 0.92);
+  }
+
+  .header__actions {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 110;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid rgba(240, 242, 237, 0.14);
+    border-radius: var(--radius-pill);
+    background: rgba(0, 38, 36, 0.9);
+    -webkit-backdrop-filter: blur(16px) saturate(1.25);
+    backdrop-filter: blur(16px) saturate(1.25);
+    box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.7);
+    pointer-events: auto;
+  }
+
+  .header__actions .btn--round,
+  .header__actions .nav-toggle {
+    width: 40px;
+    height: 40px;
+    min-height: 0;
+  }
+
+  .header__actions .btn--round svg {
+    width: 19px;
+    height: 19px;
+  }
+}
