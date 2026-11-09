@@ -399,3 +399,108 @@
 .pricing__card-divider {
   margin-block: 0.25rem;
 }
+
+/* ============================================================
+   Mise en scène : fond, cartes en verre, prix, listes à filets
+   ============================================================ */
+.pricing {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* halo diffus + fine trame, masquée vers les bords */
+.pricing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(50% 45% at 50% 58%, rgba(248, 245, 116, 0.07), transparent 70%),
+    radial-gradient(40% 40% at 8% 0%, rgba(40, 190, 160, 0.1), transparent 70%),
+    linear-gradient(rgba(240, 242, 237, 0.035) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, rgba(240, 242, 237, 0.035) 1px, transparent 1px) 0 0 / 56px 56px;
+  -webkit-mask-image: radial-gradient(85% 80% at 50% 45%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(85% 80% at 50% 45%, #000 40%, transparent 100%);
+  pointer-events: none;
+}
+
+/* cartes en verre : dégradé fin, liseré lumineux en haut à gauche */
+.pricing__card {
+  background: linear-gradient(160deg, rgba(240, 242, 237, 0.075), rgba(240, 242, 237, 0.02) 55%);
+  border-color: rgba(240, 242, 237, 0.12);
+  box-shadow: inset 0 1px 0 rgba(240, 242, 237, 0.08), 0 24px 60px -40px rgba(0, 0, 0, 0.6);
+}
+
+.pricing__card--featured {
+  background:
+    radial-gradient(90% 50% at 50% 0%, rgba(248, 245, 116, 0.16), transparent 70%),
+    linear-gradient(160deg, rgba(248, 245, 116, 0.07), rgba(248, 245, 116, 0.015) 60%);
+  border-color: rgba(248, 245, 116, 0.5);
+  box-shadow: inset 0 1px 0 rgba(248, 245, 116, 0.25), 0 40px 90px -45px rgba(248, 245, 116, 0.45);
+}
+
+/* icône : médaillon plus grand, lueur interne */
+.pricing__card-icon svg {
+  width: 26px;
+  height: 26px;
+  padding: 11px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 30% 20%, rgba(248, 245, 116, 0.2), rgba(240, 242, 237, 0.04) 70%);
+  border-color: rgba(240, 242, 237, 0.14);
+  box-shadow: 0 10px 24px -12px rgba(248, 245, 116, 0.35);
+}
+
+.pricing__card--featured .pricing__card-icon svg {
+  background: radial-gradient(circle at 30% 20%, rgba(248, 245, 116, 0.45), rgba(248, 245, 116, 0.08) 75%);
+  border-color: rgba(248, 245, 116, 0.5);
+}
+
+.pricing__card-icon h4 {
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+/* prix : plus grand, devise et unité en retrait */
+.pricing__amount {
+  font-size: clamp(2.75rem, 4.6vw, 3.5rem);
+  letter-spacing: -0.06em;
+}
+
+.pricing__from {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11.5px;
+}
+
+/* listes : filets fins entre les lignes */
+.pricing__features {
+  gap: 0;
+}
+
+.pricing__features li {
+  padding-block: 0.6rem;
+  border-bottom: 1px solid rgba(240, 242, 237, 0.07);
+}
+
+.pricing__features li:last-child {
+  border-bottom: 0;
+}
+
+.pricing__features li::before {
+  top: 0.82em;
+}
+
+.pricing__card--featured .pricing__features li {
+  border-bottom-color: rgba(248, 245, 116, 0.12);
+}
+
+.pricing__features::before {
+  margin-bottom: 0.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pricing__card:hover {
+    box-shadow: inset 0 1px 0 rgba(240, 242, 237, 0.12), 0 36px 70px -40px rgba(0, 0, 0, 0.75);
+  }
+}
