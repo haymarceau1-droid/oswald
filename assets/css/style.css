@@ -852,11 +852,11 @@ body.nav-open .cookie-banner {
 }
 
 .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(1) {
-  transform: skewX(14deg) translateY(3.75px) rotate(45deg);
+  transform: translateY(3.75px) rotate(45deg);
 }
 
 .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2) {
-  transform: skewX(14deg) translateY(-3.75px) rotate(-45deg);
+  transform: translateY(-3.75px) rotate(-45deg);
 }
 
 /* ---------- Hero ---------- */
@@ -3036,39 +3036,7 @@ body.home main::after {
   pointer-events: none;
 }
 
-/* ---------- Boutons : angles droits, côtés verticaux penchés ---------- */
-body .btn.btn.btn {
-  --skew: -14deg;
-  border-radius: 0;
-  transform: skewX(var(--skew));
-}
-
-body .btn.btn.btn:hover,
-body .btn.btn.btn:focus-visible {
-  transform: skewX(var(--skew)) translateY(-1px);
-}
-
-body .btn.btn.btn:active {
-  transform: skewX(var(--skew)) translateY(0);
-}
-
-/* le contenu reste droit */
-.btn.btn > .btn__label,
-.btn.btn > .btn__icon,
-.btn.btn > svg {
-  transform: skewX(calc(var(--skew) * -1));
-}
-
-.btn.btn.btn--round {
-  border-radius: 0;
-}
-
-/* le reflet de survol suit déjà l'inclinaison : on retire la double rotation */
-.btn--primary::after {
-  transform: none;
-}
-
-/* ---------- Header flottant : barre vitrée aux côtés penchés ---------- */
+/* ---------- Header flottant : barre vitrée arrondie ---------- */
 .site-header {
   top: 0;
   padding-top: 12px;
@@ -3119,7 +3087,7 @@ body.nav-open .site-header {
   box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(240, 242, 237, 0.08);
   -webkit-backdrop-filter: blur(16px) saturate(1.25);
   backdrop-filter: blur(16px) saturate(1.25);
-  transform: skewX(-14deg);
+  border-radius: var(--radius-pill);
   transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
@@ -3130,120 +3098,6 @@ body.nav-open .site-header {
 /* le menu mobile ouvert couvre l'écran : la barre reste au-dessus */
 body.nav-open .header__inner::before {
   background: rgba(0, 38, 36, 0.96);
-}
-
-/* ---------- Boutons flottants (cookies, retour en haut) : même forme penchée ---------- */
-.back-to-top,
-.cookie-btn {
-  --skew: -14deg;
-  border-radius: 0;
-  transform: skewX(var(--skew));
-  box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(240, 242, 237, 0.08);
-}
-
-.back-to-top {
-  transform: skewX(var(--skew)) translateY(12px);
-}
-
-.back-to-top.is-visible {
-  transform: skewX(var(--skew));
-}
-
-.back-to-top:hover,
-.cookie-btn:hover {
-  transform: skewX(var(--skew)) translateY(-2px);
-}
-
-.cookie-btn:active {
-  transform: skewX(var(--skew)) scale(0.94);
-}
-
-.back-to-top__icon,
-.cookie-btn__icon,
-.cookie-btn__dot {
-  transform: skewX(calc(var(--skew) * -1));
-}
-
-/* bouton menu mobile : même forme penchée */
-.nav-toggle {
-  --skew: -14deg;
-  border-radius: 0;
-  transform: skewX(var(--skew));
-}
-
-.nav-toggle > * {
-  transform: skewX(calc(var(--skew) * -1));
-}
-
-/* ---------- FAQ : mêmes côtés penchés que les boutons ---------- */
-.faq-item {
-  position: relative;
-  isolation: isolate;
-  background: none;
-  border: 0;
-  border-radius: 0;
-  padding-inline: 2.75rem;
-}
-
-.faq-item::before {
-  content: "";
-  position: absolute;
-  inset: 0 10px;
-  z-index: -1;
-  background: var(--surface-mid);
-  border: 1px solid var(--border);
-  transform: skewX(-14deg);
-  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
-}
-
-.faq-item:hover {
-  border-color: transparent;
-}
-
-.faq-item:hover::before {
-  border-color: var(--border-strong);
-}
-
-.faq-item.is-open::before {
-  border-color: var(--accent-ink);
-}
-
-@media (max-width: 640px) {
-  .faq-item {
-    padding-inline: 2.25rem;
-  }
-
-  .faq-item::before {
-    inset-inline: 6px;
-  }
-}
-
-.faq__support {
-  position: relative;
-  isolation: isolate;
-  background: none;
-  border: 0;
-  border-radius: 0;
-  padding: 1.5rem 2.25rem;
-}
-
-.faq__support::before {
-  content: "";
-  position: absolute;
-  inset: 0 10px;
-  z-index: -1;
-  background: var(--surface-mid);
-  border: 1px solid var(--border);
-  transform: skewX(-14deg);
-  transition: border-color 0.25s var(--ease);
-}
-
-.faq__support:hover {
-  border-color: transparent;
-}
-
-.faq__support:hover::before {
-  border-color: var(--border-strong);
 }
 
 /* ---------- Correctifs responsive ---------- */
