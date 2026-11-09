@@ -3039,3 +3039,35 @@ body.home main::after {
   opacity: 0;
   pointer-events: none;
 }
+
+/* ---------- Boutons : angles droits, côtés verticaux penchés ---------- */
+body .btn.btn.btn {
+  --skew: -14deg;
+  border-radius: 0;
+  transform: skewX(var(--skew));
+}
+
+body .btn.btn.btn:hover,
+body .btn.btn.btn:focus-visible {
+  transform: skewX(var(--skew)) translateY(-1px);
+}
+
+body .btn.btn.btn:active {
+  transform: skewX(var(--skew)) translateY(0);
+}
+
+/* le contenu reste droit */
+.btn.btn > .btn__label,
+.btn.btn > .btn__icon,
+.btn.btn > svg {
+  transform: skewX(calc(var(--skew) * -1));
+}
+
+.btn.btn.btn--round {
+  border-radius: 0;
+}
+
+/* le reflet de survol suit déjà l'inclinaison : on retire la double rotation */
+.btn--primary::after {
+  transform: none;
+}
