@@ -307,3 +307,80 @@
     opacity: 1;
   }
 }
+
+/* ============================================================
+   Finitions : carte à la une, alignements, hiérarchie
+   ============================================================ */
+.pricing__card {
+  position: relative;
+  padding: 2.25rem 2rem 2rem;
+}
+
+/* carte à la une : halo doux en haut, légèrement surélevée sur desktop */
+.pricing__card--featured {
+  background:
+    radial-gradient(90% 55% at 50% 0%, rgba(248, 245, 116, 0.13), transparent 70%),
+    rgba(248, 245, 116, 0.035);
+  box-shadow: 0 30px 70px -40px rgba(248, 245, 116, 0.35);
+}
+
+@media (min-width: 960px) {
+  .pricing__card--featured {
+    transform: translateY(-10px);
+  }
+
+  .pricing__card--featured:hover {
+    transform: translateY(-14px);
+  }
+}
+
+/* badge posé dans l'angle plutôt qu'à côté du titre */
+.pricing__card-icon h4 {
+  font-size: 16px;
+  color: var(--on-dark);
+}
+
+.pricing__card-badge {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  margin: 0;
+}
+
+/* accroche : même hauteur d'une carte à l'autre pour aligner boutons et listes */
+.pricing__card-for {
+  margin-top: 1rem;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--on-dark-muted);
+}
+
+@media (min-width: 960px) {
+  .pricing__card-for {
+    min-height: 4.65em;
+  }
+}
+
+.pricing__card-period {
+  margin-top: 0.5rem;
+}
+
+/* intitulé discret au-dessus des listes */
+.pricing__features::before {
+  content: "Inclus";
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-dark-muted-2);
+}
+
+.pricing__card--featured .pricing__features::before {
+  color: var(--acid);
+}
+
+.pricing__card-divider {
+  margin-block: 0.25rem;
+}
