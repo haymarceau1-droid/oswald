@@ -409,7 +409,7 @@
   overflow: hidden;
 }
 
-/* halo diffus + fine trame, masquée vers les bords */
+/* halo diffus */
 .pricing::before {
   content: "";
   position: absolute;
@@ -417,11 +417,7 @@
   z-index: -1;
   background:
     radial-gradient(50% 45% at 50% 58%, rgba(248, 245, 116, 0.07), transparent 70%),
-    radial-gradient(40% 40% at 8% 0%, rgba(40, 190, 160, 0.1), transparent 70%),
-    linear-gradient(rgba(240, 242, 237, 0.035) 1px, transparent 1px) 0 0 / 56px 56px,
-    linear-gradient(90deg, rgba(240, 242, 237, 0.035) 1px, transparent 1px) 0 0 / 56px 56px;
-  -webkit-mask-image: radial-gradient(85% 80% at 50% 45%, #000 40%, transparent 100%);
-  mask-image: radial-gradient(85% 80% at 50% 45%, #000 40%, transparent 100%);
+    radial-gradient(40% 40% at 8% 0%, rgba(40, 190, 160, 0.1), transparent 70%);
   pointer-events: none;
 }
 
@@ -502,5 +498,47 @@
 @media (prefers-reduced-motion: no-preference) {
   .pricing__card:hover {
     box-shadow: inset 0 1px 0 rgba(240, 242, 237, 0.12), 0 36px 70px -40px rgba(0, 0, 0, 0.75);
+  }
+}
+
+/* ============================================================
+   Icônes : médaillons plus affirmés
+   ============================================================ */
+.pricing__card-icon {
+  gap: 1.25rem;
+}
+
+.pricing__card-icon svg {
+  width: 30px;
+  height: 30px;
+  padding: 13px;
+  border-radius: 20px;
+  color: var(--acid);
+  background:
+    radial-gradient(circle at 28% 18%, rgba(248, 245, 116, 0.28), transparent 60%),
+    linear-gradient(145deg, rgba(240, 242, 237, 0.12), rgba(240, 242, 237, 0.03));
+  border: 1px solid rgba(248, 245, 116, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(240, 242, 237, 0.18),
+    0 16px 32px -14px rgba(248, 245, 116, 0.35);
+}
+
+/* carte à la une : médaillon plein, glyphe sombre */
+.pricing__card--featured .pricing__card-icon svg {
+  color: var(--ink-deep);
+  background: linear-gradient(145deg, #fbf98c, var(--acid));
+  border-color: transparent;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 18px 38px -12px rgba(248, 245, 116, 0.6);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pricing__card-icon svg {
+    transition: transform 0.5s var(--ease);
+  }
+
+  .pricing__card:hover .pricing__card-icon svg {
+    transform: translateY(-3px) rotate(-4deg);
   }
 }
