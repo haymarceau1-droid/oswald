@@ -3178,3 +3178,74 @@ body.nav-open .header__inner::before {
 .nav-toggle > * {
   transform: skewX(calc(var(--skew) * -1));
 }
+
+/* ---------- FAQ : mêmes côtés penchés que les boutons ---------- */
+.faq-item {
+  position: relative;
+  isolation: isolate;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding-inline: 2.75rem;
+}
+
+.faq-item::before {
+  content: "";
+  position: absolute;
+  inset: 0 10px;
+  z-index: -1;
+  background: var(--surface-mid);
+  border: 1px solid var(--border);
+  transform: skewX(-14deg);
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+
+.faq-item:hover {
+  border-color: transparent;
+}
+
+.faq-item:hover::before {
+  border-color: var(--border-strong);
+}
+
+.faq-item.is-open::before {
+  border-color: var(--accent-ink);
+}
+
+@media (max-width: 640px) {
+  .faq-item {
+    padding-inline: 2.25rem;
+  }
+
+  .faq-item::before {
+    inset-inline: 6px;
+  }
+}
+
+.faq__support {
+  position: relative;
+  isolation: isolate;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 1.5rem 2.25rem;
+}
+
+.faq__support::before {
+  content: "";
+  position: absolute;
+  inset: 0 10px;
+  z-index: -1;
+  background: var(--surface-mid);
+  border: 1px solid var(--border);
+  transform: skewX(-14deg);
+  transition: border-color 0.25s var(--ease);
+}
+
+.faq__support:hover {
+  border-color: transparent;
+}
+
+.faq__support:hover::before {
+  border-color: var(--border-strong);
+}
