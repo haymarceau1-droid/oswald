@@ -825,7 +825,7 @@ body.nav-open .cookie-banner {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   position: relative;
   z-index: 95;
   width: 46px;
@@ -852,15 +852,11 @@ body.nav-open .cookie-banner {
 }
 
 .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
+  transform: skewX(14deg) translateY(3.75px) rotate(45deg);
 }
 
 .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2) {
-  opacity: 0;
-}
-
-.nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
+  transform: skewX(14deg) translateY(-3.75px) rotate(-45deg);
 }
 
 /* ---------- Hero ---------- */
