@@ -58,7 +58,6 @@
   bar.setAttribute("aria-hidden", "true");
   document.body.appendChild(bar);
 
-  var heroVisual = document.querySelector(".hero__visual");
   var ticking = false;
 
   var updateScroll = function () {
@@ -66,9 +65,6 @@
     var max = document.documentElement.scrollHeight - window.innerHeight;
     var y = window.scrollY;
     bar.style.transform = "scaleX(" + (max > 0 ? Math.min(y / max, 1) : 0) + ")";
-    if (heroVisual && y < window.innerHeight * 1.5) {
-      heroVisual.style.transform = "translate3d(0," + (y * 0.14).toFixed(1) + "px,0)";
-    }
   };
 
   window.addEventListener("scroll", function () {

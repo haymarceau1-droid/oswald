@@ -47,11 +47,6 @@
 }
 
 /* ---------- Hero ---------- */
-/* Parallaxe du château */
-.hero__visual {
-  will-change: transform;
-}
-
 /* Étiquette du hero : léger shimmer */
 .hero__label {
   position: relative;
