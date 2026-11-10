@@ -632,3 +632,22 @@
   letter-spacing: -0.04em;
   word-spacing: 0.12em;
 }
+
+/* ---------- Mention TTC ---------- */
+.pricing__tax {
+  max-width: 62ch;
+  margin: 2rem 0 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-on-dark);
+  border-left: 3px solid var(--acid);
+  border-radius: var(--radius-lg);
+  background: rgba(240, 242, 237, 0.03);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--on-dark-muted);
+}
+
+.pricing__tax strong {
+  font-weight: 500;
+  color: var(--on-dark);
+}
