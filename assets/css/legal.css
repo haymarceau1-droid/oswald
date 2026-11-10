@@ -224,3 +224,109 @@
     display: none;
   }
 }
+
+/* ---------- Fiches d'identité (éditeur, hébergeur) ---------- */
+.legal__card {
+  margin: 1.1rem 0 0 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-mid);
+  overflow: hidden;
+}
+
+.legal__card > div {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.9rem 1.25rem;
+}
+
+.legal__card > div + div {
+  border-top: 1px solid var(--border);
+}
+
+.legal__card dt {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.legal__card dd {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-deep);
+}
+
+.legal__todo {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (min-width: 640px) {
+  .legal__card > div {
+    grid-template-columns: 13rem 1fr;
+    align-items: baseline;
+    gap: 1rem;
+  }
+}
+
+/* ---------- Résumé « l'essentiel » ---------- */
+.legal__summary {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.legal__summary > div {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface-deep);
+  color: var(--on-dark);
+}
+
+.legal__summary strong {
+  font-family: var(--font-logo);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--acid);
+}
+
+.legal__summary span {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--on-dark-muted);
+}
+
+@media (min-width: 720px) {
+  .legal__summary {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 959px) {
+  .legal__card {
+    margin-left: 0;
+  }
+}
+
+@media print {
+  .legal__summary > div {
+    background: none;
+    color: #000;
+    border: 1px solid #999;
+  }
+
+  .legal__summary strong,
+  .legal__summary span {
+    color: #000;
+  }
+}
