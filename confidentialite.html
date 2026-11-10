@@ -27,9 +27,7 @@
   <meta name="twitter:title" content="Politique de confidentialité — Oswald Solutions">
   <meta name="twitter:description" content="Politique de confidentialité du site Oswald Solutions : données collectées, finalités, durée de conservation et vos droits RGPD.">
   <meta name="twitter:image" content="https://oswaldsolutions.fr/assets/og/og-image.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/breadcrumb.css">
   <link rel="stylesheet" href="assets/css/animations.css">
@@ -152,11 +150,10 @@
 
         <div class="legal__section">
           <h2>Destinataires et prestataires</h2>
-          <p>Les données collectées sont destinées à Oswald Solutions uniquement. Elles ne sont <strong>jamais vendues, louées ni cédées</strong> à des tiers à des fins commerciales. Pour faire fonctionner le site, nous nous appuyons sur des prestataires techniques :</p>
+          <p>Les données collectées sont destinées à Oswald Solutions uniquement. Elles ne sont <strong>jamais vendues, louées ni cédées</strong> à des tiers à des fins commerciales. Pour faire fonctionner le site, nous nous appuyons sur des prestataires techniques. Les polices du site sont hébergées sur nos propres serveurs : aucune requête n'est envoyée à Google pour les afficher.</p>
           <ul>
             <li><strong>Vercel</strong> — hébergement du site et traitement de l'envoi du formulaire ;</li>
-            <li><strong>Resend</strong> — acheminement de l'email de contact jusqu'à notre messagerie ;</li>
-            <li><strong>Google Fonts</strong> — affichage de certaines polices : votre adresse IP est alors transmise à Google lors du chargement de la page.</li>
+            <li><strong>Resend</strong> — acheminement de l'email de contact jusqu'à notre messagerie.</li>
           </ul>
           <p>Ces prestataires peuvent être situés hors de l'Union européenne, notamment aux États-Unis. Ces transferts sont encadrés par des garanties appropriées (clauses contractuelles types ou cadre de protection des données UE–États-Unis).</p>
         </div>
@@ -235,9 +232,9 @@
     </svg>
   </a>
 
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/animations.js"></script>
-  <script src="assets/js/legal.js"></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/animations.js" defer></script>
+  <script src="assets/js/legal.js" defer></script>
   <script src="assets/js/oswald-credit.js" defer></script>
 </body>
 </html>

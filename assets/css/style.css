@@ -5,6 +5,23 @@
    Sections claires #f0f2ed · Textes deep ink #001d1b
    ============================================================ */
 
+/* Geist et Caveat : polices hébergées localement (pas de requête vers Google) */
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/geist-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Caveat";
+  src: url("../fonts/caveat-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Logo Oswald Solutions — Clash Grotesk (police locale) */
 @font-face {
   font-family: "Clash Grotesk";
