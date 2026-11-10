@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="assets/css/animations.css?v=20260">
   <link rel="stylesheet" href="assets/css/mobilenav.css?v=20260">
   <link rel="stylesheet" href="assets/css/megamenu.css?v=20260">
-  <link rel="stylesheet" href="assets/css/pricing.css?v=20262">
+  <link rel="stylesheet" href="assets/css/pricing.css?v=20263">
   <link rel="stylesheet" href="assets/css/process.css?v=20260">
   <link rel="stylesheet" href="assets/css/projects.css?v=20260">
   <script type="application/ld+json">
@@ -657,7 +657,14 @@
           </div>
         </div>
         </div>
-        <p class="pricing__tax"><strong>Tous nos prix sont en TTC.</strong> Que vous les lisiez sur ce site ou sur votre devis, le montant annoncé est le montant que vous payez : toutes taxes comprises, sans mauvaise surprise.</p>
+        <div class="pricing__tax" role="note">
+          <span class="pricing__tax-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span>
+          <div class="pricing__tax-text">
+            <strong>Tous nos prix sont en TTC</strong>
+            <span>Sur ce site comme sur votre devis, le montant annoncé est le montant que vous payez : toutes taxes comprises, sans mauvaise surprise.</span>
+          </div>
+          <span class="pricing__tax-badge" aria-hidden="true">TTC</span>
+        </div>
         <ul class="pricing__assure" aria-label="Nos engagements">
           <li><strong>Devis gratuit, sans engagement</strong><span>Vous savez ce que vous payez avant de démarrer.</span></li>
           <li><strong>Un seul interlocuteur</strong><span>Vous échangez directement avec la personne qui conçoit votre site.</span></li>

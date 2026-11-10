@@ -635,19 +635,78 @@
 
 /* ---------- Mention TTC ---------- */
 .pricing__tax {
-  max-width: 62ch;
-  margin: 2rem 0 0;
-  padding: 1rem 1.25rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 2.5rem 0 0;
+  padding: 1.25rem 1.5rem;
   border: 1px solid var(--border-on-dark);
-  border-left: 3px solid var(--acid);
-  border-radius: var(--radius-lg);
-  background: rgba(240, 242, 237, 0.03);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(60% 140% at 0% 50%, rgba(248, 245, 116, 0.1), transparent 70%),
+    rgba(240, 242, 237, 0.04);
+  overflow: hidden;
+}
+
+.pricing__tax-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: var(--acid);
+  color: var(--ink-deep);
+  box-shadow: 0 10px 28px -10px rgba(248, 245, 116, 0.55);
+}
+
+.pricing__tax-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.pricing__tax-text {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.pricing__tax-text strong {
+  font-family: var(--font-logo);
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--on-dark);
+}
+
+.pricing__tax-text span {
   font-size: 14.5px;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--on-dark-muted);
 }
 
-.pricing__tax strong {
-  font-weight: 500;
-  color: var(--on-dark);
+.pricing__tax-badge {
+  flex: none;
+  margin-left: auto;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(248, 245, 116, 0.4);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-logo);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--acid);
+}
+
+@media (max-width: 639px) {
+  .pricing__tax {
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.15rem;
+  }
+
+  .pricing__tax-badge {
+    display: none;
+  }
 }
