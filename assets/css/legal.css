@@ -294,7 +294,6 @@
 }
 
 .legal__summary strong {
-  font-family: var(--font-logo);
   font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: -0.02em;
