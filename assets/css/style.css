@@ -633,12 +633,20 @@ body.loader-active {
   min-height: 44px;
 }
 
-.logo__word {
-  font-family: var(--font-logo);
-  font-weight: 500;
-  font-size: 1.0625rem;
-  letter-spacing: -0.02em;
-  color: var(--on-dark);
+.logo__img {
+  display: block;
+  width: auto;
+  height: 34px;
+}
+
+.footer__brand .logo__img {
+  height: 44px;
+}
+
+@media (max-width: 767px) {
+  .logo__img {
+    height: 28px;
+  }
 }
 
 .site-nav__list {
