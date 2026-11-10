@@ -4,7 +4,8 @@
 
 /* ---------- Bandeau d'en-tête ---------- */
 .legal-hero {
-  padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2.5rem, 6vw, 4rem);
+  margin-top: calc(-1 * var(--header-h));
+  padding-block: calc(var(--header-h) + clamp(2.5rem, 6vw, 4.5rem)) clamp(2.5rem, 6vw, 4rem);
   background: var(--surface-deep);
   color: var(--on-dark);
   border-bottom: 1px solid var(--border-on-dark);
@@ -328,5 +329,16 @@
   .legal__summary strong,
   .legal__summary span {
     color: #000;
+  }
+}
+
+/* mobile : le bouton « Retour au site » reste lisible dans l'en-tête compact */
+@media (max-width: 767px) {
+  .header__inner > .btn--outline {
+    flex: none;
+    min-height: 44px;
+    padding-inline: 1rem;
+    white-space: nowrap;
+    font-size: 14px;
   }
 }
