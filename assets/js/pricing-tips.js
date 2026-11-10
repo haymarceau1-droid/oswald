@@ -33,6 +33,9 @@
     "Monitoring renforcé": "Surveillance automatique plus fréquente et plus fine : nous sommes alertés si le site tombe ou ralentit.",
     "Sécurité": "Protection contre les attaques et les logiciels malveillants, avec correctifs appliqués régulièrement.",
     "Mises à jour": "Mises à jour techniques et de sécurité, pour que le site reste compatible et protégé.",
+    "Jusqu'à 3 modifications par mois": "Changer un texte, remplacer une photo, mettre à jour un prix ou des horaires… Nous nous en occupons, sans supplément (environ 30 minutes de travail par mois).",
+    "Jusqu'à 8 modifications par mois": "Mettre à jour plusieurs textes, photos et sections, ajuster une mise en page… Nous nous en occupons, sans supplément (environ 1 h 30 de travail par mois).",
+    "Bilan chiffré tous les 3 mois": "Un rapport clair tous les trimestres : visites, pages les plus vues, vitesse du site et pistes d'amélioration.",
     "Analyse mensuelle des performances": "Chaque mois : vitesse, fréquentation et résultats du site, avec des recommandations concrètes."
   };
 
