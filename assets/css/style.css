@@ -2323,12 +2323,10 @@ body.home main::after {
   pointer-events: none;
 }
 
+/* motif de la charte : défenses en quinconce, ton sur ton */
 body.home main::before {
-  background-image: radial-gradient(
-    rgba(0, 38, 36, 0.1) 1px,
-    transparent 1.5px
-  );
-  background-size: 26px 26px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22140%22 viewBox=%220 0 160 140%22%3E%3Cg fill=%22%23002624%22 fill-opacity=%22.032%22%3E%3Cpath transform=%22translate%2820 14%29 scale%28.9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3Cpath transform=%22translate%2876 28%29 scale%28-.9 .9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3Cpath transform=%22translate%28100 14%29 scale%28.9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3Cpath transform=%22translate%28156 28%29 scale%28-.9 .9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3Cpath transform=%22translate%2860 84%29 scale%28.9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3Cpath transform=%22translate%28116 98%29 scale%28-.9 .9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3Cpath transform=%22translate%28140 84%29 scale%28.9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3Cpath transform=%22translate%2836 98%29 scale%28-.9 .9%29 translate%28-12 -66%29%22 d=%22M32 108A27 27 0 0 1 12 66A62 62 0 0 0 32 108Z%22/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px 210px;
   -webkit-mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0.55));
   mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, 0.55));
 }
