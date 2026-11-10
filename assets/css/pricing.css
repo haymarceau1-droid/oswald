@@ -624,3 +624,11 @@
   top: -5px;
   bottom: auto;
 }
+
+/* ---------- Prix en Clash Grotesk ---------- */
+.pricing__amount {
+  font-family: var(--font-logo);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  word-spacing: 0.12em;
+}
