@@ -3172,6 +3172,14 @@ body.nav-open .header__inner::before {
     background: rgba(0, 38, 36, 0.92);
   }
 
+  /* pas de capsule pour le logo du pied de page */
+  .site-footer .logo {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+
   .header__actions {
     position: fixed;
     top: 12px;
