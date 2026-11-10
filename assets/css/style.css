@@ -927,9 +927,13 @@ body.nav-open .cookie-banner {
   bottom: -20px;
   }
 
+  .hero {
+    padding-bottom: 14rem;
+  }
+
   .hero__chateau {
-    width: 420px;
-    transform: translateX(-20%);
+    width: 680px;
+    transform: translateX(-40%);
   }
 
   .services__visual {
