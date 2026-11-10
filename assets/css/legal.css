@@ -336,6 +336,7 @@
 @media (max-width: 767px) {
   .header__inner > .btn--outline {
     flex: none;
+    margin-left: 10.5rem; /* laisse la place au logo fixé à gauche */
     min-height: 44px;
     padding-inline: 1rem;
     white-space: nowrap;

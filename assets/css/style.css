@@ -3185,12 +3185,40 @@ body.nav-open .header__inner::before {
     display: none;
   }
 
-  /* logo dans une petite capsule sombre : lisible sur fond clair comme sombre */
+  /* logo dans une petite capsule sombre, fixée en haut à gauche :
+     complet quand on remonte, réduit à la hure quand on descend */
   .logo {
     padding: 0.5rem 1rem;
     border: 1px solid rgba(240, 242, 237, 0.14);
     border-radius: var(--radius-pill);
     background: rgba(0, 38, 36, 0.92);
+  }
+
+  .site-header .logo {
+    position: fixed;
+    top: 14px;
+    left: clamp(1.25rem, 5vw, 2.5rem);
+    z-index: 105;
+    transition: padding 0.4s var(--ease);
+    -webkit-backdrop-filter: blur(16px) saturate(1.25);
+    backdrop-filter: blur(16px) saturate(1.25);
+    box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.7);
+  }
+
+  .site-header .logo__img {
+    width: 125px;
+    object-fit: cover;
+    object-position: left center;
+    transition: width 0.4s var(--ease);
+  }
+
+  .site-header.is-compact .logo {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .site-header.is-compact .logo__img {
+    width: 34px;
   }
 
   /* pas de capsule pour le logo du pied de page */
