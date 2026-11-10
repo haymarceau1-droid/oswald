@@ -3206,19 +3206,19 @@ body.nav-open .header__inner::before {
   }
 
   .site-header .logo__img {
-    width: 125px;
+    width: 126px;
     object-fit: cover;
     object-position: left center;
     transition: width 0.4s var(--ease);
   }
 
   .site-header.is-compact .logo {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.48rem;
+    padding-left: 0.48rem;
   }
 
   .site-header.is-compact .logo__img {
-    width: 34px;
+    width: 31.6px;
   }
 
   /* pas de capsule pour le logo du pied de page */
