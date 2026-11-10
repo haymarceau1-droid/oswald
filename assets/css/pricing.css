@@ -624,3 +624,119 @@
   top: -5px;
   bottom: auto;
 }
+
+/* ---------- Sanglier qui court sur la section ---------- */
+.boar-run {
+  position: absolute;
+  top: clamp(1rem, 2.2vw, 1.75rem);
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+}
+
+.boar-run__mover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(84px, 9vw, 116px);
+  color: var(--acid);
+  transform: translateX(-160px);
+  animation: boar-cross 14s linear infinite;
+  animation-play-state: paused;
+}
+
+.boar-run.is-running .boar-run__mover,
+.boar-run.is-running .boar-run__leg,
+.boar-run.is-running .boar-run__bob,
+.boar-run.is-running .boar-run__tail {
+  animation-play-state: running;
+}
+
+.boar-run__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.boar-run__body,
+.boar-run__leg,
+.boar-run__tail {
+  fill: currentColor;
+}
+
+.boar-run__tail {
+  fill: none;
+  stroke: currentColor;
+}
+
+.boar-run__tusk {
+  fill: var(--on-dark);
+}
+
+.boar-run__dark {
+  fill: var(--surface-deep);
+}
+
+.boar-run__leg {
+  transform-box: fill-box;
+  transform-origin: 50% 8%;
+  animation: boar-leg 0.55s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.boar-run__leg--f {
+  animation-delay: -0.275s;
+}
+
+.boar-run__leg--far {
+  opacity: 0.55;
+}
+
+.boar-run__leg--far.boar-run__leg--b {
+  animation-delay: -0.275s;
+}
+
+.boar-run__leg--far.boar-run__leg--f {
+  animation-delay: 0s;
+}
+
+.boar-run__bob {
+  animation: boar-bob 0.275s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.boar-run__tail {
+  transform-box: fill-box;
+  transform-origin: 100% 100%;
+  animation: boar-tail 0.275s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+@keyframes boar-cross {
+  0% { transform: translateX(-160px); }
+  72%, 100% { transform: translateX(calc(100vw + 40px)); }
+}
+
+@keyframes boar-leg {
+  from { transform: rotate(-32deg); }
+  to { transform: rotate(32deg); }
+}
+
+@keyframes boar-bob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}
+
+@keyframes boar-tail {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(10deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boar-run {
+    display: none;
+  }
+}
