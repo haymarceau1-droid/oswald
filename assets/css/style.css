@@ -3202,13 +3202,17 @@ body.nav-open .header__inner::before {
 
   .header__actions .btn--round,
   .header__actions .nav-toggle {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     min-height: 0;
   }
 
   .header__actions .btn--round svg {
-    width: 19px;
-    height: 19px;
+    width: 21px;
+    height: 21px;
+  }
+
+  .header__actions .nav-toggle__line {
+    width: 20px;
   }
 }
