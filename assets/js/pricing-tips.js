@@ -36,7 +36,7 @@
     "Jusqu'à 3 modifications par mois": "Changer un texte, remplacer une photo, mettre à jour un prix ou des horaires… Nous nous en occupons, sans supplément (environ 30 minutes de travail par mois).",
     "Jusqu'à 8 modifications par mois": "Mettre à jour plusieurs textes, photos et sections, ajuster une mise en page… Nous nous en occupons, sans supplément (environ 1 h 30 de travail par mois).",
     "Bilan chiffré tous les 3 mois": "Un rapport clair tous les trimestres : visites, pages les plus vues, vitesse du site et pistes d'amélioration.",
-    "Analyse mensuelle des performances": "Chaque mois : vitesse, fréquentation et résultats du site, avec des recommandations concrètes."
+    "Bilan chiffré envoyé chaque mois": "Chaque mois, un rapport clair envoyé par email : visites, pages les plus vues, vitesse du site et résultats, avec des recommandations concrètes."
   };
 
   var items = document.querySelectorAll(".pricing__features li");
