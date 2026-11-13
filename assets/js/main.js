@@ -403,7 +403,7 @@
     status.textContent = "Envoi en cours…";
     submit.disabled = true;
 
-    fetch("/api/contact", {
+    fetch("/contact.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)

@@ -1,0 +1,77 @@
+# Configuration Apache / LiteSpeed (Hostinger)
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+Options -Indexes
+
+# ---------- Redirections ----------
+RewriteEngine On
+
+# HTTPS partout
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://oswaldsolutions.fr%{REQUEST_URI} [L,R=301]
+
+# www -> domaine sans www (adresse canonique du site)
+RewriteCond %{HTTP_HOST} ^www\.oswaldsolutions\.fr$ [NC]
+RewriteRule ^ https://oswaldsolutions.fr%{REQUEST_URI} [L,R=301]
+
+# anciennes pages du blog supprimé
+RewriteRule ^(blog|article)\.html$ / [L,R=301]
+
+# ---------- Fichiers à ne jamais servir ----------
+RedirectMatch 404 ^/(\.git|scripts|api|node_modules)(/|$)
+RedirectMatch 404 ^/(README\.md|vercel\.json|package(-lock)?\.json)$
+
+<Files "contact-config.php">
+  Require all denied
+</Files>
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# ---------- Types de fichiers ----------
+AddType text/plain ".txt"
+AddType application/xml ".xml"
+AddType application/manifest+json ".webmanifest"
+AddType font/woff2 ".woff2"
+AddDefaultCharset UTF-8
+
+# ---------- En-têtes de sécurité ----------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+</IfModule>
+
+# ---------- Cache ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 0 seconds"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/webp "access plus 7 days"
+  ExpiresByType image/x-icon "access plus 7 days"
+</IfModule>
+<IfModule mod_headers.c>
+  # polices : jamais modifiées
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # images et logos : 7 jours
+  <FilesMatch "\.(svg|png|jpe?g|webp|ico)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  # CSS, JS, pages : toujours revalidés pour que les mises à jour apparaissent tout de suite
+  <FilesMatch "\.(css|js|html|xml|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ---------- Compression ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json application/xml image/svg+xml
+</IfModule>
