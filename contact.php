@@ -18,6 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     reponse(405, false, 'method_not_allowed');
 }
 
+/* contrôles anti-abus : même site uniquement, JSON uniquement, taille limitée */
+$hote = $_SERVER['HTTP_HOST'] ?? '';
+$origine = $_SERVER['HTTP_ORIGIN'] ?? ($_SERVER['HTTP_REFERER'] ?? '');
+if ($origine !== '') {
+    $hoteOrigine = parse_url($origine, PHP_URL_HOST);
+    $autorises = ['oswaldsolutions.fr', 'www.oswaldsolutions.fr', preg_replace('/:\d+$/', '', $hote)];
+    if (!$hoteOrigine || !in_array(strtolower($hoteOrigine), array_map('strtolower', $autorises), true)) {
+        reponse(403, false, 'forbidden');
+    }
+}
+if (stripos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== 0) {
+    reponse(415, false, 'unsupported');
+}
+if ((int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 20000) {
+    reponse(413, false, 'too_large');
+}
+
 /* réglages */
 $config = [
     'to'         => 'haymarceau1@gmail.com',
@@ -73,6 +90,12 @@ if ($nom === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $projet === '' 
 $verrou = sys_get_temp_dir() . '/oswald-contact-' . md5($_SERVER['REMOTE_ADDR'] ?? '');
 if (is_file($verrou) && time() - filemtime($verrou) < 20) reponse(429, false, 'too_many');
 @touch($verrou);
+
+/* plafond global : 40 envois par heure au maximum */
+$compteur = sys_get_temp_dir() . '/oswald-contact-total-' . date('YmdH');
+$total = (int) @file_get_contents($compteur);
+if ($total >= 40) reponse(429, false, 'too_many');
+@file_put_contents($compteur, (string) ($total + 1), LOCK_EX);
 
 $sujet = 'Demande de devis — ' . $nom . ' (' . $projet . ')';
 $texte = "Nom : $nom\nEntreprise : " . ($entreprise ?: '—') . "\nEmail : $email\n"

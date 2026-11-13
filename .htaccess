@@ -23,9 +23,9 @@ RewriteRule ^(blog|article)\.html$ / [L,R=301]
 RedirectMatch 404 ^/(\.git|scripts|api|node_modules)(/|$)
 RedirectMatch 404 ^/(README\.md|vercel\.json|package(-lock)?\.json)$
 
-<Files "contact-config.php">
+<FilesMatch "^(contact-config(\.example)?\.php|README\.md|\.gitignore|.*\.mjs)$">
   Require all denied
-</Files>
+</FilesMatch>
 <FilesMatch "^\.">
   Require all denied
 </FilesMatch>
@@ -42,7 +42,13 @@ AddDefaultCharset UTF-8
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.pexels.com; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
 </IfModule>
 
 # ---------- Cache ----------
