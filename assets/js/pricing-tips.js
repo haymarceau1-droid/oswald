@@ -47,6 +47,12 @@
   tip.id = "info-tip";
   tip.setAttribute("role", "tooltip");
   tip.hidden = true;
+  var tipTitle = document.createElement("strong");
+  tipTitle.className = "info-tip__title";
+  var tipText = document.createElement("span");
+  tipText.className = "info-tip__text";
+  tip.appendChild(tipTitle);
+  tip.appendChild(tipText);
   document.body.appendChild(tip);
 
   var current = null;
@@ -57,7 +63,7 @@
 
   function place(btn) {
     var r = btn.getBoundingClientRect();
-    var w = Math.min(280, window.innerWidth - 24);
+    var w = Math.min(300, window.innerWidth - 24);
     tip.style.width = w + "px";
     var left = r.left + r.width / 2 - w / 2;
     left = Math.max(12, Math.min(left, window.innerWidth - w - 12));
@@ -67,11 +73,13 @@
     tip.classList.toggle("is-below", below);
     tip.style.top = (below ? r.bottom + 10 : r.top - h - 10) + "px";
     tip.style.setProperty("--arrow-x", r.left + r.width / 2 - left + "px");
+    tip.style.transformOrigin = (r.left + r.width / 2 - left) + "px " + (below ? "0" : "100%");
   }
 
   function show(btn) {
     current = btn;
-    tip.textContent = btn.getAttribute("data-tip");
+    tipTitle.textContent = btn.getAttribute("data-title");
+    tipText.textContent = btn.getAttribute("data-tip");
     tip.hidden = false;
     btn.setAttribute("aria-describedby", "info-tip");
     place(btn);
@@ -93,12 +101,15 @@
     btn.type = "button";
     btn.className = "info-btn";
     btn.setAttribute("data-tip", text);
+    btn.setAttribute("data-title", key);
     btn.setAttribute("aria-label", "Explication : " + key);
-    btn.textContent = "i";
+    btn.innerHTML =
+      '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7.25" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="4.7" r="1.05" fill="currentColor"/><path d="M8 7.3v4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
     li.appendChild(btn);
 
-    btn.addEventListener("mouseenter", function () { if (canHover()) show(btn); });
-    btn.addEventListener("mouseleave", function () { if (canHover()) hide(); });
+    /* souris : toute la ligne ouvre la bulle, pas seulement le petit « i » */
+    li.addEventListener("mouseenter", function () { if (canHover()) show(btn); });
+    li.addEventListener("mouseleave", function () { if (canHover()) hide(); });
     btn.addEventListener("focus", function () {
       /* le focus au clavier ouvre la bulle ; au toucher, c'est le clic qui s'en charge */
       if (btn.matches(":focus-visible")) show(btn);
