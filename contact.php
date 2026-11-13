@@ -2,7 +2,7 @@
 /* Formulaire de contact : reçoit les demandes en JSON et les envoie par e-mail.
    Hébergement Hostinger (PHP). Réglages facultatifs dans contact-config.php
    (voir contact-config.example.php). Sans ce fichier, les demandes sont envoyées
-   à contact@oswaldsolutions.fr avec la fonction mail() de PHP. */
+   à haymarceau1@gmail.com avec la fonction mail() de PHP. */
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 /* réglages */
 $config = [
-    'to'         => 'contact@oswaldsolutions.fr',
+    'to'         => 'haymarceau1@gmail.com',
     'from'       => 'contact@oswaldsolutions.fr',
     'from_name'  => 'Oswald Solutions',
     'resend_key' => '',

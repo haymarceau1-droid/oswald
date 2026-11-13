@@ -9,7 +9,7 @@
 
 ## Formulaire de contact
 
-Le formulaire envoie un vrai e-mail via `contact.php` (PHP, hébergement Hostinger). Par défaut, il utilise la fonction `mail()` de PHP : les demandes arrivent sur `contact@oswaldsolutions.fr`, qui doit être une boîte créée chez Hostinger (Emails).
+Le formulaire envoie un vrai e-mail via `contact.php` (PHP, hébergement Hostinger). Par défaut, il utilise la fonction `mail()` de PHP : les demandes arrivent sur `haymarceau1@gmail.com`. L'expéditeur est `contact@oswaldsolutions.fr` (adresse du domaine : elle n'a pas besoin d'exister comme boîte pour envoyer).
 
 Pour changer le destinataire ou l'expéditeur, ou utiliser [Resend](https://resend.com) à la place de `mail()`, copier `contact-config.example.php` en `contact-config.php` **sur l'hébergement** (ce fichier n'est pas versionné et reste inaccessible depuis le web grâce à `.htaccess`) et adapter les valeurs.
 

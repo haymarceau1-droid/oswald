@@ -417,7 +417,7 @@
           form.reset();
         } else {
           status.classList.add("is-error");
-          status.innerHTML = "L’envoi a échoué. Écrivez-moi directement à <a href=\"mailto:contact@oswaldsolutions.fr\">contact@oswaldsolutions.fr</a>.";
+          status.innerHTML = "L’envoi a échoué. Écrivez-moi directement sur <a href=\"https://wa.me/33651476435\" target=\"_blank\" rel=\"noopener\">WhatsApp</a> ou par email à <a href=\"mailto:haymarceau1@gmail.com\">haymarceau1@gmail.com</a>.";
         }
       });
   });
