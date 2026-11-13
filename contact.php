@@ -2,7 +2,16 @@
 /* Formulaire de contact : reçoit les demandes en JSON et les envoie par e-mail.
    Hébergement Hostinger (PHP). Réglages facultatifs dans contact-config.php
    (voir contact-config.example.php). Sans ce fichier, les demandes sont envoyées
-   à haymarceau1@gmail.com avec la fonction mail() de PHP. */
+   à haymarceau1@gmail.com avec la fonction mail() de PHP.
+
+   Protection anti-spam (sans service tiers ni captcha) :
+   1. jeton signé délivré à l'ouverture de la page : un robot qui poste directement est refusé ;
+   2. délai minimal de remplissage (4 s) et durée de vie limitée du jeton (2 h) ;
+   3. champ piège (honeypot) invisible ;
+   4. filtrage du contenu (liens en nombre, alphabets inhabituels, noms suspects) ;
+   5. détection des doublons ;
+   6. limites : 1 envoi / 20 s par adresse IP, 40 par heure au total ;
+   7. même origine uniquement, JSON uniquement, taille limitée. */
 
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
@@ -13,12 +22,13 @@ function reponse($code, $ok, $erreur = null) {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Allow: POST');
-    reponse(405, false, 'method_not_allowed');
+/* faux succès : les robots ne savent pas qu'ils ont été repérés */
+function ignorer($raison) {
+    error_log('contact.php : demande ignorée (' . $raison . ')');
+    reponse(200, true);
 }
 
-/* contrôles anti-abus : même site uniquement, JSON uniquement, taille limitée */
+/* même site uniquement */
 $hote = $_SERVER['HTTP_HOST'] ?? '';
 $origine = $_SERVER['HTTP_ORIGIN'] ?? ($_SERVER['HTTP_REFERER'] ?? '');
 if ($origine !== '') {
@@ -28,12 +38,6 @@ if ($origine !== '') {
         reponse(403, false, 'forbidden');
     }
 }
-if (stripos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== 0) {
-    reponse(415, false, 'unsupported');
-}
-if ((int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 20000) {
-    reponse(413, false, 'too_large');
-}
 
 /* réglages */
 $config = [
@@ -41,11 +45,35 @@ $config = [
     'from'       => 'contact@oswaldsolutions.fr',
     'from_name'  => 'Oswald Solutions',
     'resend_key' => '',
+    'secret'     => '',
 ];
 $fichier = __DIR__ . '/contact-config.php';
 if (is_file($fichier)) {
     $perso = include $fichier;
     if (is_array($perso)) $config = array_merge($config, $perso);
+}
+/* clé de signature des jetons : 'secret' si fourni, sinon dérivée de la clé Resend */
+$cleSignature = $config['secret'] !== '' ? $config['secret'] : hash('sha256', 'oswald|' . $config['resend_key'] . '|' . __FILE__);
+$signer = function ($t) use ($cleSignature) { return hash_hmac('sha256', (string) $t, $cleSignature); };
+
+/* délivrance du jeton : GET contact.php?jeton=1 */
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['jeton'])) {
+    $t = time();
+    http_response_code(200);
+    echo json_encode(['ok' => true, 'jeton' => $t . '.' . $signer($t)]);
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Allow: POST');
+    reponse(405, false, 'method_not_allowed');
+}
+
+if (stripos($_SERVER['CONTENT_TYPE'] ?? '', 'application/json') !== 0) {
+    reponse(415, false, 'unsupported');
+}
+if ((int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 20000) {
+    reponse(413, false, 'too_large');
 }
 
 /* lecture et nettoyage des champs */
@@ -61,8 +89,18 @@ function une_ligne($v, $max) {
     return preg_replace('/[\n\t]+/', ' ', nettoyer($v, $max));
 }
 
-/* champ piège : les robots le remplissent, on fait semblant d'avoir réussi */
-if (nettoyer($body['website'] ?? '', 200) !== '') reponse(200, true);
+/* 3. champ piège : les robots le remplissent */
+if (nettoyer($body['website'] ?? '', 200) !== '') ignorer('honeypot');
+
+/* 1 et 2. jeton signé, délai de remplissage et durée de vie */
+$jeton = nettoyer($body['jeton'] ?? '', 120);
+$partiesJeton = explode('.', $jeton);
+if (count($partiesJeton) !== 2 || !ctype_digit($partiesJeton[0]) || !hash_equals($signer($partiesJeton[0]), $partiesJeton[1])) {
+    reponse(403, false, 'token');
+}
+$age = time() - (int) $partiesJeton[0];
+if ($age < 4) ignorer('trop rapide (' . $age . ' s)');
+if ($age > 7200) reponse(403, false, 'token_expired');
 
 $PROJETS = [
     'nouveau-site' => 'Nouveau site', 'refonte' => 'Refonte', 'landing-page' => 'Landing page',
@@ -86,12 +124,27 @@ if ($nom === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $projet === '' 
     reponse(400, false, 'invalid');
 }
 
-/* limite simple : une demande toutes les 20 secondes par adresse IP */
+/* 4. filtrage du contenu */
+$tout = $nom . ' ' . $entreprise . ' ' . $message;
+if (preg_match('~(https?://|www\.)~i', $nom . ' ' . $entreprise)) ignorer('lien dans le nom');
+if (preg_match_all('~(https?://|www\.)~i', $message) > 3) ignorer('trop de liens');
+if (preg_match('~\[url[=\]]|<a\s|<script|\[link=~i', $tout)) ignorer('balises');
+$lettres = preg_match_all('/\p{L}/u', $message);
+if ($lettres > 20) {
+    $hors = preg_match_all('/[\p{Cyrillic}\p{Han}\p{Arabic}\p{Hangul}\p{Thai}]/u', $message);
+    if ($hors / $lettres > 0.3) ignorer('alphabet inhabituel');
+}
+if (mb_strlen($message, 'UTF-8') < 10) reponse(400, false, 'invalid');
+
+/* 5. doublons : même message et même adresse dans l'heure */
+$empreinte = sys_get_temp_dir() . '/oswald-contact-dup-' . md5(strtolower($email) . '|' . $message);
+if (is_file($empreinte) && time() - filemtime($empreinte) < 3600) ignorer('doublon');
+
+/* 6. limites : par adresse IP, puis globale */
 $verrou = sys_get_temp_dir() . '/oswald-contact-' . md5($_SERVER['REMOTE_ADDR'] ?? '');
 if (is_file($verrou) && time() - filemtime($verrou) < 20) reponse(429, false, 'too_many');
 @touch($verrou);
 
-/* plafond global : 40 envois par heure au maximum */
 $compteur = sys_get_temp_dir() . '/oswald-contact-total-' . date('YmdH');
 $total = (int) @file_get_contents($compteur);
 if ($total >= 40) reponse(429, false, 'too_many');
@@ -128,6 +181,7 @@ if ($config['resend_key'] !== '') {
         error_log('contact.php : Resend a répondu ' . $statut);
         reponse(502, false, 'send_failed');
     }
+    @touch($empreinte);
     reponse(200, true);
 }
 
@@ -143,4 +197,5 @@ if (!$ok) {
     error_log('contact.php : mail() a échoué');
     reponse(502, false, 'send_failed');
 }
+@touch($empreinte);
 reponse(200, true);

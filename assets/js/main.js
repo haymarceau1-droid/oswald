@@ -379,6 +379,16 @@
     });
   });
 
+  /* jeton anti-spam signé par le serveur : obtenu à l'ouverture de la page, renouvelé au besoin */
+  var jeton = { value: "", at: 0 };
+  var chargerJeton = function () {
+    return fetch("/contact.php?jeton=1", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (j && j.jeton) { jeton.value = j.jeton; jeton.at = Date.now(); } })
+      .catch(function () {});
+  };
+  chargerJeton();
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -403,10 +413,16 @@
     status.textContent = "Envoi en cours…";
     submit.disabled = true;
 
-    fetch("/contact.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+    /* jeton absent ou trop ancien (plus d'1 h 45) : on en demande un nouveau avant d'envoyer */
+    var pret = jeton.value && Date.now() - jeton.at < 6300000 ? Promise.resolve() : chargerJeton();
+
+    pret.then(function () {
+      data.jeton = jeton.value;
+      return fetch("/contact.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
     })
       .then(function (r) { return r.json().then(function (j) { return r.ok && j.ok; }, function () { return false; }); })
       .catch(function () { return false; })

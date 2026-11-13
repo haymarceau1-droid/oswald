@@ -11,4 +11,8 @@ return [
 
     /* facultatif : clé API Resend (resend.com), pour un envoi plus fiable que mail() */
     'resend_key' => '',
+
+    /* facultatif : phrase secrète (n'importe quelle longue suite de caractères) qui signe les jetons anti-spam.
+       Sans elle, le secret est dérivé de la clé Resend. */
+    'secret' => '',
 ];
