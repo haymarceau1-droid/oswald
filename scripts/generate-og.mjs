@@ -18,8 +18,8 @@ const PAGES = [
   ["og-site-vitrine", "Site vitrine", "Votre activité, bien présentée.", "Dès 2 490 € TTC"],
   ["og-site-e-commerce", "Site e-commerce", "Vendez en ligne, simplement.", "Sur devis"],
   ["og-refonte-site", "Refonte de site", "Un site qui vous ressemble enfin.", "Sur devis"],
-  ["og-care-plan", "Care Plan", "Votre site suivi, mois après mois.", "Dès 79 € TTC / mois"],
-  ["og-maintenance", "Maintenance et hébergement", "Un site à jour, sans y penser.", "Dès 79 € TTC / mois"],
+  ["og-care-plan", "Care Plan Oswald", "Un site qui progresse, mois après mois.", "Dès 149 € TTC / mois"],
+  ["og-maintenance", "Maintenance", "Un site en ligne, à jour, sans y penser.", "79 € TTC / mois"],
   ["og-realisations", "Réalisations", "Des projets concrets, des sites qui servent.", ""],
   ["og-legal", "Informations légales", "Transparence et données personnelles.", ""],
 ];

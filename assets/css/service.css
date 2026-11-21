@@ -467,3 +467,131 @@
     animation: none;
   }
 }
+
+/* ---------- Comparatif Maintenance / Care Plan ---------- */
+.sv-compare__grid {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 860px) {
+  .sv-compare__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+.sv-compare__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface-mid);
+  color: var(--ink-deep);
+}
+
+.sv-compare__card--featured {
+  border-color: transparent;
+  background: var(--surface-deep);
+  color: var(--on-dark);
+}
+
+.sv-compare__tag {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sv-compare__card--featured .sv-compare__tag {
+  color: var(--acid);
+}
+
+.sv-compare__card h3 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: inherit;
+}
+
+.sv-compare__price {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.sv-compare__price strong {
+  font-family: var(--font-logo);
+  font-size: clamp(1.75rem, 3.4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--ink-deep);
+  word-spacing: 0.1em;
+}
+
+.sv-compare__card--featured .sv-compare__price {
+  color: var(--on-dark-muted);
+}
+
+.sv-compare__card--featured .sv-compare__price strong {
+  color: var(--acid);
+}
+
+.sv-compare__list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1.25rem;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+  flex: 1;
+}
+
+.sv-compare__card--featured .sv-compare__list {
+  border-top-color: var(--border-on-dark);
+}
+
+.sv-compare__list li {
+  position: relative;
+  padding-left: 1.6rem;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.sv-compare__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  width: 15px;
+  height: 15px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23002624' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.sv-compare__card--featured .sv-compare__list li::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f8f574' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+
+.sv-compare__list li.is-no {
+  color: var(--muted-2);
+}
+
+.sv-compare__list li.is-no::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23707078' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 12h12'/%3E%3C/svg%3E");
+}
+
+.sv-compare__card .btn {
+  align-self: flex-start;
+}
+
+.sv-compare__card:not(.sv-compare__card--featured) .btn--outline {
+  border-color: var(--ink-deep);
+  background: transparent;
+  color: var(--ink-deep);
+}
