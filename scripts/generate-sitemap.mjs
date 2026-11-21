@@ -10,8 +10,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = "https://oswaldsolutions.fr";
 
 // pages à exclure du sitemap
-// seule la page 404 est exclue (elle est en « noindex »)
-const EXCLUDE = new Set(["404.html"]);
+// pages en « noindex » : 404 et pages légales (non référencées, mais accessibles depuis le pied de page)
+const EXCLUDE = new Set(["404.html", "mentions-legales.html", "confidentialite.html"]);
 const pages = readdirSync(root).filter((f) => f.endsWith(".html") && !EXCLUDE.has(f));
 
 const lastmod = (file) => {
