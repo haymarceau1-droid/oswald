@@ -746,3 +746,16 @@
     display: none;
   }
 }
+
+.pricing__lede {
+  max-width: 56ch;
+  margin: 1rem 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--on-dark-muted);
+}
+
+.pricing__lede strong {
+  font-weight: 500;
+  color: var(--on-dark);
+}
