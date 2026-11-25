@@ -4,24 +4,11 @@
    retirer "sample": true, puis renseigner "url" (adresse du site réalisé).
    Champs : slug, title, category, year, excerpt, tags[], url, domain, image, visual
    ("forest" ou "acid" : couleur du visuel).
-   "image" (facultatif) : capture d'écran du site, ex. "assets/projects/talaria.jpg"
+   "image" (facultatif) : capture d'écran du site, ex. "assets/projects/rodara.jpg"
    (format conseillé : 1440 x 900 px, jpg ou webp, moins de 250 Ko).
    Sans image, une maquette de navigateur dessinée en CSS est affichée.
    "status" : "published" (affiché) ou "draft" (masqué). */
 window.PROJECTS = [
-  {
-    "slug": "talaria",
-    "title": "Talaria",
-    "category": "Design",
-    "year": "",
-    "excerpt": "UX et UI de la landing page, de l'app mobile et de la webapp de Talaria, l'app qui regroupe vols, logements, activités et budget pour voyager entre amis.",
-    "tags": ["UX", "UI", "Landing page", "App mobile", "Webapp"],
-    "url": "https://talaria.world",
-    "image": "assets/projects/talaria.jpg",
-    "domain": "talaria.world",
-    "visual": "forest",
-    "status": "published"
-  },
   {
     "slug": "rodara",
     "title": "Rodara",
