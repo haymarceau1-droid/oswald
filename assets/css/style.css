@@ -887,8 +887,7 @@ body.nav-open .cookie-banner {
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
-  margin-top: calc(-1 * var(--header-h));
-  padding-block: max(clamp(5rem, 12vw, 9.375rem), calc(var(--header-h) + 3.5rem)) clamp(4rem, 9vw, 7.5rem);
+  padding-block: clamp(4rem, 9vw, 7rem) clamp(4rem, 9vw, 7.5rem);
   background: var(--surface-deep);
   color: var(--on-dark);
   overflow: hidden;
@@ -3062,68 +3061,25 @@ body.home main::after {
   pointer-events: none;
 }
 
-/* ---------- Header flottant : barre vitrée arrondie ---------- */
+/* ---------- Header classique : pleine largeur, fixe en haut de page (ne suit pas le défilement) ---------- */
 .site-header {
-  top: 0;
-  padding-top: 12px;
-  border-bottom: 0;
-  background: transparent;
-  pointer-events: none;
-}
-
-.site-header > * {
+  position: relative;
+  top: auto;
+  z-index: 100;
+  padding: 0;
+  background: var(--surface-deep);
+  border-bottom: 1px solid rgba(240, 242, 237, 0.1);
   pointer-events: auto;
 }
 
 .site-header::before,
-.site-header.is-scrolled::before,
-.site-header--solid::before,
-body.nav-open .site-header {
-  background: transparent;
-}
-
-.site-header::before {
+.header__inner::before {
   display: none;
 }
 
-.site-header.is-scrolled,
-.site-header--solid,
-.site-header--solid.is-scrolled,
-body.nav-open .site-header {
-  border-bottom-color: transparent;
-  background: transparent;
-}
-
 .header__inner {
-  --bar-inset: clamp(0.5rem, 2.2vw, 1.25rem);
-  --bar-gap: 8px;
   position: relative;
-  min-height: calc(48px + var(--bar-gap) * 2);
-  /* même espace à droite du bouton qu'au-dessus et en dessous */
-  padding-right: calc(var(--bar-inset) + var(--bar-gap));
-}
-
-.header__inner::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0 var(--bar-inset);
-  background: rgba(0, 38, 36, 0.9);
-  border: 1px solid rgba(240, 242, 237, 0.14);
-  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(240, 242, 237, 0.08);
-  -webkit-backdrop-filter: blur(16px) saturate(1.25);
-  backdrop-filter: blur(16px) saturate(1.25);
-  border-radius: var(--radius-pill);
-  transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
-}
-
-.site-header.is-scrolled .header__inner::before {
-  background: rgba(0, 38, 36, 0.95);
-}
-
-/* le menu mobile ouvert couvre l'écran : la barre reste au-dessus */
-body.nav-open .header__inner::before {
-  background: rgba(0, 38, 36, 0.96);
+  min-height: var(--header-h);
 }
 
 /* ---------- Correctifs responsive ---------- */
@@ -3162,85 +3118,14 @@ body.nav-open .header__inner::before {
   }
 }
 
-/* ---------- Mobile : barre compacte fixée en haut à droite ---------- */
+/* ---------- Mobile : barre classique pleine largeur ---------- */
 @media (max-width: 767px) {
   :root {
     --header-h: 64px;
   }
 
-  /* l'en-tête défile avec la page ; seule la capsule d'actions reste fixe */
-  .site-header {
-    position: relative;
-    padding-top: 12px;
-  }
-
-  .header__inner {
-    min-height: 52px;
-    padding-right: clamp(1.25rem, 5vw, 2.5rem);
-  }
-
-  .header__inner::before {
-    display: none;
-  }
-
-  /* logo dans une petite capsule sombre, fixée en haut à gauche :
-     complet quand on remonte, réduit à la hure quand on descend */
-  .logo {
-    padding: 0.5rem 1rem;
-    border: 1px solid rgba(240, 242, 237, 0.14);
-    border-radius: var(--radius-pill);
-    background: rgba(0, 38, 36, 0.92);
-  }
-
-  .site-header .logo {
-    position: fixed;
-    top: 14px;
-    left: clamp(1.25rem, 5vw, 2.5rem);
-    z-index: 105;
-    transition: padding 0.4s var(--ease);
-    -webkit-backdrop-filter: blur(16px) saturate(1.25);
-    backdrop-filter: blur(16px) saturate(1.25);
-    box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.7);
-  }
-
-  .site-header .logo__img {
-    width: 126px;
-    object-fit: cover;
-    object-position: left center;
-    transition: width 0.4s var(--ease);
-  }
-
-  .site-header.is-compact .logo {
-    padding-right: 0.48rem;
-    padding-left: 0.48rem;
-  }
-
-  .site-header.is-compact .logo__img {
-    width: 31.6px;
-  }
-
-  /* pas de capsule pour le logo du pied de page */
-  .site-footer .logo {
-    padding: 0;
-    border: 0;
-    border-radius: 0;
-    background: none;
-  }
-
   .header__actions {
-    position: fixed;
-    top: 12px;
-    right: 12px;
-    z-index: 110;
-    gap: 4px;
-    padding: 4px;
-    border: 1px solid rgba(240, 242, 237, 0.14);
-    border-radius: var(--radius-pill);
-    background: rgba(0, 38, 36, 0.9);
-    -webkit-backdrop-filter: blur(16px) saturate(1.25);
-    backdrop-filter: blur(16px) saturate(1.25);
-    box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.7);
-    pointer-events: auto;
+    gap: 6px;
   }
 
   .header__actions .btn--round,

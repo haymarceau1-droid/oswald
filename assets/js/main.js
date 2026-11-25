@@ -46,23 +46,8 @@
 
   /* ---------- Header : bordure au scroll ---------- */
   var header = document.getElementById("site-header");
-  var lastY = window.scrollY;
   var onScroll = function () {
-    var y = window.scrollY;
-    header.classList.toggle("is-scrolled", y > 8);
-
-    /* mobile : le logo se réduit à la hure en descendant, se redéploie en remontant */
-    var delta = y - lastY;
-    if (document.body.classList.contains("nav-open") || y < 40) {
-      header.classList.remove("is-compact");
-      lastY = y;
-    } else if (delta > 6) {
-      header.classList.add("is-compact");
-      lastY = y;
-    } else if (delta < -6) {
-      header.classList.remove("is-compact");
-      lastY = y;
-    }
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
