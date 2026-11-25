@@ -3068,9 +3068,9 @@ body.home main::after {
   z-index: 100;
   padding: 0;
   background: transparent;
-  border-bottom: 1px solid rgba(240, 242, 237, 0.12);
+  border-bottom: 0;
   pointer-events: auto;
-  transition: box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+  transition: box-shadow 0.35s var(--ease);
 }
 
 /* le verre est sur un calque : un filtre sur l'en-tête lui-même casserait le menu mobile plein écran.
@@ -3089,7 +3089,6 @@ body.home main::after {
 }
 
 .site-header.is-scrolled {
-  border-bottom-color: rgba(240, 242, 237, 0.16);
   box-shadow: 0 18px 40px -26px rgba(0, 0, 0, 0.7);
 }
 
