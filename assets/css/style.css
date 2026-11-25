@@ -3073,7 +3073,8 @@ body.home main::after {
   transition: box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
 }
 
-/* le verre est sur un calque : un filtre sur l'en-tête lui-même casserait le menu mobile plein écran */
+/* le verre est sur un calque : un filtre sur l'en-tête lui-même casserait le menu mobile plein écran.
+   Au sommet de la page la barre est pleine (rien à flouter) ; elle devient verre dès qu'on défile. */
 .site-header::before {
   content: "";
   display: block;
@@ -3081,10 +3082,10 @@ body.home main::after {
   inset: 0;
   z-index: -1;
   opacity: 1;
-  background: linear-gradient(180deg, rgba(0, 46, 43, 0.78), rgba(0, 38, 36, 0.62));
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  backdrop-filter: blur(20px) saturate(1.6);
-  transition: background 0.35s var(--ease);
+  background: var(--surface-deep);
+  -webkit-backdrop-filter: blur(22px) saturate(1.7);
+  backdrop-filter: blur(22px) saturate(1.7);
+  transition: background 0.4s var(--ease);
 }
 
 .site-header.is-scrolled {
@@ -3093,7 +3094,7 @@ body.home main::after {
 }
 
 .site-header.is-scrolled::before {
-  background: linear-gradient(180deg, rgba(0, 46, 43, 0.86), rgba(0, 38, 36, 0.74));
+  background: linear-gradient(180deg, rgba(0, 46, 43, 0.9), rgba(0, 38, 36, 0.8));
 }
 
 body.nav-open .site-header::before {
