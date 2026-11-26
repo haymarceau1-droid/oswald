@@ -7,51 +7,6 @@
 
   var raf = window.requestAnimationFrame.bind(window);
 
-  /* ---------- Étoiles filantes du hero (accueil) ---------- */
-  (function () {
-    var hero = document.querySelector("body.home .hero");
-    if (!hero) return;
-
-    var box = document.createElement("div");
-    box.className = "hero__stars";
-    box.setAttribute("aria-hidden", "true");
-    hero.insertBefore(box, hero.firstChild);
-
-    var rand = function (min, max) { return min + Math.random() * (max - min); };
-
-    /* Sens de chute alterné (une fois vers la gauche, une fois vers la droite) et
-       point de départ pris dans la moitié opposée : l'écran est couvert de façon
-       équilibrée, à gauche comme à droite. */
-    var place = function (star) {
-      var toLeft = star._toLeft = !star._toLeft;
-      var angle = toLeft ? rand(142, 156) : rand(24, 38);
-      var rad = (angle * Math.PI) / 180;
-      var dist = rand(380, 520);
-      var x = toLeft ? rand(36, 108) : rand(-8, 64);
-      star.style.setProperty("--x", x.toFixed(1) + "%");
-      star.style.setProperty("--y", rand(2, 48).toFixed(1) + "%");
-      star.style.setProperty("--a", angle.toFixed(1) + "deg");
-      star.style.setProperty("--dx", (Math.cos(rad) * dist).toFixed(0) + "px");
-      star.style.setProperty("--dy", (Math.sin(rad) * dist).toFixed(0) + "px");
-      star.style.setProperty("--o", rand(0.22, 0.38).toFixed(2));
-    };
-
-    /* 4 étoiles : durée du cycle (s) et délai de départ (s) */
-    var cycles = [12, 14.3, 16.6, 23.4];
-    var delays = [2.2, 6.8, 11.5, 9];
-    cycles.forEach(function (dur, i) {
-      var star = document.createElement("span");
-      star.className = "hero__star";
-      star.style.setProperty("--dur", dur.toFixed(1) + "s");
-      star.style.animationDelay = delays[i] + "s";
-      star._toLeft = i % 2 === 0; /* place() inverse : la 1re ira donc vers la droite */
-      place(star);
-      /* à chaque nouveau passage : autre endroit, autre angle */
-      star.addEventListener("animationiteration", function () { place(star); });
-      box.appendChild(star);
-    });
-  })();
-
   /* ---------- Barre de progression du scroll ---------- */
   var bar = document.createElement("div");
   bar.className = "scroll-progress";
