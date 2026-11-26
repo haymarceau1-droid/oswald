@@ -907,6 +907,7 @@ body.nav-open .cookie-banner {
 }
 
 .hero__chateau {
+  display: block;
   width: 1231px;
   max-width: none;
   height: auto;
