@@ -3444,3 +3444,13 @@ body.nav-open .site-header::before {
     gap: 4rem;
   }
 }
+
+/* texte d'accroche du hero : une phrase par ligne, coupures équilibrées */
+.hero__lede > span {
+  display: block;
+  text-wrap: balance;
+}
+
+.hero__lede > span + span {
+  margin-top: 0.35rem;
+}
