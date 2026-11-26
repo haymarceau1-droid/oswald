@@ -921,6 +921,10 @@ body.nav-open .cookie-banner {
     transform: translateX(-30%);
   }
 
+  .services__visual {
+    bottom: -130px;
+  }
+
   .services__statue {
     width: 320px;
     transform: translateX(calc(80% + 60px));
@@ -931,6 +935,10 @@ body.nav-open .cookie-banner {
   .hero__chateau {
     width: 640px;
     transform: translateX(-25%);
+  }
+
+  .services__visual {
+    bottom: -100px;
   }
 
   .services__statue {
@@ -954,7 +962,7 @@ body.nav-open .cookie-banner {
   }
 
   .services__visual {
-    bottom: -10px;
+    bottom: -80px;
   }
 
   .services__statue {
@@ -1204,7 +1212,7 @@ body.nav-open .cookie-banner {
 
 .services__visual {
   position: absolute;
-  bottom: -35px;
+  bottom: -170px;
   left: 50%;
   z-index: 0;
   pointer-events: none;
@@ -1215,7 +1223,7 @@ body.nav-open .cookie-banner {
   max-width: none;
   height: auto;
   opacity: 0.6;
-  transform: translateX(calc(80% + 60px));
+  transform: translateX(calc(80% + 100px));
 }
 
 .services__grid {
