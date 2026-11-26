@@ -1,8 +1,13 @@
 /* Château d'Angers en ASCII animé (hero de l'accueil).
    La grille vient de assets/data/chateau-ascii.js (générée par scripts/generate-ascii.mjs).
-   Animation : les caractères « se décodent » du bas vers le haut, puis un reflet traverse
-   le dessin et quelques caractères scintillent. Pause hors écran ; image fixe si
-   l'utilisateur a demandé moins d'animations. */
+
+   Animation :
+   1. Apparition : une vague diagonale (bas gauche vers haut droit) balaie le dessin. Son front est
+      lumineux, sa traîne « décode » les caractères (symboles aléatoires qui se fixent un à un).
+   2. Ensuite : le dessin respire doucement, un reflet le traverse, de petites rafales de données
+      parcourent une bande de lignes, quelques caractères scintillent.
+   3. Interaction (souris) : le curseur allume les caractères autour de lui et les fait « chanter ».
+   Pause hors écran ou onglet masqué ; image fixe si l'utilisateur préfère moins d'animations. */
 (function () {
   "use strict";
 
@@ -16,7 +21,8 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var ctx = canvas.getContext("2d");
 
-  /* cellules non vides */
+  /* ---------- cellules non vides ---------- */
+  var U_MAX = COLS * 0.55 + ROWS;   /* étendue de la diagonale de la vague */
   var cells = [];
   for (var r = 0; r < ROWS; r++) {
     var line = LINES[r] || "";
@@ -25,60 +31,97 @@
       if (idx > 0) {
         cells.push({
           c: c, r: r, idx: idx, ch: RAMP.charAt(idx),
-          base: 0.62 + 0.38 * (idx / LAST),  /* opacité de repos */
-          t0: (1 - r / ROWS) * 1500 + (c / COLS) * 350 + Math.random() * 450,
-          alpha: -1, flick: 0
+          base: 0.62 + 0.38 * (idx / LAST),
+          u: c * 0.55 + (ROWS - r),      /* position sur la diagonale */
+          settled: false, flick: 0, fg: "",
+          dA: -1, dG: "", dH: -1          /* dernier état dessiné */
         });
       }
     }
   }
 
-  var cw = 0, chh = 0, fontPx = 12, dpr = 1;
+  /* ---------- palettes (jaune du site, et blanc chaud pour les éclats) ---------- */
+  var Q = 16;
+  var YEL = [], HOT = [];
+  for (var q = 0; q <= Q; q++) {
+    YEL.push("rgba(248,245,116," + (q / Q).toFixed(3) + ")");
+    HOT.push("rgba(255,254,226," + (q / Q).toFixed(3) + ")");
+  }
+
+  /* ---------- géométrie ---------- */
+  var cw = 0, chh = 0, dpr = 1, W = 0;
+  var FONT = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
 
   var measure = function () {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var w = canvas.clientWidth || 1200;
-    canvas.width = Math.round(w * dpr);
-    canvas.height = Math.round(w * ASPECT * dpr);
+    W = canvas.clientWidth || 1200;
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(W * ASPECT * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    cw = w / COLS;
-    chh = (w * ASPECT) / ROWS;
-    ctx.font = "100px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+    cw = W / COLS;
+    chh = (W * ASPECT) / ROWS;
+    ctx.font = "100px " + FONT;
     var m = ctx.measureText("M").width || 60;
-    fontPx = Math.max(3, (100 * cw) / m);
-    ctx.font = fontPx + "px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+    ctx.font = Math.max(3, (100 * cw) / m) + "px " + FONT;
     ctx.textBaseline = "middle";
+    for (var i = 0; i < cells.length; i++) { cells[i].dA = -1; cells[i].settled = false; }
   };
 
-  var drawCell = function (cell, glyph, alpha) {
+  /* dessine une cellule seulement si son apparence a changé */
+  var paint = function (cell, glyph, alpha, hot) {
+    var a = Math.max(0, Math.min(Q, Math.round(alpha * Q)));
+    var h = hot ? 1 : 0;
+    if (cell.dA === a && cell.dG === glyph && cell.dH === h) return;
+    cell.dA = a; cell.dG = glyph; cell.dH = h;
     var x = cell.c * cw, y = cell.r * chh;
-    ctx.clearRect(x - 0.5, y - 0.5, cw + 1, chh + 1);
-    if (alpha <= 0) return;
-    ctx.fillStyle = "rgba(248,245,116," + alpha.toFixed(2) + ")";
+    ctx.clearRect(x - 0.6, y - 0.4, cw + 1.2, chh + 0.8);
+    if (a <= 0) return;
+    ctx.fillStyle = (h ? HOT : YEL)[a];
     ctx.fillText(glyph, x, y + chh / 2);
   };
 
-  var drawAll = function () {
+  var rnd = function (a, b) { return a + Math.random() * (b - a); };
+  var randGlyph = function (min) { return RAMP.charAt(min + Math.floor(Math.random() * (LAST - min + 1))); };
+
+  /* ---------- image fixe (moins d'animations) ---------- */
+  var drawStatic = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    cells.forEach(function (cell) { cell.alpha = cell.base; drawCell(cell, cell.ch, cell.base); });
+    for (var i = 0; i < cells.length; i++) { paint(cells[i], cells[i].ch, cells[i].base, false); }
   };
 
   var resizeTimer = 0;
-  var onResize = function () {
+  window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () { measure(); if (done || reduce) drawAll(); }, 150);
-  };
+    resizeTimer = setTimeout(function () {
+      measure();
+      if (reduce) drawStatic();
+    }, 150);
+  });
 
   measure();
-  window.addEventListener("resize", onResize);
+  if (reduce) { drawStatic(); return; }
 
-  if (reduce) { drawAll(); return; }
+  /* ---------- paramètres ---------- */
+  var BUILD = 3400;      /* durée de la vague d'apparition (ms) */
+  var HEAD = 9;          /* épaisseur du front lumineux (unités de diagonale) */
+  var TRAIL = 46;        /* longueur de la traîne de décodage */
+  var SWEEP = 12000;     /* période du reflet (ms) */
+  var done = false, running = false, visible = true;
+  var start = 0, lastFrame = 0, rafId = 0;
 
-  /* ---------- animation ---------- */
-  var start = 0, done = false, running = false, visible = true, lastFrame = 0, rafId = 0;
-  var BUILD = 2600;      /* durée totale de l'apparition (ms) */
-  var SCRAMBLE = 320;    /* durée du « décodage » d'une cellule (ms) */
-  var SWEEP = 11000;     /* durée d'un passage de reflet (ms) */
+  /* rafale de données : quelques lignes consécutives s'embrasent brièvement */
+  var burst = { r0: 0, r1: -1, until: 0, next: 0 };
+
+  /* curseur */
+  var pointer = { x: -9999, y: -9999, on: false };
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    window.addEventListener("pointermove", function (e) {
+      pointer.x = e.clientX; pointer.y = e.clientY; pointer.on = true;
+    }, { passive: true });
+    document.addEventListener("pointerleave", function () { pointer.on = false; });
+  }
+
+  var easeInOut = function (x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
 
   var frame = function (now) {
     rafId = 0;
@@ -86,48 +129,101 @@
     if (now - lastFrame < 33) { rafId = requestAnimationFrame(frame); return; } /* ~30 images/s */
     lastFrame = now;
     var t = now - start;
+    var i, cell;
 
+    /* ----- 1. vague d'apparition ----- */
     if (!done) {
-      var pending = 0;
-      for (var i = 0; i < cells.length; i++) {
-        var cell = cells[i];
-        var dt = t - cell.t0;
-        if (dt < 0) { pending++; continue; }
-        if (dt < SCRAMBLE) {
-          pending++;
-          var g = RAMP.charAt(1 + Math.floor(Math.random() * LAST));
-          drawCell(cell, g, 0.25 + 0.55 * (dt / SCRAMBLE));
-          cell.alpha = -2;
-        } else if (cell.alpha !== cell.base) {
-          drawCell(cell, cell.ch, cell.base);
-          cell.alpha = cell.base;
+      var head = easeInOut(Math.min(1, t / BUILD)) * (U_MAX + HEAD + TRAIL + 6) - 4;
+      var remaining = 0;
+      for (i = 0; i < cells.length; i++) {
+        cell = cells[i];
+        if (cell.settled) continue;
+        var d = head - cell.u;
+        if (d < 0) { remaining++; continue; }
+        if (d < HEAD) {                       /* front : éclat blanc, symboles denses */
+          remaining++;
+          paint(cell, randGlyph(5), 1, true);
+        } else if (d < HEAD + TRAIL) {        /* traîne : décodage progressif */
+          remaining++;
+          var k = (d - HEAD) / TRAIL;
+          var g = Math.random() < k * 0.85 ? cell.ch : randGlyph(1);
+          paint(cell, g, 0.95 - (0.95 - cell.base) * k, false);
+        } else {                              /* fixé */
+          cell.settled = true;
+          paint(cell, cell.ch, cell.base, false);
         }
       }
-      if (!pending && t > BUILD) { done = true; }
-    } else {
-      /* reflet diagonal qui traverse le dessin */
-      var p = ((t % SWEEP) / SWEEP) * (COLS + ROWS * 1.2 + 60) - 30;
-      for (var j = 0; j < cells.length; j++) {
-        var k = cells[j];
-        var d = Math.abs(k.c + (ROWS - k.r) * 0.9 - p);
-        var boost = d < 16 ? 1 - d / 16 : 0;
-        var a = Math.min(1, k.base + boost * 0.7);
-        a = Math.round(a * 12) / 12;
-        if (k.flick > now) continue;
-        if (k.alpha !== a) { k.alpha = a; drawCell(k, k.ch, a); }
-      }
-      /* scintillement : quelques caractères changent brièvement de densité */
-      for (var n = 0; n < 4; n++) {
-        var f = cells[Math.floor(Math.random() * cells.length)];
-        if (f.flick > now) continue;
-        var gi = Math.max(1, Math.min(LAST, f.idx + (Math.random() < 0.5 ? -2 : 2)));
-        f.flick = now + 160;
-        drawCell(f, RAMP.charAt(gi), Math.min(1, f.base + 0.25));
-        (function (cc) {
-          setTimeout(function () { if (running || done) { cc.flick = 0; cc.alpha = -1; } }, 170);
-        })(f);
-      }
+      if (!remaining) done = true;
+      rafId = requestAnimationFrame(frame);
+      return;
     }
+
+    /* ----- 2. vie du dessin ----- */
+    var rect = null, px = 0, py = 0, R = 0, R2 = 0;
+    if (pointer.on) {
+      rect = canvas.getBoundingClientRect();
+      px = pointer.x - rect.left; py = pointer.y - rect.top;
+      R = cw * 15; R2 = R * R;
+    }
+    var sweepP = ((t % SWEEP) / SWEEP) * (U_MAX + 90) - 30;
+    var breathT = t / 1900;
+
+    /* rafale : toutes les 4 à 8 s, sur 2 à 4 lignes, pendant 220 ms */
+    if (now > burst.next) {
+      burst.r0 = Math.floor(rnd(ROWS * 0.25, ROWS * 0.9));
+      burst.r1 = burst.r0 + Math.floor(rnd(1, 3));
+      burst.until = now + 220;
+      burst.next = now + rnd(4000, 8000);
+    }
+    var inBurst = now < burst.until;
+
+    for (i = 0; i < cells.length; i++) {
+      cell = cells[i];
+      var alpha = cell.base + 0.1 * Math.sin(breathT + cell.c * 0.05 + cell.r * 0.09);
+      var glyph = cell.ch, hot = false;
+
+      /* reflet diagonal */
+      var dd = Math.abs(cell.u - sweepP);
+      if (dd < 15) {
+        var b = 1 - dd / 15;
+        alpha += b * 0.6;
+        if (b > 0.7) hot = true;
+      }
+
+      /* rafale de données */
+      if (inBurst && cell.r >= burst.r0 && cell.r <= burst.r1) {
+        glyph = Math.random() < 0.45 ? randGlyph(2) : cell.ch;
+        alpha = 1; hot = true;
+      }
+
+      /* scintillement ponctuel */
+      if (cell.flick > now) {
+        glyph = cell.fg; alpha += 0.25;
+      }
+
+      /* curseur : lumière et caractères qui « chantent » autour de la souris */
+      if (rect) {
+        var dx = (cell.c + 0.5) * cw - px, dy = (cell.r + 0.5) * chh - py;
+        var d2 = dx * dx + dy * dy;
+        if (d2 < R2) {
+          var kk = 1 - Math.sqrt(d2) / R;
+          alpha += kk * 0.9;
+          if (kk > 0.3) hot = true;
+          if (kk > 0.5 && Math.random() < 0.7) glyph = randGlyph(Math.max(1, cell.idx - 2));
+        }
+      }
+
+      paint(cell, glyph, Math.min(1, alpha), hot);
+    }
+
+    /* nouveaux scintillements */
+    for (var n = 0; n < 5; n++) {
+      var f = cells[Math.floor(Math.random() * cells.length)];
+      if (f.flick > now) continue;
+      f.flick = now + 180;
+      f.fg = RAMP.charAt(Math.max(1, Math.min(LAST, f.idx + (Math.random() < 0.5 ? -2 : 2))));
+    }
+
     rafId = requestAnimationFrame(frame);
   };
 
