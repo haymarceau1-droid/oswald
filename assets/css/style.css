@@ -1219,6 +1219,7 @@ body.nav-open .cookie-banner {
 }
 
 .services__statue {
+  display: block;
   width: 380px;
   max-width: none;
   height: auto;
@@ -3462,4 +3463,9 @@ body.nav-open .site-header::before {
 
 .hero__lede > span + span {
   margin-top: 0.35rem;
+}
+
+/* statue ASCII : plus lumineuse que l'ancienne image, pour que les caractères restent lisibles */
+canvas.services__statue {
+  opacity: 0.95;
 }
